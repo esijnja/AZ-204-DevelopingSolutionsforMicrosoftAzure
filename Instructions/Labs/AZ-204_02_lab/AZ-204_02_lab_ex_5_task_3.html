@@ -1,0 +1,122 @@
+<h4>Task 3: Write Blob-inputted function code</h4>
+<ol>
+  <li>
+    <p>Open <strong>Visual Studio Code</strong>.</p>
+  </li>
+  <li>
+    <p>
+      Using <strong>Visual Studio Code</strong>, open the solution folder found
+      at <strong>Allfiles (F):\Allfiles\Labs\02\Starter\func</strong>.
+    </p>
+  </li>
+  <li>
+    <p>Open the <strong>GetSettingInfo.cs</strong> file.</p>
+  </li>
+  <li>
+    <p>
+      In the code editor, delete all the code within the
+      <strong>GetSettingInfo.cs</strong> file.
+    </p>
+  </li>
+  <li>
+    <p>
+      Add <strong>using directives</strong> for the
+      <strong>Microsoft.AspNetCore.Http</strong>,
+      <strong>Microsoft.AspNetCore.Mvc</strong>, and
+      <strong>Microsoft.Azure.WebJobs</strong> namespaces:
+    </p>
+    <pre><code class="language-csharp"><div><span class="hljs-keyword">using</span> Microsoft.AspNetCore.Http;
+<span class="hljs-keyword">using</span> Microsoft.AspNetCore.Mvc;
+<span class="hljs-keyword">using</span> Microsoft.Azure.WebJobs;
+</div></code></pre>
+  </li>
+  <li>
+    <p>
+      Create a new <strong>public static</strong> class named
+      <strong>GetSettingInfo</strong>:
+    </p>
+    <pre><code class="language-csharp"><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">GetSettingInfo</span>
+{ }
+</div></code></pre>
+  </li>
+  <li>
+    <p>
+      Within the <strong>GetSettingInfo</strong> class, create a new
+      <strong>public static</strong> expression-bodied method named
+      <strong>Run</strong> that returns a variable of type
+      <strong>IActionResult</strong> and that also takes in variables of type
+      <strong>HttpRequest</strong> and <strong>string</strong> as parameters
+      named <em>request</em> and <em>json</em>:
+    </p>
+    <pre><code class="language-csharp"><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> IActionResult <span class="hljs-title">Run</span>(<span class="hljs-params">
+    HttpRequest request,
+    <span class="hljs-keyword">string</span> json</span>)</span>
+    =&gt; <span class="hljs-literal">null</span>;
+</div></code></pre>
+    <blockquote>
+      <p>
+        <strong>Note</strong>: You are only temporarily setting the return value
+        to <strong>null</strong>.
+      </p>
+    </blockquote>
+  </li>
+  <li>
+    <p>
+      Append an attribute to the <strong>Run</strong> method of type
+      <strong>FunctionNameAttribute</strong> that has its
+      <strong>name</strong> parameter set to a value of
+      <strong>GetSettingInfo</strong>:
+    </p>
+    <pre><code class="language-csharp"><div>[<span class="hljs-meta">FunctionName(<span class="hljs-meta-string">&quot;GetSettingInfo&quot;</span>)</span>]
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> IActionResult <span class="hljs-title">Run</span>(<span class="hljs-params">
+    HttpRequest request,
+    <span class="hljs-keyword">string</span> json</span>)</span>
+    =&gt; <span class="hljs-literal">null</span>;
+</div></code></pre>
+  </li>
+  <li>
+    <p>
+      Append an attribute to the <strong>request</strong> parameter of type
+      <strong>HttpTriggerAttribute</strong> that has its
+      <strong>methods</strong> parameter array set to a single value of
+      <strong>GET</strong>:
+    </p>
+    <pre><code class="language-csharp"><div>[<span class="hljs-meta">FunctionName(<span class="hljs-meta-string">&quot;GetSettingInfo&quot;</span>)</span>]
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> IActionResult <span class="hljs-title">Run</span>(<span class="hljs-params">
+    [HttpTrigger(<span class="hljs-string">&quot;GET&quot;</span></span>)] HttpRequest request,
+    <span class="hljs-keyword">string</span> json)</span>
+    =&gt; <span class="hljs-literal">null</span>;
+</div></code></pre>
+  </li>
+  <li>
+    <p>
+      Append an attribute to the <strong>json</strong> parameter of type
+      <strong>BlobAttribute</strong> that has its
+      <strong>blobPath</strong> parameter set to a value of
+      <strong>content/settings.json</strong>:
+    </p>
+    <pre><code class="language-csharp"><div>[<span class="hljs-meta">FunctionName(<span class="hljs-meta-string">&quot;GetSettingInfo&quot;</span>)</span>]
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> IActionResult <span class="hljs-title">Run</span>(<span class="hljs-params">
+    [HttpTrigger(<span class="hljs-string">&quot;GET&quot;</span></span>)] HttpRequest request,
+    [<span class="hljs-title">Blob</span>(<span class="hljs-params"><span class="hljs-string">&quot;content/settings.json&quot;</span></span>)] <span class="hljs-keyword">string</span> json)</span>
+    =&gt; <span class="hljs-literal">null</span>;
+</div></code></pre>
+  </li>
+  <li>
+    <p>
+      Update the <strong>Run</strong> expression-bodied method to return a new
+      instance of the <strong>OkObjectResult</strong> class passing in the value
+      of the <strong>json</strong> method parameter as the sole constructor
+      parameter:
+    </p>
+    <pre><code class="language-csharp"><div>[<span class="hljs-meta">FunctionName(<span class="hljs-meta-string">&quot;GetSettingInfo&quot;</span>)</span>]
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> IActionResult <span class="hljs-title">Run</span>(<span class="hljs-params">
+    [HttpTrigger(<span class="hljs-string">&quot;GET&quot;</span></span>)] HttpRequest request,
+    [<span class="hljs-title">Blob</span>(<span class="hljs-params"><span class="hljs-string">&quot;content/settings.json&quot;</span></span>)] <span class="hljs-keyword">string</span> json)</span>
+    =&gt; <span class="hljs-keyword">new</span> OkObjectResult(json);
+</div></code></pre>
+  </li>
+  <li>
+    <p><strong>Save</strong> the <strong>Echo.cs</strong> file.</p>
+  </li>
+</ol>

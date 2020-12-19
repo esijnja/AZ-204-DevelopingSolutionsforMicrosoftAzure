@@ -1,0 +1,79 @@
+<h4>Task 4: Test the Blob-inputted function by using httprepl</h4>
+<ol>
+  <li>
+    <p>Open the <strong>Windows Terminal</strong> application.</p>
+  </li>
+  <li>
+    <p>
+      Change the current directory to the
+      <strong>Allfiles (F):\Allfiles\Labs\02\Starter\func</strong> project
+      directory.
+    </p>
+  </li>
+  <li>
+    <p>Start the function app project:</p>
+    <blockquote>
+      <p>
+        <strong>Note</strong>: You can review the documentation to [start the
+        function app project locally][azure-functions-core-tools-start-function]
+        using the <strong>Azure Functions Core Tools</strong>.
+      </p>
+    </blockquote>
+  </li>
+  <li>
+    <p>
+      Open a new instance of the <strong>Windows Terminal</strong> application.
+    </p>
+  </li>
+  <li>
+    <p>
+      Start the <strong>httprepl</strong> tool, and then set the base URI to
+      <code>http://localhost:7071</code>:
+    </p>
+    <pre><code class="language-powershell"><div>httprepl http://localhost:<span class="hljs-number">7071</span>
+</div></code></pre>
+    <blockquote>
+      <p>
+        <strong>Note</strong>: An error message is displayed by the httprepl
+        tool. This message occurs because the tool is searching for a Swagger
+        definition file to use to &quot;traverse&quot; the API. Because your
+        functio projectp does not produce a Swagger definition file, you'll need
+        to traverse the API manually.
+      </p>
+    </blockquote>
+  </li>
+  <li>
+    <p>
+      When you receive the tool prompt, browse to the relative
+      <strong>api/getsettinginfo</strong> endpoint:
+    </p>
+    <pre><code class="language-powershell"><div><span class="hljs-built_in">cd</span> api
+<span class="hljs-built_in">cd</span> getsettinginfo
+</div></code></pre>
+  </li>
+  <li>
+    <p>Run the <strong>get</strong> command for the current endpoint:</p>
+    <pre><code class="language-powershell"><div>get
+</div></code></pre>
+  </li>
+  <li>
+    <p>Observe the JSON content of the response from the function app.</p>
+  </li>
+  <li>
+    <p>Exit the <strong>httprepl</strong> application:</p>
+    <pre><code class="language-powershell"><div><span class="hljs-keyword">exit</span>
+</div></code></pre>
+  </li>
+  <li>
+    <p>
+      Close all currently running instances of the
+      <strong>Windows Terminal</strong> application.
+    </p>
+  </li>
+</ol>
+<blockquote>
+  <p>
+    <strong>Review</strong>: In this exercise, you created a function that
+    returns the content of a JSON file in Storage.
+  </p>
+</blockquote>

@@ -1,0 +1,42 @@
+<h4>Task 2: Validate deployment</h4>
+<ol>
+  <li>
+    Sign in to the Azure portal (<a href="https://portal.azure.com"
+      >https://portal.azure.com</a
+    >).
+  </li>
+  <li>
+    Access the <strong>funclogic[yourname]</strong> function app that you
+    created earlier in this lab.
+  </li>
+  <li>
+    From the <strong>App Service</strong> blade, locate and open the
+    <strong>Functions</strong> section, then locate and open the
+    <strong>GetSettingInfo</strong> function.
+  </li>
+  <li>
+    In the <strong>Function</strong> blade, select the
+    <strong>Code + Test</strong> option from the
+    <strong>Developer</strong> section.
+  </li>
+  <li>In the function editor, select <strong>Test/Run</strong>.</li>
+  <li>
+    In the popup dialog that appears, perform the following actions:
+    <ul>
+      <li>
+        In the <strong>HTTP method</strong> list, select <strong>GET</strong>.
+      </li>
+    </ul>
+  </li>
+  <li>Select <strong>Run</strong> to test the function.</li>
+  <li>
+    Observe the results of the test run. the JSON content should be the same as
+    the <strong>settings.json</strong> file.
+  </li>
+</ol>
+<blockquote>
+  <p>
+    <strong>Review</strong>: In this exercise, you deployed a local function
+    project to Azure Functions and validated that the functions work in Azure.
+  </p>
+</blockquote>
