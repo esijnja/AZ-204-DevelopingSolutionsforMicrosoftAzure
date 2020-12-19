@@ -1,0 +1,55 @@
+<h4>Task 4: Insert items into Azure Cosmos DB</h4>
+<ol>
+  <li>
+    <p>
+      Still within the <strong>Main</strong> method, add the following blocks of
+      code to import the in-memory model and product data as documents to Azure
+      Cosmos DB:
+    </p>
+    <pre><code><code><div>using CosmosClient client = new CosmosClient(cosmosDBConnectionString);
+
+Database database = await client.CreateDatabaseIfNotExistsAsync(&quot;Retail&quot;);
+
+Container container = await database.CreateContainerIfNotExistsAsync(&quot;Online&quot;,
+    partitionKeyPath: $&quot;/{nameof(Model.Category)}&quot;,
+    throughput: 1000
+);
+
+int count = 0;
+foreach (var item in items)
+{
+    ItemResponse&lt;Model&gt; document = await container.UpsertItemAsync&lt;Model&gt;(item);
+    await Console.Out.WriteLineAsync($&quot;Upserted document #{++count:000} [Activity Id: {document.ActivityId}]&quot;);
+}
+
+await Console.Out.WriteLineAsync($&quot;Total Azure Cosmos DB Documents: {count}&quot;);
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>Save the <strong>Program.cs</strong> file.</p>
+  </li>
+  <li>
+    <p>
+      Using a terminal, change your context to the
+      <strong>AdventureWorks.Migrate</strong> folder:
+    </p>
+    <pre><code><code><div>cd .\AdventureWorks.Migrate\
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>Using the same terminal, build the .NET console application project:</p>
+    <pre><code><code><div>dotnet build
+</div></code></code></pre>
+    <blockquote>
+      <p>
+        <strong>Note</strong>: If there are any build errors, review the
+        <strong>Program.cs</strong> file in the
+        <strong
+          >Allfiles
+          (F):\Allfiles\Labs\04\Solution\AdventureWorks\AdventureWorks.Migrate</strong
+        >
+        folder.
+      </p>
+    </blockquote>
+  </li>
+</ol>

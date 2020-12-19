@@ -1,0 +1,49 @@
+<h4>Task 3: Get SQL database records by using Entity Framework</h4>
+<ol>
+  <li>
+    <p>
+      Within the <strong>Main</strong> method, add the following blocks of code
+      to export all model and product records from SQL Database to local memory:
+    </p>
+    <pre><code><code><div>await Console.Out.WriteLineAsync(&quot;Start Migration&quot;);
+
+using AdventureWorksSqlContext context = new AdventureWorksSqlContext(sqlDBConnectionString);
+
+List&lt;Model&gt; items = await context.Models
+    .Include(m =&gt; m.Products)
+    .ToListAsync&lt;Model&gt;();
+
+await Console.Out.WriteLineAsync($&quot;Total Azure SQL DB Records: {items.Count}&quot;);
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>Save the <strong>Program.cs</strong> file.</p>
+  </li>
+  <li>
+    <p>
+      Using a terminal, change your context to the
+      <strong>AdventureWorks.Migrate</strong> folder:
+    </p>
+    <pre><code><code><div>cd .\AdventureWorks.Migrate\
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>Using the same terminal, build the .NET console application project:</p>
+    <pre><code><code><div>dotnet build
+</div></code></code></pre>
+    <blockquote>
+      <p>
+        <strong>Note</strong>: If there are any build errors, review the
+        <strong>Program.cs</strong> file in the
+        <strong
+          >Allfiles
+          (F):\Allfiles\Labs\04\Solution\AdventureWorks\AdventureWorks.Migrate</strong
+        >
+        folder.
+      </p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Close the current terminal.</p>
+  </li>
+</ol>

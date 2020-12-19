@@ -1,0 +1,66 @@
+<h4>Task 2: Create a .NET class</h4>
+<ol>
+  <li>
+    <p>
+      Open the <strong>AdventureWorks.Migrate/Program.cs</strong> file in Visual
+      Studio Code.
+    </p>
+  </li>
+  <li>
+    <p>Delete all existing code in the <strong>Program.cs</strong> file.</p>
+  </li>
+  <li>
+    <p>
+      Add the following <strong>using</strong> directives for libraries that
+      will be referenced by the application:
+    </p>
+    <pre><code><code><div>using AdventureWorks.Context;
+using AdventureWorks.Models;
+using Microsoft.Azure.Cosmos;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>
+      Create a new <strong>Program</strong> class with two constant string
+      properties and an asynchronous <strong>Main</strong> entry point method:
+    </p>
+    <pre><code><code><div>public class Program
+{
+    private const string sqlDBConnectionString = &quot;&quot;;
+    private const string cosmosDBConnectionString = &quot;&quot;;
+    
+    public static async Task Main(string[] args)
+    {
+    }
+}
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>
+      Update the <strong>sqlDBConnectionString</strong> string constant by
+      setting its value to the <strong
+        >ADO.NET (SQL Authentication) connection string</strong
+      > of the SQL database that you recorded earlier in this lab.
+    </p>
+    <blockquote>
+      <p>
+        <strong>Note</strong>: It's important that you use your updated
+        connection string here. The original connection string copied from the
+        portal won't have the username and password necessary to connect to the
+        SQL database.
+      </p>
+    </blockquote>
+  </li>
+  <li>
+    <p>
+      Update the <strong>cosmosDBConnectionString</strong> string constant by
+      setting its value to the <strong>PRIMARY CONNECTION STRING</strong> of the
+      Azure Cosmos DB account that you recorded earlier in this lab.
+    </p>
+  </li>
+</ol>

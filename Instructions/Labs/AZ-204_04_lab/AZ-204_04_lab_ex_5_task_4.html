@@ -1,0 +1,39 @@
+<h4>Task 4: Update .NET application startup logic</h4>
+<ol>
+  <li>
+    <p>
+      Open the <strong>AdventureWorks.Web/Startup.cs</strong> file in Visual
+      Studio Code.
+    </p>
+  </li>
+  <li>
+    <p>
+      In the <strong>Startup</strong> class, find the existing
+      <strong>ConfigureProductService</strong> method.
+    </p>
+    <blockquote>
+      <p>
+        <strong>Note</strong>: The current product service uses SQL as its
+        database.
+      </p>
+    </blockquote>
+  </li>
+  <li>
+    <p>
+      Replace the <strong>ConfigureProductService</strong> method with the
+      following code:
+    </p>
+    <pre><code><code><div>public void ConfigureProductService(IServiceCollection services)
+{
+    services.AddScoped&lt;IAdventureWorksProductContext, AdventureWorksCosmosContext&gt;(provider =&gt;
+            new AdventureWorksCosmosContext(
+                _configuration.GetConnectionString(nameof(AdventureWorksCosmosContext))
+            )
+    );
+}
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>Save the <strong>Startup.cs</strong> file.</p>
+  </li>
+</ol>
