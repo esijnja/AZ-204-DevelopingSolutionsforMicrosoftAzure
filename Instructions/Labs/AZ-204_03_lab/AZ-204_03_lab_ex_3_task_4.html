@@ -1,0 +1,134 @@
+<h4>Task 4: Enumerate the existing containers</h4>
+<ol>
+  <li>
+    <p>
+      In the <strong>Program</strong> class, create a new
+      <strong>private static</strong> method named
+      <strong>EnumerateContainersAsync</strong> that's asynchronous and has a
+      single parameter of type <strong>BlobServiceClient</strong>:
+    </p>
+    <pre><code><code><div>private static async Task EnumerateContainersAsync(BlobServiceClient client)
+{        
+}
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>
+      In the <strong>EnumerateContainersAsync</strong> method, create an
+      asynchronous <strong>foreach</strong> loop that iterates over the results
+      of an invocation of the <strong>GetBlobContainersAsync</strong> method of
+      the <strong>BlobServiceClient</strong> class and prints out the name of
+      each container:
+    </p>
+    <pre><code><code><div>await foreach (BlobContainerItem container in client.GetBlobContainersAsync())
+{
+    await Console.Out.WriteLineAsync($&quot;Container:\t{container.Name}&quot;);
+}
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>
+      In the <strong>Main</strong> method, add a new line of code to invoke the
+      <strong>EnumerateContainersAsync</strong> method, passing in the
+      <em>serviceClient</em> variable as a parameter:
+    </p>
+    <pre><code><code><div>await EnumerateContainersAsync(serviceClient);
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>Save the <strong>Program.cs</strong> file.</p>
+  </li>
+  <li>
+    <p>Using a terminal, run the console application project:</p>
+    <pre><code><code><div>dotnet run
+</div></code></code></pre>
+    <blockquote>
+      <p>
+        <strong>Note</strong>: If there are any build errors, review the
+        <strong>Program.cs</strong> file in the
+        <strong>Allfiles (F):\Allfiles\Labs\03\Solution\BlobManager</strong>
+        folder.
+      </p>
+    </blockquote>
+  </li>
+  <li>
+    <p>
+      Observe the output from the currently running console application. The
+      updated output includes a list of every existing container in the account.
+    </p>
+  </li>
+  <li>
+    <p>Close the current terminal.</p>
+  </li>
+</ol>
+<h4>Review</h4>
+<p>
+  In this exercise, you accessed existing containers by using the Storage SDK.
+  #### Task 4: Enumerate the existing containers
+</p>
+<ol>
+  <li>
+    <p>
+      In the <strong>Program</strong> class, create a new
+      <strong>private static</strong> method named
+      <strong>EnumerateContainersAsync</strong> that's asynchronous and has a
+      single parameter of type <strong>BlobServiceClient</strong>:
+    </p>
+    <pre><code><code><div>private static async Task EnumerateContainersAsync(BlobServiceClient client)
+{        
+}
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>
+      In the <strong>EnumerateContainersAsync</strong> method, create an
+      asynchronous <strong>foreach</strong> loop that iterates over the results
+      of an invocation of the <strong>GetBlobContainersAsync</strong> method of
+      the <strong>BlobServiceClient</strong> class and prints out the name of
+      each container:
+    </p>
+    <pre><code><code><div>await foreach (BlobContainerItem container in client.GetBlobContainersAsync())
+{
+    await Console.Out.WriteLineAsync($&quot;Container:\t{container.Name}&quot;);
+}
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>
+      In the <strong>Main</strong> method, add a new line of code to invoke the
+      <strong>EnumerateContainersAsync</strong> method, passing in the
+      <em>serviceClient</em> variable as a parameter:
+    </p>
+    <pre><code><code><div>await EnumerateContainersAsync(serviceClient);
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>Save the <strong>Program.cs</strong> file.</p>
+  </li>
+  <li>
+    <p>Using a terminal, run the console application project:</p>
+    <pre><code><code><div>dotnet run
+</div></code></code></pre>
+    <blockquote>
+      <p>
+        <strong>Note</strong>: If there are any build errors, review the
+        <strong>Program.cs</strong> file in the
+        <strong>Allfiles (F):\Allfiles\Labs\03\Solution\BlobManager</strong>
+        folder.
+      </p>
+    </blockquote>
+  </li>
+  <li>
+    <p>
+      Observe the output from the currently running console application. The
+      updated output includes a list of every existing container in the account.
+    </p>
+  </li>
+  <li>
+    <p>Close the current terminal.</p>
+  </li>
+</ol>
+<h4>Review</h4>
+<p>
+  In this exercise, you accessed existing containers by using the Storage SDK.
+</p>

@@ -1,0 +1,91 @@
+<h4>Task 2: Create a new container by using the SDK</h4>
+<ol>
+  <li>
+    <p>
+      In the <strong>Program</strong> class, create a new
+      <strong>private static</strong> method named
+      <strong>GetContainerAsync</strong> that's asynchronous and has two
+      parameter types, <strong>BlobServiceClient</strong> and
+      <strong>string</strong>:
+    </p>
+    <pre><code><code><div>private static async Task&lt;BlobContainerClient&gt; GetContainerAsync(BlobServiceClient client, string containerName)
+{      
+}
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>
+      In the <strong>GetContainerAsync</strong> method, get a new instance of
+      the <strong>BlobContainerClient</strong> class by using the
+      <strong>GetBlobContainerClient</strong> method of the
+      <strong>BlobServiceClient</strong> class, passing in the
+      <strong>containerName</strong> parameter. Invoke the
+      <strong>CreateIfNotExistsAsync</strong> method of the
+      <strong>BlobContainerClient</strong> class:
+    </p>
+    <pre><code><code><div>BlobContainerClient container = client.GetBlobContainerClient(containerName);
+await container.CreateIfNotExistsAsync(PublicAccessType.Blob);
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>
+      In the <strong>GetContainerAsync</strong> method, render the name of the
+      container that was potentially created:
+    </p>
+    <pre><code><code><div>await Console.Out.WriteLineAsync($&quot;New Container:\t{container.Name}&quot;);
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>
+      Return the instance of the <strong>BlobContainerClient</strong> class
+      named <strong>container</strong> as the result of the
+      <strong>GetContainerAsync</strong> method:
+    </p>
+    <pre><code><code><div>return container;
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>
+      In the <strong>Main</strong> method, add a new line of code to create a
+      variable named <em>newContainerName</em> with a value of
+      <strong>vector-graphics</strong>:
+    </p>
+    <pre><code><code><div>string newContainerName = &quot;vector-graphics&quot;;
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>
+      In the <strong>Main</strong> method, add a new line of code to invoke the
+      <strong>GetContainerAsync</strong> method, passing in the
+      <em>serviceClient</em> and <em>newContainerName</em> variables as
+      parameters:
+    </p>
+    <pre><code><code><div>BlobContainerClient containerClient = await GetContainerAsync(serviceClient, newContainerName);
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>Save the <strong>Program.cs</strong> file.</p>
+  </li>
+  <li>
+    <p>Using a terminal, run the console application project:</p>
+    <pre><code><code><div>dotnet run
+</div></code></code></pre>
+    <blockquote>
+      <p>
+        <strong>Note</strong>: If there are any build errors, review the
+        <strong>Program.cs</strong> file in the
+        <strong>Allfiles (F):\Allfiles\Labs\03\Solution\BlobManager</strong>
+        folder.
+      </p>
+    </blockquote>
+  </li>
+  <li>
+    <p>
+      Observe the output from the currently running console application. The
+      updated output includes metadata about the new container and blobs.
+    </p>
+  </li>
+  <li>
+    <p>Close the current terminal.</p>
+  </li>
+</ol>

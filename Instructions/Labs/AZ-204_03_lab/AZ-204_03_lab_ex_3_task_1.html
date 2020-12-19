@@ -1,0 +1,51 @@
+<h4>Task 1: Create .NET project</h4>
+<ol>
+  <li>
+    <p>
+      Using Visual Studio Code, open the
+      <strong>Allfiles (F):\Allfiles\Labs\03\Starter\BlobManager</strong>
+      folder.
+    </p>
+  </li>
+  <li>
+    <p>
+      Using a terminal, create a new .NET project named
+      <strong>BlobManager</strong> in the current folder:
+    </p>
+    <pre><code><code><div>dotnet new console --name BlobManager --output .
+</div></code></code></pre>
+    <blockquote>
+      <p>
+        <strong>Note</strong>: The <strong>dotnet new</strong> command will
+        create a new <strong>console</strong> project in a folder with the same
+        name as the project.
+      </p>
+    </blockquote>
+  </li>
+  <li>
+    <p>
+      Using the same terminal, import version 12.0.0 of
+      <strong>Azure.Storage.Blobs</strong> from NuGet:
+    </p>
+    <pre><code><code><div>dotnet add package Azure.Storage.Blobs --version 12.0.0
+</div></code></code></pre>
+    <blockquote>
+      <p>
+        <strong>Note</strong>: The <strong>dotnet add package</strong> command
+        will add the <strong>Azure.Storage.Blobs</strong> package from NuGet.
+        For more information, go to
+        <a href="https://www.nuget.org/packages/Azure.Storage.Blobs/12.0.0"
+          >Azure.Storage.Blobs</a
+        >.
+      </p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Using the same terminal, build the .NET web application:</p>
+    <pre><code><code><div>dotnet build
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>Close the current terminal.</p>
+  </li>
+</ol>

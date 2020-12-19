@@ -1,0 +1,62 @@
+<h4>Task 2: Modify the Program class to access Storage</h4>
+<ol>
+  <li>
+    <p>Open the <strong>Program.cs</strong> file in Visual Studio Code.</p>
+  </li>
+  <li>
+    <p>Delete all existing code in the <strong>Program.cs</strong> file.</p>
+  </li>
+  <li>
+    <p>
+      Add the following <strong>using</strong> directives for libraries that
+      will be referenced by the application:
+    </p>
+    <pre><code><code><div>using Azure.Storage;
+using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
+using System;
+using System.Threading.Tasks;
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>
+      Create a new <strong>Program</strong> class with three constant string
+      properties named <strong>blobServiceEndpoint</strong>,
+      <strong>storageAccountName</strong>, and
+      <strong>storageAccountKey</strong>, and then create an asynchronous
+      <strong>Main</strong> entry point method:
+    </p>
+    <pre><code><code><div>public class Program
+{
+    private const string blobServiceEndpoint = &quot;&quot;;
+    private const string storageAccountName = &quot;&quot;;
+    private const string storageAccountKey = &quot;&quot;;
+    
+    public static async Task Main(string[] args)
+    {
+    }
+}
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>
+      Update the <strong>blobServiceEndpoint</strong> string constant by setting
+      its value to the <strong>Primary Blob Service Endpoint</strong> of the
+      storage account that you recorded earlier in this lab.
+    </p>
+  </li>
+  <li>
+    <p>
+      Update the <strong>storageAccountName</strong> string constant by setting
+      its value to the <strong>Storage account name</strong> of the Storage
+      account that you recorded earlier in this lab.
+    </p>
+  </li>
+  <li>
+    <p>
+      Update the <strong>storageAccountKey</strong> string constant by setting
+      its value to the <strong>Key</strong> of the Storage account that you
+      recorded earlier in this lab.
+    </p>
+  </li>
+</ol>

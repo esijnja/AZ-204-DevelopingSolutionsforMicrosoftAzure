@@ -1,0 +1,108 @@
+<h4>Task 4: Access blob URI by using the SDK</h4>
+<ol>
+  <li>
+    <p>
+      In the <strong>Program</strong> class, create a new
+      <strong>private static</strong> method named
+      <strong>GetBlobAsync</strong> that's asynchronous and has two types of
+      parameters, <strong>BlobContainerClient</strong> and
+      <strong>string</strong>:
+    </p>
+    <pre><code><code><div>private static async Task&lt;BlobClient&gt; GetBlobAsync(BlobContainerClient client, string blobName)
+{      
+}
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>
+      In the <strong>GetBlobAsync</strong> method, get a new instance of the
+      <strong>BlobClient</strong> class by using the
+      <strong>GetBlobClient</strong> method of the
+      <strong>BlobContainerClient</strong> class, passing in the
+      <strong>blobName</strong> parameter:
+    </p>
+    <pre><code><code><div>BlobClient blob = client.GetBlobClient(blobName);
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>
+      In the <strong>GetBlobAsync</strong> method, render the name of the blob
+      that was referenced:
+    </p>
+    <pre><code><code><div>await Console.Out.WriteLineAsync($&quot;Blob Found:\t{blob.Name}&quot;);
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>
+      Return the instance of the <strong>BlobClient</strong> class named
+      <strong>blob</strong> as the result of the
+      <strong>GetBlobAsync</strong> method:
+    </p>
+    <pre><code><code><div>return blob;
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>
+      In the <strong>Main</strong> method, add a new line of code to create a
+      variable named <em>uploadedBlobName</em> with a value of
+      <strong>vector-graphics</strong>:
+    </p>
+    <pre><code><code><div>string uploadedBlobName = &quot;graph.svg&quot;;
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>
+      In the <strong>Main</strong> method, add a new line of code to invoke the
+      <strong>GetBlobAsync</strong> method, passing in the
+      <em>containerClient</em> and <em>uploadedBlobName</em> variables as
+      parameters and store the result in a variable named <em>blobClient</em> of
+      type <strong>BlobClient</strong>:
+    </p>
+    <pre><code><code><div>BlobClient blobClient = await GetBlobAsync(containerClient, uploadedBlobName);
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>
+      In the <strong>Main</strong> method, add a new line of code to render the
+      <strong>Uri</strong> property of the <em>blobClient</em> variable:
+    </p>
+    <pre><code><code><div>await Console.Out.WriteLineAsync($&quot;Blob Url:\t{blobClient.Uri}&quot;);
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>Save the <strong>Program.cs</strong> file.</p>
+  </li>
+  <li>
+    <p>Using a terminal, run the console application project:</p>
+    <pre><code><code><div>dotnet run
+</div></code></code></pre>
+    <blockquote>
+      <p>
+        <strong>Note</strong>: If there are any build errors, review the
+        <strong>Program.cs</strong> file in the
+        <strong>Allfiles (F):\Allfiles\Labs\03\Solution\BlobManager</strong>
+        folder.
+      </p>
+    </blockquote>
+  </li>
+  <li>
+    <p>
+      Observe the output from the currently running console application. The
+      updated output includes the final URL to access the blob online. Record
+      the value of this URL to use later in the lab.
+    </p>
+    <blockquote>
+      <p>
+        <strong>Note</strong>: The URL will likely be similar to the following
+        string:
+        <em
+          ><em><a href="https://mediastor">https://mediastor</a></em
+          >[yourname]*.blob.core.windows.net/vector-graphics/graph.svg</em
+        >*
+      </p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Close the current terminal.</p>
+  </li>
+</ol>

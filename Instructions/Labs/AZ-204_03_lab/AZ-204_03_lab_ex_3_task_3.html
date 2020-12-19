@@ -1,0 +1,52 @@
+<h4>Task 3: Connect to the Azure Storage blob service endpoint</h4>
+<ol>
+  <li>
+    <p>
+      In the <strong>Main</strong> method, add the following block of code to
+      connect to the storage account and to retrieve account metadata:
+    </p>
+    <pre><code><code><div>StorageSharedKeyCredential accountCredentials = new StorageSharedKeyCredential(storageAccountName, storageAccountKey);
+
+BlobServiceClient serviceClient = new BlobServiceClient(new Uri(blobServiceEndpoint), accountCredentials);
+
+AccountInfo info = await serviceClient.GetAccountInfoAsync();
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>
+      Still in the <strong>Main</strong> method, add the following block of code
+      to print metadata about the storage account:
+    </p>
+    <pre><code><code><div>await Console.Out.WriteLineAsync($&quot;Connected to Azure Storage Account&quot;);
+await Console.Out.WriteLineAsync($&quot;Account name:\t{storageAccountName}&quot;);
+await Console.Out.WriteLineAsync($&quot;Account kind:\t{info?.AccountKind}&quot;);
+await Console.Out.WriteLineAsync($&quot;Account sku:\t{info?.SkuName}&quot;);
+</div></code></code></pre>
+  </li>
+  <li>
+    <p>Save the <strong>Program.cs</strong> file.</p>
+  </li>
+  <li>
+    <p>Using a terminal, run the console application project:</p>
+    <pre><code><code><div>dotnet run
+</div></code></code></pre>
+    <blockquote>
+      <p>
+        <strong>Note</strong>: If there are any build errors, review the
+        <strong>Program.cs</strong> file in the
+        <strong>Allfiles (F):\Allfiles\Labs\03\Solution\BlobManager</strong>
+        folder.
+      </p>
+    </blockquote>
+  </li>
+  <li>
+    <p>
+      Observe the output from the currently running console application. The
+      output contains metadata for the Storage account that was retrieved from
+      the service.
+    </p>
+  </li>
+  <li>
+    <p>Close the current terminal.</p>
+  </li>
+</ol>
