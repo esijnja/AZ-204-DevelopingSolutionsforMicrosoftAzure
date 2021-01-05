@@ -1,0 +1,120 @@
+<article>
+  <h4><a id="user-content-task-1-import-the-microsoft-graph-sdk-from-nuget" class="anchor" aria-hidden="true" href="#task-1-import-the-microsoft-graph-sdk-from-nuget"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Import the Microsoft Graph SDK from NuGet</h4>
+  <ol>
+  <li>
+  <p>Using a terminal, import version 1.21.0 of <strong>Microsoft.Graph</strong> from NuGet:</p>
+  <pre><code>dotnet add package Microsoft.Graph --version 1.21.0
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: The <strong>dotnet add package</strong> command will add the <strong>Microsoft.Graph</strong> package from NuGet. For more information, go to <a href="https://www.nuget.org/packages/Microsoft.Graph/1.21.0" rel="nofollow">Microsoft.Graph</a>.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Using the same terminal, import version 1.0.0-preview.2 of <strong>Microsoft.Graph.Auth</strong> from NuGet:</p>
+  <pre><code>dotnet add package Microsoft.Graph.Auth --version 1.0.0-preview.2
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: The <strong>dotnet add package</strong> command will add the <strong>Microsoft.Graph.Auth</strong> package from NuGet. For more information, go to <a href="https://www.nuget.org/packages/Microsoft.Graph.Auth/1.0.0-preview.2" rel="nofollow">Microsoft.Graph.Auth</a>.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Using the same terminal, build the .NET web application:</p>
+  <pre><code>dotnet build
+  </code></pre>
+  </li>
+  <li>
+  <p>Close the current terminal.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-2-modify-the-program-class-1" class="anchor" aria-hidden="true" href="#task-2-modify-the-program-class-1"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Modify the Program class</h4>
+  <ol>
+  <li>
+  <p>Open the <strong>Program.cs</strong> file in Visual Studio Code.</p>
+  </li>
+  <li>
+  <p>Add the following <strong>using</strong> directives for libraries that will be referenced by the application:</p>
+  <pre><code>using Microsoft.Graph;    
+  using Microsoft.Graph.Auth;
+  </code></pre>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-3-use-the-microsoft-graph-sdk-to-query-user-profile-information" class="anchor" aria-hidden="true" href="#task-3-use-the-microsoft-graph-sdk-to-query-user-profile-information"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Use the Microsoft Graph SDK to query user profile information</h4>
+  <ol>
+  <li>
+  <p>Within the <strong>Main</strong> method, remove the following block of unnecessary code:</p>
+  <pre><code>AuthenticationResult result;
+      
+  result = await app
+      .AcquireTokenInteractive(scopes)
+      .ExecuteAsync();
+  
+  Console.WriteLine($"Token:\t{result.AccessToken}");
+  </code></pre>
+  </li>
+  <li>
+  <p>In the <strong>Main</strong> method, perform the following actions:</p>
+  <ol>
+  <li>
+  <p>Create a new variable named <em>provider</em> of type <strong>DeviceCodeProvider</strong> that passes in the variables <em>app</em>, and <em>scopes</em> as constructor parameters:</p>
+  <pre><code>DeviceCodeProvider provider = new DeviceCodeProvider(app, scopes);
+  </code></pre>
+  </li>
+  <li>
+  <p>Create a new variable named <em>client</em> of type <strong>GraphServiceClient</strong> that passes in the variable <em>provider</em> as a constructor parameter:</p>
+  <pre><code>GraphServiceClient client = new GraphServiceClient(provider);
+  </code></pre>
+  </li>
+  <li>
+  <p>Add the following block of code to use the <strong>GraphServiceClient</strong> instance to asynchronously get the response of issuing an HTTP request to the relative <strong>/Me</strong> directory of the REST API, and then store the result in a new variable named <em>myProfile</em> of type <strong>User</strong>:</p>
+  <pre><code>User myProfile = await client.Me
+      .Request()
+      .GetAsync();
+  </code></pre>
+  </li>
+  <li>
+  <p>Render the value of the <strong>User.DisplayName</strong> and <strong>User.Id</strong> members to the console:</p>
+  <pre><code>Console.WriteLine($"Name:\t{myProfile.DisplayName}");
+  Console.WriteLine($"AAD Id:\t{myProfile.Id}");
+  </code></pre>
+  </li>
+  </ol>
+  </li>
+  <li>
+  <p>Save the&nbsp;<strong>Program.cs</strong>&nbsp;file.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-4-test-the-updated-application-1" class="anchor" aria-hidden="true" href="#task-4-test-the-updated-application-1"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 4: Test the updated application</h4>
+  <ol>
+  <li>
+  <p>Using a terminal, run the .NET console application project:</p>
+  <pre><code>dotnet run
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: If there are any build errors, review the <strong>Program.cs</strong> file in the <strong>Allfiles (F):\Allfiles\Labs\06\Solution\GraphClient</strong> folder.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Observe the message in the output from the currently running console application. Record the value of the code in the message. You'll use this value later in the lab.</p>
+  </li>
+  <li>
+  <p>Go to <a href="https://microsoft.com/devicelogin" rel="nofollow">https://microsoft.com/devicelogin</a>, and then enter the code value that you copied earlier in the lab.</p>
+  </li>
+  <li>
+  <p>Sign in by using your Microsoft account.</p>
+  <blockquote>
+  <p><strong>Note</strong>: You might have the option to select an existing Microsoft account as opposed to signing in again.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Close the currently open browser window.</p>
+  </li>
+  <li>
+  <p>In the <strong>Visual Studio Code</strong> window, observe the output from the Microsoft Graph request in the currently running console application.</p>
+  </li>
+  <li>
+  <p>Close the current terminal.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-review-2" class="anchor" aria-hidden="true" href="#review-2"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+  <p>In this exercise, you queried Microsoft Graph by using the SDK and MSAL-based authentication.</p>
+  </article>

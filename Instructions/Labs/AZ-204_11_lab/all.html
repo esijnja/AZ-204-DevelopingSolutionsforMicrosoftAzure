@@ -1,0 +1,478 @@
+<article class="markdown-body entry-content container-lg" itemprop="text"><table data-table-type="yaml-metadata">
+    <thead>
+    <tr>
+    <th>lab</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><div><table>
+    <thead>
+    <tr>
+    <th>title</th>
+    <th>az204Module</th>
+    <th>az020Module</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><div>Lab: Asynchronously processing messages by using Azure Queue Storage</div></td>
+    <td><div>Module 11: Develop message-based solutions</div></td>
+    <td><div>Module 10: Develop message-based solutions</div></td>
+    </tr>
+    </tbody>
+  </table>
+  </div></td>
+    </tr>
+    </tbody>
+  </table>
+  
+  <h1><a id="user-content-lab-asynchronously-processing-messages-by-using-azure-queue-storage" class="anchor" aria-hidden="true" href="#lab-asynchronously-processing-messages-by-using-azure-queue-storage"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Lab: Asynchronously processing messages by using Azure Queue Storage</h1>
+  <h1><a id="user-content-student-lab-manual" class="anchor" aria-hidden="true" href="#student-lab-manual"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Student lab manual</h1>
+  <h2><a id="user-content-lab-scenario" class="anchor" aria-hidden="true" href="#lab-scenario"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Lab scenario</h2>
+  <p>You're studying various ways to communicate between isolated service components in Microsoft Azure, and you have decided to evaluate the Azure Storage service and its Queue service offering. As part of this evaluation, you'll build a prototype application in .NET that can send and receive messages so that you can measure the complexity involved in using this service. To help you with your evaluation, you've also decided to use Azure Storage Explorer as the queue message producer/consumer throughout your tests.</p>
+  <h2><a id="user-content-objectives" class="anchor" aria-hidden="true" href="#objectives"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Objectives</h2>
+  <p>After you complete this lab, you will be able to:</p>
+  <ul>
+  <li>
+  <p>Add <strong>Azure.Storage</strong> libraries from NuGet.</p>
+  </li>
+  <li>
+  <p>Create a queue in .NET.</p>
+  </li>
+  <li>
+  <p>Produce a new message in the queue by using .NET.</p>
+  </li>
+  <li>
+  <p>Consume a message from the queue by using .NET.</p>
+  </li>
+  <li>
+  <p>Manage a queue by using Storage Explorer.</p>
+  </li>
+  </ul>
+  <h2><a id="user-content-lab-setup" class="anchor" aria-hidden="true" href="#lab-setup"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Lab setup</h2>
+  <ul>
+  <li>Estimated time: <strong>45 minutes</strong></li>
+  </ul>
+  <h2><a id="user-content-instructions" class="anchor" aria-hidden="true" href="#instructions"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Instructions</h2>
+  <h3><a id="user-content-before-you-start" class="anchor" aria-hidden="true" href="#before-you-start"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Before you start</h3>
+  <h4><a id="user-content-sign-in-to-the-lab-virtual-machine" class="anchor" aria-hidden="true" href="#sign-in-to-the-lab-virtual-machine"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Sign in to the lab virtual machine</h4>
+  <p>Ensure that you're signed in to your Windows 10 virtual machine by using the following credentials:</p>
+  <ul>
+  <li>
+  <p>Username: <strong>Admin</strong></p>
+  </li>
+  <li>
+  <p>Password: <strong>Pa55w.rd</strong></p>
+  </li>
+  </ul>
+  <h4><a id="user-content-review-the-installed-applications" class="anchor" aria-hidden="true" href="#review-the-installed-applications"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review the installed applications</h4>
+  <p>Find the taskbar on your Windows 10 desktop. The taskbar contains the icons for the applications that you'll use in this lab:</p>
+  <ul>
+  <li>
+  <p>Microsoft Edge</p>
+  </li>
+  <li>
+  <p>Visual Studio Code</p>
+  </li>
+  <li>
+  <p>Storage Explorer</p>
+  </li>
+  </ul>
+  <h3><a id="user-content-exercise-1-create-azure-resources" class="anchor" aria-hidden="true" href="#exercise-1-create-azure-resources"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 1: Create Azure resources</h3>
+  <h4><a id="user-content-task-1-open-the-azure-portal" class="anchor" aria-hidden="true" href="#task-1-open-the-azure-portal"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Open the Azure portal</h4>
+  <ol>
+  <li>
+  <p>Sign in to the Azure portal (<a href="https://portal.azure.com" rel="nofollow">https://portal.azure.com</a>).</p>
+  </li>
+  <li>
+  <p>If this is your first time signing in to the Azure portal, you'll notice a dialog box offering a tour of the portal. Select <strong>Get Started</strong> to skip the tour.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-2-create-a-storage-account" class="anchor" aria-hidden="true" href="#task-2-create-a-storage-account"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Create a Storage account</h4>
+  <ol>
+  <li>
+  <p>Create a new&nbsp;storage account&nbsp;with the following details:</p>
+  <ul>
+  <li>
+  <p>New resource group: <strong>AsyncProcessor</strong></p>
+  </li>
+  <li>
+  <p>Name: <em><em>asyncstor</em>[yourname]</em>**</p>
+  </li>
+  <li>
+  <p>Location: <strong>(US) East US</strong></p>
+  </li>
+  <li>
+  <p>Performance: <strong>Standard</strong></p>
+  </li>
+  <li>
+  <p>Account kind: <strong>StorageV2 (general purpose v2)</strong></p>
+  </li>
+  <li>
+  <p>Replication: <strong>Locally-redundant storage (LRS)</strong></p>
+  </li>
+  <li>
+  <p>Access tier: <strong>Hot</strong></p>
+  </li>
+  </ul>
+  <blockquote>
+  <p><strong>Note</strong>: Wait for Azure to finish creating the storage account before you move forward with the lab. You'll receive a notification when the&nbsp;account&nbsp;is created.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Find the&nbsp;<strong>Access Keys</strong>&nbsp;blade of your newly created&nbsp;storage account&nbsp;instance.</p>
+  </li>
+  <li>
+  <p>Record the value of the&nbsp;<strong>Connection string</strong> text box. You'll use this value later in this lab.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-review" class="anchor" aria-hidden="true" href="#review"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+  <p>In this exercise, you created a new Storage account that you'll use through the remainder of the lab.</p>
+  <h3><a id="user-content-exercise-2-configure-the-azure-storage-sdk-in-a-net-project" class="anchor" aria-hidden="true" href="#exercise-2-configure-the-azure-storage-sdk-in-a-net-project"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 2: Configure the Azure Storage SDK in a .NET project</h3>
+  <h4><a id="user-content-task-1-create-a-net-project" class="anchor" aria-hidden="true" href="#task-1-create-a-net-project"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Create a .NET project</h4>
+  <ol>
+  <li>
+  <p>Using Visual Studio Code, open the <strong>Allfiles (F):\Allfiles\Labs\11\Starter\MessageProcessor</strong> folder.</p>
+  </li>
+  <li>
+  <p>Using a terminal, create a new .NET project named <strong>MessageProcessor</strong> in the current folder:</p>
+  <pre><code>dotnet new console --name MessageProcessor --output .
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: The <strong>dotnet new</strong> command will create a new <strong>console</strong> project in a folder with the same name as the project.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Using the same terminal, import version 12.0.0 of <strong>Azure.Storage.Queues</strong> from NuGet:</p>
+  <pre><code>dotnet add package Azure.Storage.Queues --version 12.0.0
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: The <strong>dotnet add package</strong> command will add the <strong>Azure.Storage.Queues</strong> package from NuGet. For more information, go to <a href="https://www.nuget.org/packages/Azure.Storage.Queues/12.0.0" rel="nofollow">Azure.Storage.Queues</a>.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Using the same terminal, build the .NET web application:</p>
+  <pre><code>dotnet build
+  </code></pre>
+  </li>
+  <li>
+  <p>Close the current terminal.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-2-write-code-to-access-azure-storage" class="anchor" aria-hidden="true" href="#task-2-write-code-to-access-azure-storage"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Write code to access Azure Storage</h4>
+  <ol>
+  <li>
+  <p>Open the <strong>Program.cs</strong> file in Visual Studio Code.</p>
+  </li>
+  <li>
+  <p>Delete all existing code in the <strong>Program.cs</strong> file.</p>
+  </li>
+  <li>
+  <p>Add the following <strong>using</strong> directives for libraries that will be referenced by the application:</p>
+  <pre><code>using Azure;
+  using Azure.Storage.Queues;
+  using Azure.Storage.Queues.Models;
+  using System;
+  using System.Threading.Tasks;
+  </code></pre>
+  </li>
+  <li>
+  <p>Create a new <strong>Program</strong> class with two constant string properties named <strong>storageConnectionString</strong> and <strong>messagequeue</strong>, and then create an asynchronous <strong>Main</strong> entry point method:</p>
+  <pre><code>public class Program
+  {
+      private const string storageConnectionString = "&lt;storage-connection-string&gt;";
+      private const string queueName = "messagequeue";
+  
+      public static async Task Main(string[] args)
+      {
+      }
+  }
+  </code></pre>
+  </li>
+  <li>
+  <p>Update the <strong>storageConnectionString</strong> string constant by setting its value to the&nbsp;<strong>Connection string</strong> of the storage account that you recorded earlier in this lab.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-3-validate-azure-storage-access" class="anchor" aria-hidden="true" href="#task-3-validate-azure-storage-access"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Validate Azure Storage access</h4>
+  <ol>
+  <li>
+  <p>In the <strong>Main</strong> method, add the following block of code to connect to the storage account and to asynchronously create the queue if it doesn't already exist:</p>
+  <pre><code>QueueClient client = new QueueClient(storageConnectionString, queueName);        
+  await client.CreateAsync();
+  </code></pre>
+  </li>
+  <li>
+  <p>Still in the <strong>Main</strong> method, add the following block of code to render the Uniform Resource Identifier (URI) of the queue endpoint:</p>
+  <pre><code>Console.WriteLine($"---Account Metadata---");
+  Console.WriteLine($"Account Uri:\t{client.Uri}");
+  </code></pre>
+  </li>
+  <li>
+  <p>Save the&nbsp;<strong>Program.cs</strong>&nbsp;file.</p>
+  </li>
+  <li>
+  <p>Using a terminal, run the ASP.NET web application project:</p>
+  <pre><code>dotnet run
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: If there are any build errors, review the <strong>Program.cs</strong> file in the <strong>Allfiles (F):\Allfiles\Labs\11\Solution\MessageProcessor</strong> folder.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Observe the output from the currently running console application. The output contains metadata for the queue endpoint.</p>
+  </li>
+  <li>
+  <p>Close the current terminal.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-review-1" class="anchor" aria-hidden="true" href="#review-1"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+  <p>In this exercise, you configured your .NET project to access the Storage service and manipulate a queue made available through the service.</p>
+  <h3><a id="user-content-exercise-3-add-messages-to-the-queue" class="anchor" aria-hidden="true" href="#exercise-3-add-messages-to-the-queue"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 3: Add messages to the queue</h3>
+  <h4><a id="user-content-task-1-write-code-to-access-queue-messages" class="anchor" aria-hidden="true" href="#task-1-write-code-to-access-queue-messages"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Write code to access queue messages</h4>
+  <ol>
+  <li>
+  <p>In the <strong>Main</strong> method, perform the following actions:</p>
+  <ol>
+  <li>
+  <p>Render a header by using the <strong>Console.WriteLine</strong> static method:</p>
+  <pre><code>Console.WriteLine($"---Existing Messages---");
+  </code></pre>
+  </li>
+  <li>
+  <p>Add the following block of code to create variables that will be used when retrieving queue messages:</p>
+  <pre><code>int batchSize = 10;
+  TimeSpan visibilityTimeout = TimeSpan.FromSeconds(2.5d);
+  </code></pre>
+  </li>
+  <li>
+  <p>Add the following block of code to retrieve a batch of messages asynchronously from the queue service and iterate over the messages:</p>
+  <pre><code>Response&lt;QueueMessage[]&gt; messages = await client.ReceiveMessagesAsync(batchSize, visibilityTimeout);
+  foreach(QueueMessage message in messages?.Value)
+  {
+  }
+  </code></pre>
+  </li>
+  <li>
+  <p>Within the <strong>foreach</strong> block, render the <strong>MessageId</strong> and <strong>MessageText</strong> properties of the <strong><a href="https://docs.microsoft.com/dotnet/api/azure.storage.queues.models.queuemessage" rel="nofollow">QueueMessage</a></strong> instance:</p>
+  <pre><code>Console.WriteLine($"[{message.MessageId}]\t{message.MessageText}");
+  </code></pre>
+  </li>
+  </ol>
+  </li>
+  <li>
+  <p>Save the&nbsp;<strong>Program.cs</strong>&nbsp;file.</p>
+  </li>
+  <li>
+  <p>Using a terminal, build the ASP.NET web application project:</p>
+  <pre><code>dotnet build
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: If there are any build errors, review the <strong>Program.cs</strong> file in the <strong>Allfiles (F):\Allfiles\Labs\11\Solution\MessageProcessor</strong> folder.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Close the current terminal.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-2-test-message-queue-access" class="anchor" aria-hidden="true" href="#task-2-test-message-queue-access"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Test message queue access</h4>
+  <ol>
+  <li>
+  <p>Using a terminal, run the ASP.NET web application project:</p>
+  <pre><code>dotnet run
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: If there are any build errors, review the <strong>Program.cs</strong> file in the <strong>Allfiles (F):\Allfiles\Labs\11\Solution\MessageProcessor</strong> folder.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Observe the output from the currently running console application. The output indicates that no messages are in the queue.</p>
+  </li>
+  <li>
+  <p>Close the current terminal.</p>
+  </li>
+  <li>
+  <p>Find the <em><em>asyncstor</em>[yourname]</em>** Storage account that you created earlier in this lab.</p>
+  </li>
+  <li>
+  <p>In the <strong>Overview</strong> section of the blade, select <strong>Open in Explorer</strong> to open the Storage account by using Storage Explorer.</p>
+  </li>
+  <li>
+  <p>In the <strong>Azure Storage Explorer</strong> application, sign in to your Azure account.</p>
+  </li>
+  <li>
+  <p>From the <strong>Azure Storage Explorer</strong> application, in the <strong>EXPLORER</strong> pane, find and expand the <em><em>asyncstor</em>[yourname]</em>** storage account that you created earlier in this lab.</p>
+  </li>
+  <li>
+  <p>Within the <em><em>asyncstor</em>[yourname]</em>** node for the Storage account that you created earlier in this lab, find and open the <strong>messagequeue</strong> queue.</p>
+  </li>
+  <li>
+  <p>Add a new message to the queue with the following properties:</p>
+  <ul>
+  <li>
+  <p>Message text: <strong>Hello World</strong></p>
+  </li>
+  <li>
+  <p>Expires in: <strong>12 Hours</strong></p>
+  </li>
+  <li>
+  <p>Encode message body in Base 64: <strong>No</strong></p>
+  </li>
+  </ul>
+  </li>
+  <li>
+  <p>Return to the Visual Studio Code application.</p>
+  </li>
+  <li>
+  <p>Using a terminal, run the ASP.NET web application project:</p>
+  <pre><code>dotnet run
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: If there are any build errors, review the <strong>Program.cs</strong> file in the <strong>Allfiles (F):\Allfiles\Labs\11\Solution\MessageProcessor</strong> folder.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Observe the output from the currently running console application. The output includes the new message that you created.</p>
+  </li>
+  <li>
+  <p>Close the current terminal.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-3-delete-queued-messages" class="anchor" aria-hidden="true" href="#task-3-delete-queued-messages"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Delete queued messages</h4>
+  <ol>
+  <li>
+  <p>In the <strong>Visual Studio Code</strong> window, open the <strong>Program.cs</strong> file.</p>
+  </li>
+  <li>
+  <p>Update the <strong>foreach</strong> loop's block of code to invoke the <strong>DeleteMessageAsync</strong> method of the <strong>QueueMessage</strong> class, passing in the <strong>MessageId</strong> and <strong>PopReceipt</strong> properties of the <em>message</em> variable:</p>
+  <pre><code>foreach(QueueMessage message in messages?.Value)
+  {
+      Console.WriteLine($"[{message.MessageId}]\t{message.MessageText}");
+      await client.DeleteMessageAsync(message.MessageId, message.PopReceipt);
+  }
+  </code></pre>
+  </li>
+  <li>
+  <p><strong>Save</strong> the <strong>Program.cs</strong> file.</p>
+  </li>
+  <li>
+  <p>Using a terminal, run the ASP.NET web application project:</p>
+  <pre><code>dotnet run
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: If there are any build errors, review the <strong>Program.cs</strong> file in the <strong>Allfiles (F):\Allfiles\Labs\11\Solution\MessageProcessor</strong> folder.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Observe the output from the currently running console application. The message that you created earlier in the lab still exists because it hasn't been deleted previously.</p>
+  </li>
+  <li>
+  <p>Close the current terminal.</p>
+  </li>
+  <li>
+  <p>In the <strong>Azure Storage Explorer</strong> window, within the <em><em>asyncstor</em>[yourname]</em>** node for the Storage account that you created earlier in this lab, find and open the <strong>messagequeue</strong> queue.</p>
+  </li>
+  <li>
+  <p>Observe the empty list of messages in the queue.</p>
+  <blockquote>
+  <p><strong>Note</strong>: You might need to refresh the queue.</p>
+  </blockquote>
+  </li>
+  </ol>
+  <h4><a id="user-content-review-2" class="anchor" aria-hidden="true" href="#review-2"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+  <p>In this exercise, you read and deleted existing messages from the Storage queue by using the .NET library.</p>
+  <h3><a id="user-content-exercise-4-queue-new-messages-by-using-net" class="anchor" aria-hidden="true" href="#exercise-4-queue-new-messages-by-using-net"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 4: Queue new messages by using .NET</h3>
+  <h4><a id="user-content-task-1-write-code-to-create-queue-messages" class="anchor" aria-hidden="true" href="#task-1-write-code-to-create-queue-messages"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Write code to create queue messages</h4>
+  <ol>
+  <li>
+  <p>In the <strong>Visual Studio Code</strong> window, open the <strong>Program.cs</strong> file.</p>
+  </li>
+  <li>
+  <p>In the <strong>Main</strong> method, perform the following actions:</p>
+  <ol>
+  <li>
+  <p>Render a header by using the <strong>Console.WriteLine</strong> static method:</p>
+  <pre><code>Console.WriteLine($"---New Messages---");
+  </code></pre>
+  </li>
+  <li>
+  <p>Add the following block of code to create a new string variable named <em>greeting</em> with a value of <strong>Hi, Developer!</strong>, and then invoke the <strong>SendMessageAsync</strong> method of the <strong>QueueClient</strong> class by using the <em>greeting</em> variable as a parameter:</p>
+  <pre><code>string greeting = "Hi, Developer!";
+  await client.SendMessageAsync(greeting);
+  </code></pre>
+  </li>
+  <li>
+  <p>Add the following block of code to render the content of the message that you sent:</p>
+  <pre><code>Console.WriteLine($"Sent Message:\t{greeting}");
+  </code></pre>
+  </li>
+  </ol>
+  </li>
+  <li>
+  <p><strong>Save</strong> the <strong>Program.cs</strong> file.</p>
+  </li>
+  <li>
+  <p>Using a terminal, run the ASP.NET web application project:</p>
+  <pre><code>dotnet run
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: If there are any build errors, review the <strong>Program.cs</strong> file in the <strong>Allfiles (F):\Allfiles\Labs\11\Solution\MessageProcessor</strong> folder.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Observe the output from the currently running console application. The content of the new message that you sent should be in the output.</p>
+  </li>
+  <li>
+  <p>Close the current terminal.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-2-view-queued-messages-by-using-storage-explorer" class="anchor" aria-hidden="true" href="#task-2-view-queued-messages-by-using-storage-explorer"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: View queued messages by using Storage Explorer</h4>
+  <ol>
+  <li>
+  <p>In the <strong>Azure Storage Explorer</strong> window, within the <em><em>asyncstor</em>[yourname]</em>** node for the Storage account that you created earlier in this lab, find and open the <strong>messagequeue</strong> queue.</p>
+  </li>
+  <li>
+  <p>Observe the single new message in the list of messages in the queue.</p>
+  <blockquote>
+  <p><strong>Note</strong>: You might need to refresh the queue.</p>
+  </blockquote>
+  </li>
+  </ol>
+  <h4><a id="user-content-review-3" class="anchor" aria-hidden="true" href="#review-3"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+  <p>In this exercise, you created new messages in the queue by using the .NET library for Storage queues.</p>
+  <h3><a id="user-content-exercise-5-clean-up-your-subscription" class="anchor" aria-hidden="true" href="#exercise-5-clean-up-your-subscription"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 5: Clean up your subscription</h3>
+  <h4><a id="user-content-task-1-open-azure-cloud-shell-and-list-resource-groups" class="anchor" aria-hidden="true" href="#task-1-open-azure-cloud-shell-and-list-resource-groups"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Open Azure Cloud Shell and list resource groups</h4>
+  <ol>
+  <li>
+  <p>In the portal, select the <strong>Cloud Shell</strong> icon to open a new shell instance.</p>
+  </li>
+  <li>
+  <p>If Cloud Shell isn't already configured, configure the shell for Bash by using the default settings.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-2-delete-a-resource-group" class="anchor" aria-hidden="true" href="#task-2-delete-a-resource-group"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Delete a resource group</h4>
+  <ol>
+  <li>
+  <p>Enter the following command, and then select Enter to delete the <strong>AsyncProcessor</strong> resource group:</p>
+  <pre><code>az group delete --name AsyncProcessor --no-wait --yes
+  </code></pre>
+  </li>
+  <li>
+  <p>Close the Cloud Shell pane in the portal.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-3-close-the-active-application" class="anchor" aria-hidden="true" href="#task-3-close-the-active-application"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Close the active application</h4>
+  <ol>
+  <li>
+  <p>Close the currently running Microsoft Edge application.</p>
+  </li>
+  <li>
+  <p>Close the currently running Visual Studio Code application.</p>
+  </li>
+  <li>
+  <p>Close the currently running Azure Storage Explorer application.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-review-4" class="anchor" aria-hidden="true" href="#review-4"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+  <p>In this exercise, you cleaned up your subscription by removing the resource group that was used in this lab.</p>
+  </article>

@@ -1,0 +1,239 @@
+<article>
+<h4><a id="user-content-task-1-update-library-with-the-cosmos-sdk-and-references" class="anchor" aria-hidden="true" href="#task-1-update-library-with-the-cosmos-sdk-and-references"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Update library with the Cosmos SDK and references</h4>
+  <ol>
+  <li>
+  <p>Using a terminal, change your context to the <strong>AdventureWorks.Context</strong> folder:</p>
+  <pre><code>cd .\AdventureWorks.Context\
+  </code></pre>
+  </li>
+  <li>
+  <p>Using the same terminal, import <strong>Microsoft.Azure.Cosmos</strong> from NuGet:</p>
+  <pre><code>dotnet add package Microsoft.Azure.Cosmos --version 3.4.1
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: The <strong>dotnet add package</strong> command will add the <strong>Microsoft.Azure.Cosmos</strong> package from <strong>NuGet</strong>. For more information, go to: <a href="https://www.nuget.org/packages/Microsoft.Azure.Cosmos/3.4.1" rel="nofollow">Microsoft.Azure.Cosmos</a>.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Using the same terminal, build the ASP.NET web application project:</p>
+  <pre><code>dotnet build
+  </code></pre>
+  </li>
+  <li>
+  <p>Close the current terminal.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-2-write-net-code-to-connect-to-azure-cosmos-db" class="anchor" aria-hidden="true" href="#task-2-write-net-code-to-connect-to-azure-cosmos-db"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Write .NET code to connect to Azure Cosmos DB</h4>
+  <ol>
+  <li>
+  <p>Create a new <strong>AdventureWorks.Context/AdventureWorksCosmosContext.cs</strong> file in Visual Studio Code.</p>
+  </li>
+  <li>
+  <p>Add the following <strong>using</strong> directives for libraries that will be referenced by the application:</p>
+  <pre><code>using AdventureWorks.Models;
+  using Microsoft.Azure.Cosmos;
+  using Microsoft.Azure.Cosmos.Linq;
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+  using System.Threading.Tasks;
+  </code></pre>
+  </li>
+  <li>
+  <p>Enter the following code to add an <strong>AdventureWorks.Context</strong> namespace block:</p>
+  <pre><code>namespace AdventureWorks.Context
+  {
+  }
+  </code></pre>
+  </li>
+  <li>
+  <p>Create a new <strong>AdventureWorksCosmosContext</strong> class that implements the <strong>IAdventureWorksProductContext</strong> interface with a single read-only <em>Container</em> variable:</p>
+  <pre><code>public class AdventureWorksCosmosContext : IAdventureWorksProductContext
+  {
+      private readonly Container _container;
+  }
+  </code></pre>
+  </li>
+  <li>
+  <p>Within the <strong>AdventureWorksCosmosContext</strong> class, add a new constructor that creates a new instance of the <strong>CosmosClient</strong> class, and then obtain both a <strong>Database</strong> and <strong>Container</strong> instance from the client:</p>
+  <pre><code>public AdventureWorksCosmosContext(string connectionString, string database = "Retail", string container = "Online")
+  {
+      _container = new CosmosClient(connectionString)
+          .GetDatabase(database)
+          .GetContainer(container);
+  }
+  </code></pre>
+  </li>
+  <li>
+  <p>Within the <strong>AdventureWorksCosmosContext</strong> class, add a new <strong>FindModelAsync</strong> method that creates a LINQ query, transforms it into an iterator, iterates over the result set, and then returns the single item in the result set:</p>
+  <pre><code>public async Task&lt;Model&gt; FindModelAsync(Guid id)
+  {
+      var iterator = _container.GetItemLinqQueryable&lt;Model&gt;()
+          .Where(m =&gt; m.id == id)
+          .ToFeedIterator&lt;Model&gt;();
+  
+      List&lt;Model&gt; matches = new List&lt;Model&gt;();
+      while (iterator.HasMoreResults)
+      {
+          var next = await iterator.ReadNextAsync();
+          matches.AddRange(next);
+      }
+  
+      return matches.SingleOrDefault();
+  }
+  </code></pre>
+  </li>
+  <li>
+  <p>Within the <strong>AdventureWorksCosmosContext</strong> class, add a new <strong>GetModelsAsync</strong> method that runs an SQL query, gets the query result iterator, iterates over the result set, and then returns the union of all results:</p>
+  <pre><code>public async Task&lt;List&lt;Model&gt;&gt; GetModelsAsync()
+  {
+      string query = $@"SELECT * FROM items";
+  
+      var iterator = _container.GetItemQueryIterator&lt;Model&gt;(query);
+  
+      List&lt;Model&gt; matches = new List&lt;Model&gt;();
+      while (iterator.HasMoreResults)
+      {
+          var next = await iterator.ReadNextAsync();
+          matches.AddRange(next);
+      }
+  
+      return matches;
+  }
+  </code></pre>
+  </li>
+  <li>
+  <p>Within the <strong>AdventureWorksCosmosContext</strong> class, add a new <strong>FindProductAsync</strong> method that runs an SQL query, gets the query result iterator, iterates over the result set, and then returns the single item in the result set:</p>
+  <pre><code>public async Task&lt;Product&gt; FindProductAsync(Guid id)
+  {
+      string query = $@"SELECT VALUE products
+                          FROM models
+                          JOIN products in models.Products
+                          WHERE products.id = '{id}'";
+  
+      var iterator = _container.GetItemQueryIterator&lt;Product&gt;(query);
+  
+      List&lt;Product&gt; matches = new List&lt;Product&gt;();
+      while (iterator.HasMoreResults)
+      {
+          var next = await iterator.ReadNextAsync();
+          matches.AddRange(next);
+      }
+  
+      return matches.SingleOrDefault();
+  }
+  </code></pre>
+  </li>
+  <li>
+  <p>Save the&nbsp;<strong>AdventureWorksCosmosContext.cs</strong>&nbsp;file.</p>
+  </li>
+  <li>
+  <p>Using a terminal, change your context to the <strong>AdventureWorks.Context</strong> folder:</p>
+  <pre><code>cd .\AdventureWorks.Context\
+  </code></pre>
+  </li>
+  <li>
+  <p>Using the same terminal, build the ASP.NET web application project:</p>
+  <pre><code>dotnet build
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: If there are any build errors, review the <strong>AdventureWorksCosmosContext.cs</strong> file in the <strong>Allfiles (F):\Allfiles\Labs\04\Solution\AdventureWorks\AdventureWorks.Context</strong> folder.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Close the current terminal.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-3-update-the-azure-cosmos-db-connection-string" class="anchor" aria-hidden="true" href="#task-3-update-the-azure-cosmos-db-connection-string"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Update the Azure Cosmos DB connection string</h4>
+  <ol>
+  <li>
+  <p>Open the <strong>AdventureWorks.Web/appsettings.json</strong> file in Visual Studio Code.</p>
+  </li>
+  <li>
+  <p>Replace the value of the <em>ConnectionStrings.AdventureWorksCosmosContext</em> property with the <strong>PRIMARY CONNECTION STRING</strong> of the Azure Cosmos DB account that you recorded earlier in this lab.</p>
+  </li>
+  <li>
+  <p>Save the&nbsp;<strong>appsettings.json</strong>&nbsp;file.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-4-update-net-application-startup-logic" class="anchor" aria-hidden="true" href="#task-4-update-net-application-startup-logic"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 4: Update .NET application startup logic</h4>
+  <ol>
+  <li>
+  <p>Open the <strong>AdventureWorks.Web/Startup.cs</strong> file in Visual Studio Code.</p>
+  </li>
+  <li>
+  <p>In the <strong>Startup</strong> class, find the existing <strong>ConfigureProductService</strong> method.</p>
+  <blockquote>
+  <p><strong>Note</strong>: The current product service uses SQL as its database.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Replace the <strong>ConfigureProductService</strong> method with the following code:</p>
+  <pre><code>public void ConfigureProductService(IServiceCollection services)
+  {
+      services.AddScoped&lt;IAdventureWorksProductContext, AdventureWorksCosmosContext&gt;(provider =&gt;
+              new AdventureWorksCosmosContext(
+                  _configuration.GetConnectionString(nameof(AdventureWorksCosmosContext))
+              )
+      );
+  }
+  </code></pre>
+  </li>
+  <li>
+  <p>Save the&nbsp;<strong>Startup.cs</strong>&nbsp;file.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-5-validate-that-the-net-application-successfully-connects-to-azure-cosmos-db" class="anchor" aria-hidden="true" href="#task-5-validate-that-the-net-application-successfully-connects-to-azure-cosmos-db"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 5: Validate that the .NET application successfully connects to Azure Cosmos DB</h4>
+  <ol>
+  <li>
+  <p>Using a terminal, change your context to the <strong>AdventureWorks.Web</strong> folder:</p>
+  <pre><code>cd .\AdventureWorks.Web\
+  </code></pre>
+  </li>
+  <li>
+  <p>Using the same terminal, run the ASP.NET web application project:</p>
+  <pre><code>dotnet run
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: The <strong>dotnet run</strong> command will automatically build any changes to the project and then start the web application without a debugger attached. The command will output the URL of the running application and any assigned ports.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Open the Microsoft Edge browser.</p>
+  </li>
+  <li>
+  <p>In the open browser window, browse to the web application that's hosted at <strong>localhost</strong> on port <strong>5000</strong>.</p>
+  <blockquote>
+  <p><strong>Note</strong>: The URL is <a href="http://localhost:5000" rel="nofollow">http://localhost:5000</a>.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>In the web application, observe the list of models displayed from the front page.</p>
+  </li>
+  <li>
+  <p>Find the <strong>Touring-1000</strong> model, and then select <strong>View Details</strong>.</p>
+  </li>
+  <li>
+  <p>From the <strong>Touring-1000</strong> product detail page, perform the following actions:</p>
+  <ol>
+  <li>
+  <p>In the <strong>Select options</strong> list, select <strong>Touring-1000 Yellow, 50, $2,384.07</strong>.</p>
+  </li>
+  <li>
+  <p>Find <strong>Add to Cart</strong>.</p>
+  </li>
+  </ol>
+  </li>
+  <li>
+  <p>Close the browser window displaying your web application.</p>
+  </li>
+  <li>
+  <p>Return to the <strong>Visual Studio Code</strong> window.</p>
+  </li>
+  <li>
+  <p>Close the current terminal.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-review-4" class="anchor" aria-hidden="true" href="#review-4"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+  <p>In this exercise, you wrote C# code to query an Azure Cosmos DB collection by using the .NET SDK.</p>
+  </article>

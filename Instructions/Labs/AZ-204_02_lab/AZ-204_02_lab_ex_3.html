@@ -1,0 +1,134 @@
+<article>
+<h4><a id="user-content-task-1-create-an-http-triggered-function" class="anchor" aria-hidden="true" href="#task-1-create-an-http-triggered-function"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Create an HTTP-triggered function</h4>
+<ol>
+<li>Open the <strong>Windows Terminal</strong> application.</li>
+<li>Change the current directory to the <strong>Allfiles (F):\Allfiles\Labs\02\Starter\func</strong> project directory.</li>
+<li>Create a new function with the following details:
+<ul>
+<li>template: <strong>HTTP trigger</strong></li>
+<li>name: <strong>Echo</strong></li>
+</ul>
+<blockquote>
+<p><strong>Note</strong>: You can review the documentation to <a href="https://docs.microsoft.com/azure/azure-functions/functions-run-local#create-func" rel="nofollow">create a new function</a> using the <strong>Azure Functions Core Tools</strong>.</p>
+</blockquote>
+</li>
+<li>Close the currently running <strong>Windows Terminal</strong> application.</li>
+</ol>
+<h4><a id="user-content-task-2-write-http-triggered-function-code" class="anchor" aria-hidden="true" href="#task-2-write-http-triggered-function-code"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Write HTTP-triggered function code</h4>
+<ol>
+<li>
+<p>Open <strong>Visual Studio Code</strong>.</p>
+</li>
+<li>
+<p>Using <strong>Visual Studio Code</strong>, open the solution folder found at <strong>Allfiles (F):\Allfiles\Labs\02\Starter\func</strong>.</p>
+</li>
+<li>
+<p>Open the <strong>Echo.cs</strong> file.</p>
+</li>
+<li>
+<p>In the code editor, delete all the code within the <strong>Echo.cs</strong> file.</p>
+</li>
+<li>
+<p>Add <strong>using directives</strong> for the <strong>Microsoft.AspNetCore.Mvc</strong>, <strong>Microsoft.Azure.WebJobs</strong>, <strong>Microsoft.AspNetCore.Http</strong>, and <strong>Microsoft.Extensions.Logging</strong> namespaces for libraries that will be referenced by the application:</p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">using</span> <span class="pl-en">Microsoft</span>.<span class="pl-en">AspNetCore</span>.<span class="pl-en">Mvc</span>;
+<span class="pl-k">using</span> <span class="pl-en">Microsoft</span>.<span class="pl-en">Azure</span>.<span class="pl-en">WebJobs</span>;
+<span class="pl-k">using</span> <span class="pl-en">Microsoft</span>.<span class="pl-en">AspNetCore</span>.<span class="pl-en">Http</span>;
+<span class="pl-k">using</span> <span class="pl-en">Microsoft</span>.<span class="pl-en">Extensions</span>.<span class="pl-en">Logging</span>;</pre></div>
+</li>
+<li>
+<p>Create a new <strong>public static</strong> class named <strong>Echo</strong>:</p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">class</span> <span class="pl-en">Echo</span>
+{ }</pre></div>
+</li>
+<li>
+<p>Within the <strong>Echo</strong> class, create a new <strong>public static</strong> method named <strong>Run</strong> that returns a variable of type <strong>IActionResult</strong> and that also takes in variables of type <strong>HttpRequest</strong> and <strong>ILogger</strong> as parameters named <em>request</em> and <em>logger</em>:</p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-en">IActionResult</span> <span class="pl-en">Run</span>(
+    <span class="pl-en">HttpRequest</span> <span class="pl-smi">request</span>,
+    <span class="pl-en">ILogger</span> <span class="pl-smi">logger</span>)
+{ }</pre></div>
+</li>
+<li>
+<p>Append an attribute to the <strong>Run</strong> method of type <strong>FunctionNameAttribute</strong> that has its <strong>name</strong> parameter set to a value of <strong>Echo</strong>:</p>
+<div class="highlight highlight-source-cs"><pre>[<span class="pl-en">FunctionName</span>(<span class="pl-s"><span class="pl-pds">"</span>Echo<span class="pl-pds">"</span></span>)]
+<span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-en">IActionResult</span> <span class="pl-en">Run</span>(
+    <span class="pl-en">HttpRequest</span> <span class="pl-smi">request</span>,
+    <span class="pl-en">ILogger</span> <span class="pl-smi">logger</span>)
+{ }</pre></div>
+</li>
+<li>
+<p>Append an attribute to the <strong>request</strong> parameter of type <strong>HttpTriggerAttribute</strong> that has its <strong>methods</strong> parameter array set to a single value of <strong>POST</strong>:</p>
+<div class="highlight highlight-source-cs"><pre>[<span class="pl-en">FunctionName</span>(<span class="pl-s"><span class="pl-pds">"</span>Echo<span class="pl-pds">"</span></span>)]
+<span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-en">IActionResult</span> <span class="pl-en">Run</span>(
+    [<span class="pl-en">HttpTrigger</span>(<span class="pl-s"><span class="pl-pds">"</span>POST<span class="pl-pds">"</span></span>)] <span class="pl-en">HttpRequest</span> <span class="pl-smi">request</span>,
+    <span class="pl-en">ILogger</span> <span class="pl-smi">logger</span>)
+{ }</pre></div>
+</li>
+<li>
+<p>Within the <strong>Run</strong> method, log a fixed message:</p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-smi">logger</span>.<span class="pl-en">LogInformation</span>(<span class="pl-s"><span class="pl-pds">"</span>Received a request<span class="pl-pds">"</span></span>);</pre></div>
+</li>
+<li>
+<p>Finally, echo the body of the HTTP request as the HTTP response:</p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-en">OkObjectResult</span>(<span class="pl-smi">request</span>.<span class="pl-smi">Body</span>);</pre></div>
+</li>
+<li>
+<p><strong>Save</strong> the <strong>Echo.cs</strong> file.</p>
+</li>
+</ol>
+<h4><a id="user-content-task-3-test-the-http-triggered-function-by-using-httprepl" class="anchor" aria-hidden="true" href="#task-3-test-the-http-triggered-function-by-using-httprepl"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Test the HTTP-triggered function by using httprepl</h4>
+<ol>
+<li>
+<p>Open the <strong>Windows Terminal</strong> application.</p>
+</li>
+<li>
+<p>Change the current directory to the <strong>Allfiles (F):\Allfiles\Labs\02\Starter\func</strong> project directory.</p>
+</li>
+<li>
+<p>Start the function app project:</p>
+<blockquote>
+<p><strong>Note</strong>: You can review the documentation to <a href="https://docs.microsoft.com/azure/azure-functions/functions-run-local#start" rel="nofollow">start the function app project locally</a> using the <strong>Azure Functions Core Tools</strong>.</p>
+</blockquote>
+</li>
+<li>
+<p>Open a new instance of the <strong>Windows Terminal</strong> application.</p>
+</li>
+<li>
+<p>Start the <strong>httprepl</strong> tool, and then set the base Uniform Resource Identifier (URI) to <code>http://localhost:7071</code>:</p>
+<div class="highlight highlight-source-powershell"><pre>httprepl http:<span class="pl-k">//</span>localhost:<span class="pl-c1">7071</span></pre></div>
+<blockquote>
+<p><strong>Note</strong>: An error message is displayed by the httprepl tool. This message occurs because the tool is searching for a Swagger definition file to use to "traverse" the API. Because your functio projectp does not produce a Swagger definition file, you'll need to traverse the API manually.</p>
+</blockquote>
+</li>
+<li>
+<p>When you receive the tool prompt, browse to the relative <strong>api/echo</strong> directory:</p>
+<div class="highlight highlight-source-powershell"><pre>cd api
+cd echo</pre></div>
+</li>
+<li>
+<p>Run the <strong>post</strong> command sending in an HTTP request body set to a numeric value of <strong>3</strong> by using the <strong>--content</strong> option:</p>
+<div class="highlight highlight-source-powershell"><pre>post <span class="pl-k">--</span>content <span class="pl-c1">3</span></pre></div>
+</li>
+<li>
+<p>Run the <strong>post</strong> command sending in an HTTP request body set to a numeric value of <strong>5</strong> by using the <strong>--content</strong> option:</p>
+<div class="highlight highlight-source-powershell"><pre>post <span class="pl-k">--</span>content <span class="pl-c1">5</span></pre></div>
+</li>
+<li>
+<p>Run the <strong>post</strong> command sending in an HTTP request body set to a string value of <strong>"Hello"</strong> by using the <strong>--content</strong> option:</p>
+<div class="highlight highlight-source-powershell"><pre>post <span class="pl-k">--</span>content <span class="pl-s"><span class="pl-pds">"</span>Hello<span class="pl-pds">"</span></span></pre></div>
+</li>
+<li>
+<p>Run the <strong>post</strong> command sending in an HTTP request body set to a JSON value of <strong>{"msg": "Successful"}</strong> by using the <strong>--content</strong> option:</p>
+<div class="highlight highlight-source-powershell"><pre>post <span class="pl-k">--</span>content <span class="pl-s"><span class="pl-pds">"</span>{<span class="pl-pds">"</span></span>msg<span class="pl-s"><span class="pl-pds">"</span>: <span class="pl-pds">"</span></span>Successful<span class="pl-s"><span class="pl-pds">"</span>}<span class="pl-pds">"</span></span></pre></div>
+</li>
+<li>
+<p>Exit the <strong>httprepl</strong> application:</p>
+<div class="highlight highlight-source-powershell"><pre><span class="pl-k">exit</span></pre></div>
+</li>
+<li>
+<p>Close all currently running instances of the <strong>Windows Terminal</strong> application.</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>Review</strong>: In this exercise, you created a basic function that echoes the content sent via an HTTP POST request.</p>
+</blockquote>
+</article>

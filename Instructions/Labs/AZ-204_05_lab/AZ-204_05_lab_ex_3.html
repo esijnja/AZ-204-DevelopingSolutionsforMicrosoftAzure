@@ -1,0 +1,104 @@
+<article>
+  <h4><a id="user-content-task-1-enable-the-admin-user-in-container-registry" class="anchor" aria-hidden="true" href="#task-1-enable-the-admin-user-in-container-registry"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Enable the admin user in Container Registry</h4>
+  <ol>
+  <li>
+  <p>Access the container registry that you created earlier in this lab.</p>
+  </li>
+  <li>
+  <p>Select <strong>Update</strong> to find the settings for the container registry.</p>
+  </li>
+  <li>
+  <p><strong>Enable</strong> the <strong>Admin User</strong>, <strong>Save</strong> your changes, and then close the <strong>Update container registry</strong> blade.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-2-automatically-deploy-a-container-image-to-an-azure-container-instance" class="anchor" aria-hidden="true" href="#task-2-automatically-deploy-a-container-image-to-an-azure-container-instance"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Automatically deploy a container image to an Azure container instance</h4>
+  <ol>
+  <li>
+  <p>Select the <strong>Repositories</strong> link to find your images in the registry.</p>
+  </li>
+  <li>
+  <p>Select the <strong>ipcheck</strong> image, and then find the <strong>latest</strong> tag for that image.</p>
+  </li>
+  <li>
+  <p>Right-click the <strong>latest</strong> tag or activate the shortcut menu for the <strong>ipcheck</strong> container image to <strong>"run"</strong> a new Azure container instance with the following settings:</p>
+  <ul>
+  <li>
+  <p>Container name: <strong>managedcompute</strong></p>
+  </li>
+  <li>
+  <p>OS type: <strong>Linux</strong></p>
+  </li>
+  <li>
+  <p>Resource group: <strong>ContainerCompute</strong></p>
+  </li>
+  <li>
+  <p>Location: <strong>East US</strong></p>
+  </li>
+  <li>
+  <p>Number of cores: <strong>2</strong></p>
+  </li>
+  <li>
+  <p>Memory (GB): <strong>4</strong></p>
+  </li>
+  <li>
+  <p>Public IP address: <strong>No</strong></p>
+  </li>
+  </ul>
+  <blockquote>
+  <p><strong>Note</strong>: Wait for the creation task to complete before moving on with this lab.</p>
+  </blockquote>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-3-manually-deploy-a-container-image-to-container-instances" class="anchor" aria-hidden="true" href="#task-3-manually-deploy-a-container-image-to-container-instances"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Manually deploy a container image to Container Instances</h4>
+  <ol>
+  <li>
+  <p>Create a new container instance with the following information :</p>
+  <ul>
+  <li>
+  <p>Resource group: <strong>ContainerCompute</strong></p>
+  </li>
+  <li>
+  <p>Container name: <strong>manualcompute</strong></p>
+  </li>
+  <li>
+  <p>Region: <strong>East US</strong></p>
+  </li>
+  <li>
+  <p>Image source: <strong>Azure Container Registry</strong></p>
+  </li>
+  <li>
+  <p>Registry: *<strong>Azure Container Registery resource created earlier in the lab</strong></p>
+  </li>
+  <li>
+  <p>Image: <strong>ipcheck</strong></p>
+  </li>
+  <li>
+  <p>Image tag: <strong>latest</strong></p>
+  </li>
+  </ul>
+  <blockquote>
+  <p><strong>Note</strong>: Wait for the creation task to complete before moving forward with this lab.</p>
+  </blockquote>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-4-validate-that-the-container-instance-ran-successfully" class="anchor" aria-hidden="true" href="#task-4-validate-that-the-container-instance-ran-successfully"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 4: Validate that the container instance ran successfully</h4>
+  <ol>
+  <li>
+  <p>Access the <strong>manualcompute</strong> container instance that you created earlier in this lab.</p>
+  </li>
+  <li>
+  <p>Select the <strong>Containers</strong> link to get a list of the current containers that are running.</p>
+  </li>
+  <li>
+  <p>Find the contents of the <strong>Events</strong> list for the container instance that ran your <strong>ipcheck</strong> application.</p>
+  </li>
+  <li>
+  <p>Select the <strong>Logs</strong> tab, and then find the text logs from the container instance.</p>
+  <blockquote>
+  <p><strong>Note</strong>: You can also optionally find the <strong>Events</strong> and <strong>Logs</strong> from the <strong>managedcompute</strong> container instance.</p>
+  </blockquote>
+  </li>
+  </ol>
+  <h4><a id="user-content-review-2" class="anchor" aria-hidden="true" href="#review-2"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+  <p>In this exercise, you used multiple methods to deploy a container image to an Azure container instance. By using the manual method, you were also able to customize the deployment further and run task-based applications as part of a container run.</p>
+  </article>

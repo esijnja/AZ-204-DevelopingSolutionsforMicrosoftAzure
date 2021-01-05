@@ -1,0 +1,310 @@
+<article>
+    <tr>
+    <th>lab</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><div><table>
+    <thead>
+    <tr>
+    <th>title</th>
+    <th>az204Module</th>
+    <th>az020Module</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><div>Lab: Creating a multi-tier solution by using services in Azure</div></td>
+    <td><div>Module 08: Implement API Management</div></td>
+    <td><div>Module 08: Implement API Management</div></td>
+    </tr>
+    </tbody>
+  </table>
+  </div></td>
+    </tr>
+    </tbody>
+  </table>
+  
+  <h1><a id="user-content-lab-creating-a-multi-tier-solution-by-using-services-in-azure" class="anchor" aria-hidden="true" href="#lab-creating-a-multi-tier-solution-by-using-services-in-azure"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Lab: Creating a multi-tier solution by using services in Azure</h1>
+  <h1><a id="user-content-student-lab-manual" class="anchor" aria-hidden="true" href="#student-lab-manual"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Student lab manual</h1>
+  <h2><a id="user-content-lab-scenario" class="anchor" aria-hidden="true" href="#lab-scenario"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Lab scenario</h2>
+  <p>The developers in your company have successfully adopted and used the <a href="https://httpbin.org/" rel="nofollow">https://httpbin.org/</a> website to test various clients that issue HTTP requests. Your company would like to use one of the publicly available containers on Docker Hub to host the httpbin web application in an enterprise-managed environment with a few caveats. First, developers who are issuing Representational State Transfer (REST) queries should receive standard headers that are used throughout the company's applications. Second, developers should be able to get responses by using JavaScript Object Notation (JSON) even if the API that's used behind the scenes doesn't support the data format. You're tasked with using Microsoft Azure API Management to create a proxy tier in front of the httpbin web application to implement your company's policies.</p>
+  <h2><a id="user-content-objectives" class="anchor" aria-hidden="true" href="#objectives"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Objectives</h2>
+  <p>After you complete this lab, you will be able to:</p>
+  <ul>
+  <li>
+  <p>Create a web application from a Docker Hub container image.</p>
+  </li>
+  <li>
+  <p>Create an API Management account.</p>
+  </li>
+  <li>
+  <p>Configure an API as a proxy for another Azure service with header and payload manipulation.</p>
+  </li>
+  </ul>
+  <h2><a id="user-content-lab-setup" class="anchor" aria-hidden="true" href="#lab-setup"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Lab setup</h2>
+  <ul>
+  <li>Estimated time: <strong>45 minutes</strong></li>
+  </ul>
+  <h2><a id="user-content-instructions" class="anchor" aria-hidden="true" href="#instructions"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Instructions</h2>
+  <h3><a id="user-content-before-you-start" class="anchor" aria-hidden="true" href="#before-you-start"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Before you start</h3>
+  <h4><a id="user-content-sign-in-to-the-lab-virtual-machine" class="anchor" aria-hidden="true" href="#sign-in-to-the-lab-virtual-machine"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Sign in to the lab virtual machine</h4>
+  <p>Ensure that you're signed in to your Windows 10 virtual machine by using the following credentials:</p>
+  <ul>
+  <li>
+  <p>Username: <strong>Admin</strong></p>
+  </li>
+  <li>
+  <p>Password: <strong>Pa55w.rd</strong></p>
+  </li>
+  </ul>
+  <h4><a id="user-content-review-the-installed-applications" class="anchor" aria-hidden="true" href="#review-the-installed-applications"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review the installed applications</h4>
+  <p>Find the taskbar on your Windows 10 desktop. The taskbar contains the icons for the applications that you'll use in this lab:</p>
+  <ul>
+  <li>Microsoft Edge</li>
+  </ul>
+  <h3><a id="user-content-exercise-1-creating-an-azure-app-service-resource-by-using-a-docker-container-image" class="anchor" aria-hidden="true" href="#exercise-1-creating-an-azure-app-service-resource-by-using-a-docker-container-image"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 1: Creating an Azure App Service resource by using a Docker container image</h3>
+  <h4><a id="user-content-task-1-open-the-azure-portal" class="anchor" aria-hidden="true" href="#task-1-open-the-azure-portal"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Open the Azure portal</h4>
+  <ol>
+  <li>
+  <p>Sign in to the Azure portal (<a href="https://portal.azure.com" rel="nofollow">https://portal.azure.com</a>).</p>
+  </li>
+  <li>
+  <p>If this is your first time signing in to the Azure portal, you'll notice a dialog box offering a tour of the portal. Select the <strong>Get Started</strong> button to skip the tour.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-2-create-a-web-app-by-using-azure-app-service-resource-by-using-an-httpbin-container-image" class="anchor" aria-hidden="true" href="#task-2-create-a-web-app-by-using-azure-app-service-resource-by-using-an-httpbin-container-image"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Create a web app by using Azure App Service resource by using an httpbin container image</h4>
+  <ol>
+  <li>
+  <p>Create a new web app with the following details:</p>
+  <ul>
+  <li>
+  <p>New resource group: <strong>ApiService</strong></p>
+  </li>
+  <li>
+  <p>Name: <em><em>httpapi</em>[yourname]</em>**</p>
+  </li>
+  <li>
+  <p>Publish: <strong>Docker Container</strong></p>
+  </li>
+  <li>
+  <p>Operating system: <strong>Linux</strong></p>
+  </li>
+  <li>
+  <p>Region: <strong>East US</strong></p>
+  </li>
+  <li>
+  <p>New App Service plan: <strong>ApiPlan</strong></p>
+  </li>
+  <li>
+  <p>SKU and size: <strong>Premium V2 P1v2</strong></p>
+  </li>
+  <li>
+  <p>Docker options: <strong>Single Container</strong></p>
+  </li>
+  <li>
+  <p>Image source: <strong>Docker Hub</strong></p>
+  </li>
+  <li>
+  <p>Access type: <strong>Public</strong></p>
+  </li>
+  <li>
+  <p>Image and tag: <strong>kennethreitz/httpbin:latest</strong></p>
+  </li>
+  </ul>
+  <blockquote>
+  <p><strong>Note</strong>: Wait for Azure to finish creating the web app before you move forward with the lab. You'll receive a notification when the&nbsp;app&nbsp;is created.</p>
+  </blockquote>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-3-test-the-httpbin-web-application" class="anchor" aria-hidden="true" href="#task-3-test-the-httpbin-web-application"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Test the httpbin web application</h4>
+  <ol>
+  <li>
+  <p>Access the <em><em>httpapi</em>[yourname]</em>** web app that you created earlier in this lab.</p>
+  </li>
+  <li>
+  <p>Open the <em><em>httpapi</em>[yourname]</em>** web app in your browser.</p>
+  </li>
+  <li>
+  <p>Test the API by selecting the <strong>Response formats</strong> option, selecting <strong>GET /xml</strong>, selecting <strong>Try it out</strong>, and then finally by selecting <strong>Execute</strong>.</p>
+  </li>
+  <li>
+  <p>Observe the response from the HTTP request. Specifically, observe the content of the <strong>Request URL</strong>, <strong>Response body</strong>, and <strong>Response headers</strong> text boxes.</p>
+  </li>
+  <li>
+  <p>Return to the Azure portal and the <strong>Web App</strong> blade for the <em><em>httpapi</em>[yourname]</em>** web app.</p>
+  </li>
+  <li>
+  <p>Access the <strong>Properties</strong> section of the <strong>Web App</strong> blade.</p>
+  </li>
+  <li>
+  <p>In the <strong>Properties</strong> section, record the value of the <strong>URL</strong> text box. You'll use this value later in the lab to make requests against the API.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-review" class="anchor" aria-hidden="true" href="#review"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+  <p>In this exercise, you created a new Azure web app by using a container image sourced from Docker Hub.</p>
+  <h3><a id="user-content-exercise-2-build-an-api-proxy-tier-by-using-azure-api-management" class="anchor" aria-hidden="true" href="#exercise-2-build-an-api-proxy-tier-by-using-azure-api-management"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 2: Build an API proxy tier by using Azure API Management</h3>
+  <h4><a id="user-content-task-1-create-an-api-management-resource" class="anchor" aria-hidden="true" href="#task-1-create-an-api-management-resource"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Create an API Management resource</h4>
+  <ol>
+  <li>
+  <p>In the Azure portal, create a new API Management service instance with the following details:</p>
+  <ul>
+  <li>
+  <p>Existing resource group: <strong>ApiService</strong></p>
+  </li>
+  <li>
+  <p>Name: <em><em>prodapi</em>[yourname]</em>**</p>
+  </li>
+  <li>
+  <p>Location: <strong>East US</strong></p>
+  </li>
+  <li>
+  <p>Organization name: <strong>Contoso</strong></p>
+  </li>
+  <li>
+  <p>Pricing tier: <strong>Consumption (99.9 SLA, %)</strong></p>
+  </li>
+  </ul>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-2-define-a-new-api" class="anchor" aria-hidden="true" href="#task-2-define-a-new-api"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Define a new API</h4>
+  <ol>
+  <li>
+  <p>Access the <em><em>prodapi</em>[yourname]</em>** API Management service instance that you created earlier in this lab.</p>
+  </li>
+  <li>
+  <p>Create a new <strong>Blank API</strong> with the following details:</p>
+  <ul>
+  <li>
+  <p>Display name: <strong>HTTPBin API</strong></p>
+  </li>
+  <li>
+  <p>Name: <strong>httpbin-api</strong></p>
+  </li>
+  <li>
+  <p>Web service URL: <em>Enter the URL for the web app that you copied earlier in this lab</em></p>
+  <blockquote>
+  <p><strong>Note</strong>: Depending on how you copy the URL, you might need to add an "http://" prefix to create a valid URL value.</p>
+  </blockquote>
+  </li>
+  </ul>
+  </li>
+  <li>
+  <p>Add a new <strong>operation</strong> to the recently created API with the following details:</p>
+  <ul>
+  <li>
+  <p>Display name: <strong>Echo Headers</strong></p>
+  </li>
+  <li>
+  <p>Name: <strong>echo-headers</strong></p>
+  </li>
+  <li>
+  <p>URL: <strong>GET /</strong></p>
+  </li>
+  </ul>
+  </li>
+  <li>
+  <p>Add a new <strong>Set Headers</strong> inbound policy to <strong>All Operations</strong> with the following details:</p>
+  <ul>
+  <li>
+  <p>Name: <strong>source</strong></p>
+  </li>
+  <li>
+  <p>Value: <strong>azure-api-mgmt</strong></p>
+  </li>
+  <li>
+  <p>Action: <strong>append</strong></p>
+  </li>
+  </ul>
+  </li>
+  <li>
+  <p>Update the <strong>Backend</strong> for the <strong>Echo Headers</strong> operation by overriding the <strong>Service URL</strong> and appending <strong>/headers</strong> to its current value.</p>
+  <blockquote>
+  <p><strong>Note</strong>: For example, if the current value is <strong><a href="http://httpapi*%5Byourname%5D*.azurewebsites.net" rel="nofollow">http://httpapi*[yourname]*.azurewebsites.net</a></strong>, the new value will be <strong><a href="http://httpapi*%5Byourname%5D*.azurewebsites.net/headers" rel="nofollow">http://httpapi*[yourname]*.azurewebsites.net/headers</a></strong></p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Test the <strong>Echo Headers</strong> operation in the <strong>HTTPBin API</strong>, observing the results of the API request.</p>
+  <blockquote>
+  <p><strong>Note</strong>: Observe how there's many headers sent as part of your request that are echoed in the response. Specifically, you'll notice the new <strong>Source</strong> header that you created as part of this task.</p>
+  </blockquote>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-3-manipulate-an-api-response" class="anchor" aria-hidden="true" href="#task-3-manipulate-an-api-response"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Manipulate an API response</h4>
+  <ol>
+  <li>
+  <p>Add a new <strong>operation</strong> to the API with the following details:</p>
+  <ul>
+  <li>
+  <p>Display name: <strong>Get Legacy Data</strong></p>
+  </li>
+  <li>
+  <p>Name: <strong>get-legacy-data</strong></p>
+  </li>
+  <li>
+  <p>URL: <strong>GET /xml</strong></p>
+  </li>
+  </ul>
+  </li>
+  <li>
+  <p>Test the <strong>Get Legacy Data</strong> operation in the <strong>HTTPBin API</strong>, observing the results of the API request.</p>
+  <blockquote>
+  <p><strong>Note</strong>: At this point, the results should be in XML format.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Add a new custom outbound policy scoped to the <strong>Get Legacy Data</strong> operation by first locating the following block of XML content:</p>
+  <pre><code>&lt;outbound&gt;
+      &lt;base /&gt;
+  &lt;/outbound&gt;
+  </code></pre>
+  </li>
+  <li>
+  <p>Replace that block of XML with the following XML, and then save the policy:</p>
+  <pre><code>&lt;outbound&gt;
+      &lt;base /&gt;
+      &lt;xml-to-json kind="direct" apply="always" consider-accept-header="false" /&gt;
+  &lt;/outbound&gt;
+  </code></pre>
+  </li>
+  <li>
+  <p>Test the <strong>Get Legacy Data</strong> operation in the <strong>HTTPBin API</strong>, observing the results of the API request.</p>
+  <blockquote>
+  <p><strong>Note</strong>: The new results are in JSON format.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Use the <strong>Trace</strong> feature of the test tool to observe the request sent to the back-end service.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-review-1" class="anchor" aria-hidden="true" href="#review-1"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+  <p>In this exercise, you built a proxy tier between your App Service resource and any developers who wish to make queries.</p>
+  <h3><a id="user-content-exercise-3-clean-up-your-subscription" class="anchor" aria-hidden="true" href="#exercise-3-clean-up-your-subscription"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 3: Clean up your subscription</h3>
+  <h4><a id="user-content-task-1-open-azure-cloud-shell" class="anchor" aria-hidden="true" href="#task-1-open-azure-cloud-shell"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Open Azure Cloud Shell</h4>
+  <ol>
+  <li>
+  <p>In the portal, select the <strong>Cloud Shell</strong> icon to open a new shell instance.</p>
+  </li>
+  <li>
+  <p>If Cloud Shell isn't already configured, configure the shell for Bash by using the default settings.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-2-delete-resource-groups" class="anchor" aria-hidden="true" href="#task-2-delete-resource-groups"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Delete resource groups</h4>
+  <ol>
+  <li>
+  <p>Enter the following command, and then select Enter to delete the <strong>ApiService</strong> resource group:</p>
+  <pre><code>az group delete --name ApiService --no-wait --yes
+  </code></pre>
+  </li>
+  <li>
+  <p>Close the Cloud Shell pane in the portal.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-3-close-the-active-applications" class="anchor" aria-hidden="true" href="#task-3-close-the-active-applications"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Close the active applications</h4>
+  <ul>
+  <li>Close the currently running Microsoft Edge application.</li>
+  </ul>
+  <h4><a id="user-content-review-2" class="anchor" aria-hidden="true" href="#review-2"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+  <p>In this exercise, you cleaned up your subscription by removing the resource groups used in this lab.</p>
+  </article>

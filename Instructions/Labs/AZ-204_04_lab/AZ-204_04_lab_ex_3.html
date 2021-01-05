@@ -1,0 +1,88 @@
+<article>
+  <h4><a id="user-content-task-1-open-and-build-the-web-application" class="anchor" aria-hidden="true" href="#task-1-open-and-build-the-web-application"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Open and build the web application</h4>
+  <ol>
+  <li>
+  <p>Using Visual Studio Code, open the solution folder found at <strong>Allfiles (F):\Allfiles\Labs\04\Starter\AdventureWorks</strong>.</p>
+  </li>
+  <li>
+  <p>Using a terminal, build the .NET solution:</p>
+  <pre><code>dotnet build
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: The <strong>dotnet build</strong> command will automatically restore any missing NuGet packages prior to building all projects in the folder.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Close the current terminal.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-2-update-the-sql-connection-string" class="anchor" aria-hidden="true" href="#task-2-update-the-sql-connection-string"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Update the SQL connection string</h4>
+  <ol>
+  <li>
+  <p>Open the <strong>AdventureWorks.Web/appsettings.json</strong> file in Visual Studio Code.</p>
+  </li>
+  <li>
+  <p>Replace the value of the <em>ConnectionStrings.AdventureWorksSqlContext</em> property with the <strong>ADO.NET (SQL Authentication) connection string</strong>&nbsp;of the&nbsp;SQL database&nbsp;that you recorded earlier in this lab.</p>
+  <blockquote>
+  <p><strong>Note</strong>: It's important that you use your updated connection string here. The original connection string copied from the portal won't have the username and password necessary to connect to the SQL database.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Save the&nbsp;<strong>appsettings.json</strong>&nbsp;file.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-3-update-the-blob-base-url" class="anchor" aria-hidden="true" href="#task-3-update-the-blob-base-url"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Update the blob base URL</h4>
+  <ol>
+  <li>
+  <p>Replace the value of the <em>Settings.BlobContainerUrl</em> property with the <em>URL</em> property of the <strong>Azure Storage</strong> blob container named <strong>images</strong> that you recorded earlier in this lab.</p>
+  </li>
+  <li>
+  <p>Save the&nbsp;<strong>appsettings.json</strong>&nbsp;file.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-4-validate-the-web-application" class="anchor" aria-hidden="true" href="#task-4-validate-the-web-application"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 4: Validate the web application</h4>
+  <ol>
+  <li>
+  <p>Using a terminal, change your context to the <strong>AdventureWorks.Web</strong> folder:</p>
+  <pre><code>cd .\AdventureWorks.Web\
+  </code></pre>
+  </li>
+  <li>
+  <p>Using the same terminal, run the ASP.NET web application project:</p>
+  <pre><code>dotnet run
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: The <strong>dotnet run</strong> command will automatically build any changes to the project and then start the web application without a debugger attached. The command will output the URL of the running application and any assigned ports.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Open the Microsoft Edge browser.</p>
+  </li>
+  <li>
+  <p>In the open browser window, browse to the web application that's hosted at <strong>localhost</strong> on port <strong>5000</strong>.</p>
+  <blockquote>
+  <p><strong>Note</strong>: The URL is <a href="http://localhost:5000" rel="nofollow">http://localhost:5000</a>.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>In the web application, observe the list of models displayed from the front page.</p>
+  </li>
+  <li>
+  <p>Find the <strong>Water Bottle</strong> model, and then select <strong>View Details</strong>.</p>
+  </li>
+  <li>
+  <p>From the <strong>Water Bottle</strong> product detail page, find <strong>Add to Cart</strong>, and then observe that the checkout functionality is currently disabled.</p>
+  </li>
+  <li>
+  <p>Close the browser window that's displaying your web application.</p>
+  </li>
+  <li>
+  <p>Return to the <strong>Visual Studio Code</strong> window.</p>
+  </li>
+  <li>
+  <p>Close the current terminal.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-review-2" class="anchor" aria-hidden="true" href="#review-2"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+  <p>In this exercise, you configured your ASP.NET web application to connect to your resources in Azure.</p>
+  </article>

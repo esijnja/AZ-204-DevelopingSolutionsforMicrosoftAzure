@@ -1,0 +1,53 @@
+<article class="markdown-body entry-content container-lg" itemprop="text"><table data-table-type="yaml-metadata">
+<h4><a id="user-content-task-1-open-the-azure-portal" class="anchor" aria-hidden="true" href="#task-1-open-the-azure-portal"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Open the Azure portal</h4>
+<ol>
+<li>Sign in to the Azure portal (<a href="https://portal.azure.com" rel="nofollow">https://portal.azure.com</a>).</li>
+<li>If this is your first time signing in to the Azure portal, a dialog box offering a tour of the portal will appear. If you prefer to skip the tour, select <strong>Get Started</strong>.</li>
+</ol>
+<h4><a id="user-content-task-2-create-an-azure-storage-account" class="anchor" aria-hidden="true" href="#task-2-create-an-azure-storage-account"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Create an Azure Storage account</h4>
+<ol>
+<li>Create a new&nbsp;storage account&nbsp;with the following details:
+<ul>
+<li>New resource group: <strong>Serverless</strong></li>
+<li>Name: <strong>funcstor[yourname]</strong></li>
+<li>Location: <strong>(US) East US</strong></li>
+<li>Performance: <strong>Standard</strong></li>
+<li>Account kind: <strong>StorageV2 (general purpose v2)</strong></li>
+<li>Replication: <strong>Locally-redundant storage (LRS)</strong></li>
+<li>Access tier: <strong>Hot</strong></li>
+</ul>
+<blockquote>
+<p><strong>Note</strong>: Wait for Azure to finish creating the storage account before you move forward with the lab. You'll receive a notification when the&nbsp;account&nbsp;is created.</p>
+</blockquote>
+</li>
+<li>Open the&nbsp;<strong>Access Keys</strong> section of your newly created&nbsp;storage account&nbsp;instance.</li>
+<li>Record the value of the&nbsp;<strong>Connection string</strong> text box.
+<blockquote>
+<p><strong>Note</strong>: You'll use this value later in the lab. It doesn't matter which connection string you choose. They are interchangeable.</p>
+</blockquote>
+</li>
+</ol>
+<h4><a id="user-content-task-3-create-a-function-app" class="anchor" aria-hidden="true" href="#task-3-create-a-function-app"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Create a function app</h4>
+<ol>
+<li>Create a new function app with the following details:
+<ul>
+<li>Existing resource group: <strong>Serverless</strong></li>
+<li>App name: <strong>funclogic[yourname]</strong></li>
+<li>Publish: <strong>Code</strong></li>
+<li>Runtime stack: <strong>.NET Core</strong></li>
+<li>Version: <strong>3.1</strong></li>
+<li>Region: <strong>East US</strong></li>
+<li>Operating system: <strong>Linux</strong></li>
+<li>Storage account: <strong>funcstor[yourname]</strong></li>
+<li>Plan: <strong>Consumption</strong></li>
+<li>Enable Application Insights: <strong>Yes</strong></li>
+</ul>
+<blockquote>
+<p><strong>Note</strong>: Wait for Azure to finish creating the function app before you move forward with the lab. You'll receive a notification when the&nbsp;app&nbsp;is created.</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p><strong>Review</strong>: In this exercise, you created all the resources that you'll use for this lab.</p>
+</blockquote>
+</article>

@@ -1,0 +1,497 @@
+<article>
+    <tr>
+    <th>lab</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><div><table>
+    <thead>
+    <tr>
+    <th>title</th>
+    <th>az204Module</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><div>Lab: Deploying compute workloads by using images and containers</div></td>
+    <td><div>Module 05: Implement IaaS solutions</div></td>
+    </tr>
+    </tbody>
+  </table>
+  </div></td>
+    </tr>
+    </tbody>
+  </table>
+  
+  <h1><a id="user-content-lab-deploying-compute-workloads-by-using-images-and-containers" class="anchor" aria-hidden="true" href="#lab-deploying-compute-workloads-by-using-images-and-containers"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Lab: Deploying compute workloads by using images and containers</h1>
+  <h1><a id="user-content-student-lab-manual" class="anchor" aria-hidden="true" href="#student-lab-manual"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Student lab manual</h1>
+  <h2><a id="user-content-lab-scenario" class="anchor" aria-hidden="true" href="#lab-scenario"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Lab scenario</h2>
+  <p>Your organization is seeking a way to automatically create virtual machines (VMs) to run tasks and immediately terminate. You're tasked with evaluating multiple compute services in Microsoft Azure and determining which service can help you automatically create VMs and install custom software on those machines. As a proof of concept, you have decided to try creating VMs from built-in images and container images so that you can compare the two solutions. To keep your proof of concept simple, you'll create a special “IP check” application written in .NET that you'll automatically deploy to your machines. Your proof of concept will evaluate the Azure Container Instances and Azure Virtual Machines services.</p>
+  <h2><a id="user-content-objectives" class="anchor" aria-hidden="true" href="#objectives"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Objectives</h2>
+  <p>After you complete this lab, you will be able to:</p>
+  <ul>
+  <li>
+  <p>Create a VM by using the Azure Command-Line Interface (CLI).</p>
+  </li>
+  <li>
+  <p>Deploy a Docker container image to Azure Container Registry.</p>
+  </li>
+  <li>
+  <p>Deploy a container from a container image in Container Registry by using Container Instances.</p>
+  </li>
+  </ul>
+  <h2><a id="user-content-lab-setup" class="anchor" aria-hidden="true" href="#lab-setup"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Lab setup</h2>
+  <ul>
+  <li>Estimated time: <strong>45 minutes</strong></li>
+  </ul>
+  <h2><a id="user-content-instructions" class="anchor" aria-hidden="true" href="#instructions"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Instructions</h2>
+  <h3><a id="user-content-before-you-start" class="anchor" aria-hidden="true" href="#before-you-start"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Before you start</h3>
+  <h4><a id="user-content-sign-in-to-the-lab-vm" class="anchor" aria-hidden="true" href="#sign-in-to-the-lab-vm"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Sign in to the lab VM</h4>
+  <p>Ensure that you're signed in to your Windows 10 VM by using the following credentials:</p>
+  <ul>
+  <li>
+  <p>Username: <strong>Admin</strong></p>
+  </li>
+  <li>
+  <p>Password: <strong>Pa55w.rd</strong></p>
+  </li>
+  </ul>
+  <h4><a id="user-content-review-the-installed-applications" class="anchor" aria-hidden="true" href="#review-the-installed-applications"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review the installed applications</h4>
+  <p>Find the taskbar on your Windows 10 desktop. The taskbar contains the icons for the applications that you'll use in this lab:</p>
+  <ul>
+  <li>
+  <p>Microsoft Edge</p>
+  </li>
+  <li>
+  <p>File Explorer</p>
+  </li>
+  </ul>
+  <h3><a id="user-content-exercise-1-create-a-vm-by-using-the-azure-cli" class="anchor" aria-hidden="true" href="#exercise-1-create-a-vm-by-using-the-azure-cli"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 1: Create a VM by using the Azure CLI</h3>
+  <h4><a id="user-content-task-1-open-the-azure-portal" class="anchor" aria-hidden="true" href="#task-1-open-the-azure-portal"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Open the Azure portal</h4>
+  <ol>
+  <li>
+  <p>Sign in to the Azure portal (<a href="https://portal.azure.com" rel="nofollow">https://portal.azure.com</a>).</p>
+  </li>
+  <li>
+  <p>If this is your first time signing in to the Azure portal, you'll notice a dialog box offering a tour of the portal. Select <strong>Get Started</strong> to skip the tour.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-2-create-a-resource-group" class="anchor" aria-hidden="true" href="#task-2-create-a-resource-group"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Create a resource group</h4>
+  <ol>
+  <li>
+  <p>Create a new resource group with the following details:</p>
+  <ol>
+  <li>
+  <p>Name: <strong>ContainerCompute</strong></p>
+  </li>
+  <li>
+  <p>Location: <strong>(US) East US</strong></p>
+  </li>
+  </ol>
+  <blockquote>
+  <p><strong>Note</strong>: Wait for the creation task to complete before moving forward with this lab.</p>
+  </blockquote>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-3-open-azure-cloud-shell" class="anchor" aria-hidden="true" href="#task-3-open-azure-cloud-shell"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Open Azure Cloud Shell</h4>
+  <ol>
+  <li>
+  <p>Open a new Cloud Shell instance in the Azure portal.</p>
+  </li>
+  <li>
+  <p>If the Cloud Shell is not already configured, configure the shell for Bash by using the default settings.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-4-use-the-azure-cli-commands" class="anchor" aria-hidden="true" href="#task-4-use-the-azure-cli-commands"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 4: Use the Azure CLI commands</h4>
+  <ol>
+  <li>
+  <p>Use the <strong>az</strong> command with the <strong>--help</strong> flag to find a list of subgroups and commands at the root level of the CLI.</p>
+  </li>
+  <li>
+  <p>Use the <strong>az vm</strong> command with the <strong>--help</strong> flag to find a list of subgroups and commands for Azure Virtual Machines:</p>
+  </li>
+  <li>
+  <p>Use the <strong>az vm create</strong> command with the <strong>--help</strong> flag to find a list of arguments and examples for the <strong>Create Virtual Machine</strong> command:</p>
+  </li>
+  <li>
+  <p>Use the <strong>az vm create</strong> command to create a new VM with the following settings:</p>
+  <ul>
+  <li>
+  <p>Resource group: <strong>ContainerCompute</strong></p>
+  </li>
+  <li>
+  <p>Name: <strong>quickvm</strong></p>
+  </li>
+  <li>
+  <p>Image: <strong>Debian</strong></p>
+  </li>
+  <li>
+  <p>Username: <strong>student</strong></p>
+  </li>
+  <li>
+  <p>Password: <strong>StudentPa55w.rd</strong></p>
+  </li>
+  </ul>
+  <blockquote>
+  <p><strong>Note</strong>: Wait for the VM creation process to complete. After the process completes, the command will return a JavaScript Object Notation (JSON) file with details about the machine.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Use the <strong>az vm show</strong> command to find a more detailed JSON file that contains various metadata about the newly created VM.</p>
+  </li>
+  <li>
+  <p>Use the <strong>az vm list-ip-addresses</strong> command to list all the IP addresses associated with the VM:</p>
+  <pre><code>az vm list-ip-addresses --resource-group ContainerCompute --name quickvm
+  </code></pre>
+  </li>
+  <li>
+  <p>Use the <strong>az vm list-ip-addresses</strong> command and the <strong>--query</strong> argument to filter the output to only return the first IP address value:</p>
+  <pre><code>az vm list-ip-addresses --resource-group ContainerCompute --name quickvm --query '[].{ip:virtualMachine.network.publicIpAddresses[0].ipAddress}' --output tsv
+  </code></pre>
+  </li>
+  <li>
+  <p>Use the following script to store the results of the previous command in a new Bash shell variable named <em>ipAddress</em>:</p>
+  <pre><code>ipAddress=$(az vm list-ip-addresses --resource-group ContainerCompute --name quickvm --query '[].{ip:virtualMachine.network.publicIpAddresses[0].ipAddress}' --output tsv)
+  </code></pre>
+  </li>
+  <li>
+  <p>Use the following script to render the value of the Bash shell variable <em>ipAddress</em>:</p>
+  <pre><code>echo $ipAddress
+  </code></pre>
+  </li>
+  <li>
+  <p>Use the following script to connect to the VM that you created earlier in this lab by using the Secure Shell (SSH) tool and the IP address stored in the Bash shell variable <em>ipAddress</em>:</p>
+  <pre><code>ssh student@$ipAddress
+  </code></pre>
+  </li>
+  <li>
+  <p>During the connection process, you'll receive a warning that the authenticity of the host can't be verified. Continue connecting to the host. Finally, use the password <strong>StudentPa55w.rd</strong> when prompted for credentials</p>
+  </li>
+  <li>
+  <p>After connecting to the VM, use the following command to get information about the machine to ensure that you're connected to the correct VM:</p>
+  <pre><code>uname -a
+  </code></pre>
+  </li>
+  <li>
+  <p>Use the <strong>exit</strong> command to end your SSH session:</p>
+  <pre><code>exit
+  </code></pre>
+  </li>
+  <li>
+  <p>Close the Cloud Shell pane.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-review" class="anchor" aria-hidden="true" href="#review"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+  <p>In this exercise, you used Cloud Shell to create a VM as part of an automated script.</p>
+  <h3><a id="user-content-exercise-2-create-a-docker-container-image-and-deploy-it-to-container-registry" class="anchor" aria-hidden="true" href="#exercise-2-create-a-docker-container-image-and-deploy-it-to-container-registry"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 2: Create a Docker container image and deploy it to Container Registry</h3>
+  <h4><a id="user-content-task-1-open-the-cloud-shell-and-editor" class="anchor" aria-hidden="true" href="#task-1-open-the-cloud-shell-and-editor"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Open the Cloud Shell and editor</h4>
+  <ol>
+  <li>
+  <p>Open a new Cloud Shell instance in the Azure portal.</p>
+  </li>
+  <li>
+  <p>At the <strong>Cloud Shell</strong> command prompt, change the active directory to <strong>~/clouddrive</strong>.</p>
+  <blockquote>
+  <p><strong>Note</strong>: The command to change directory in Bash is <strong>cd <em>path</em></strong>.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>At the <strong>Cloud Shell</strong> command prompt, create a new directory named <strong>ipcheck</strong> in the <strong>~/clouddrive</strong> directory.</p>
+  <blockquote>
+  <p><strong>Note</strong>: The command to create a new directory in Linux is <strong>mkdir <em>directory name</em></strong>.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Change the active directory to <strong>~/clouddrive/ipcheck</strong>.</p>
+  </li>
+  <li>
+  <p>Use the <strong>dotnet new console --output . --name ipcheck</strong> command to create a new .NET console application in the current directory.</p>
+  </li>
+  <li>
+  <p>Create a new file in the <strong>~/clouddrive/ipcheck</strong> directory named <strong>Dockerfile</strong>.</p>
+  <blockquote>
+  <p><strong>Note</strong>: The command to create a new file in Bash is <strong>touch <em>file name</em></strong>. The file name <strong>Dockerfile</strong> is case sensitive.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Open the embedded graphical editor in the context of the current directory.</p>
+  <blockquote>
+  <p><strong>Note</strong>: You can open the editor by using the <strong>code .</strong> command or by selecting the editor button.</p>
+  </blockquote>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-2-create-and-test-a-net-application" class="anchor" aria-hidden="true" href="#task-2-create-and-test-a-net-application"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Create and test a .NET application</h4>
+  <ol>
+  <li>
+  <p>In the graphical editor, open the <strong>Program.cs</strong> file and replace its contents with the following code, and then save the file:</p>
+  <pre><code>public class Program
+  {
+      public static void Main(string[] args)
+      {        
+          // Check if network is available
+          if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+          {
+              System.Console.WriteLine("Current IP Addresses:");
+  
+              // Get host entry for current hostname
+              string hostname = System.Net.Dns.GetHostName();
+              System.Net.IPHostEntry host = System.Net.Dns.GetHostEntry(hostname);
+              
+              // Iterate over each IP address and render their values
+              foreach(System.Net.IPAddress address in host.AddressList)
+              {
+                  System.Console.WriteLine($"\t{address}");
+              }
+          }
+          else
+          {
+              System.Console.WriteLine("No Network Connection");
+          }
+      }
+  }
+  </code></pre>
+  </li>
+  <li>
+  <p>Use the <strong>dotnet run</strong> command at the command prompt to run the application and validate that it finds one or more IP addresses.</p>
+  </li>
+  <li>
+  <p>Open the <strong>Dockerfile</strong> file in the graphical editor, replace its contents with the following code, and then save the file:</p>
+  <pre><code># Start using the .NET Core 2.2 SDK container image
+  FROM mcr.microsoft.com/dotnet/core/sdk:2.2-alpine AS build
+  
+  # Change current working directory
+  WORKDIR /app
+  
+  # Copy existing files from host machine
+  COPY . ./
+  
+  # Publish application to the "out" folder
+  RUN dotnet publish --configuration Release --output out
+  
+  # Start container by running application DLL
+  ENTRYPOINT ["dotnet", "out/ipcheck.dll"]
+  </code></pre>
+  </li>
+  <li>
+  <p>Close the Cloud Shell pane.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-3-create-a-container-registry-resource" class="anchor" aria-hidden="true" href="#task-3-create-a-container-registry-resource"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Create a Container Registry resource</h4>
+  <ul>
+  <li>
+  <p>Create a new container registry with the following details:</p>
+  <ul>
+  <li>
+  <p>Name: <em><strong>Any globally unique name</strong></em></p>
+  </li>
+  <li>
+  <p>Resource group: <strong>ContainerCompute</strong></p>
+  </li>
+  <li>
+  <p>Location: <strong>East US</strong></p>
+  </li>
+  <li>
+  <p>SKU: <strong>Basic</strong></p>
+  </li>
+  </ul>
+  <blockquote>
+  <p><strong>Note</strong>: Wait for the creation task to complete before moving on with this lab.</p>
+  </blockquote>
+  </li>
+  </ul>
+  <h4><a id="user-content-task-4-open-azure-cloud-shell-and-store-container-registry-metadata" class="anchor" aria-hidden="true" href="#task-4-open-azure-cloud-shell-and-store-container-registry-metadata"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 4: Open Azure Cloud Shell and store Container Registry metadata</h4>
+  <ol>
+  <li>
+  <p>Open a new Cloud Shell instance.</p>
+  </li>
+  <li>
+  <p>At the <strong>Cloud Shell</strong> command prompt, use the <strong>az acr list</strong> command to get a list of all container registries in your subscription.</p>
+  </li>
+  <li>
+  <p>Use the following command to output the name of the most recently created container registry:</p>
+  <pre><code>az acr list --query "max_by([], &amp;creationDate).name" --output tsv
+  </code></pre>
+  </li>
+  <li>
+  <p>Use the following command to save the name of the most recently created container registry in a Bash shell variable named <em>acrName</em>:</p>
+  <pre><code>acrName=$(az acr list --query "max_by([], &amp;creationDate).name" --output tsv)
+  </code></pre>
+  </li>
+  <li>
+  <p>Use the following script to render the value of the Bash shell variable <em>acrName</em>:</p>
+  <pre><code>echo $acrName
+  </code></pre>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-5-deploy-a-docker-container-image-to-container-registry" class="anchor" aria-hidden="true" href="#task-5-deploy-a-docker-container-image-to-container-registry"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 5: Deploy a Docker container image to Container Registry</h4>
+  <ol>
+  <li>
+  <p>Change the active directory to <strong>~/clouddrive/ipcheck</strong>.</p>
+  </li>
+  <li>
+  <p>Use the <strong>dir</strong> command to get the contents of the current directory.</p>
+  <blockquote>
+  <p><strong>Note</strong>: You'll know that you're in the correct directory if both the <strong>Program.cs</strong> and <strong>Dockerfile</strong> files that you edited earlier in this lab are there.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Use the following command to upload the source code to your container registry and build the container image as a  Container Registry task:</p>
+  <pre><code>az acr build --registry $acrName --image ipcheck:latest .
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: Wait for the build task to complete before moving forward with this lab.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Close the Cloud Shell pane.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-6-validate-your-container-image-in-container-registry" class="anchor" aria-hidden="true" href="#task-6-validate-your-container-image-in-container-registry"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 6: Validate your container image in Container Registry</h4>
+  <ol>
+  <li>
+  <p>Access the container registry that you created earlier in this lab.</p>
+  </li>
+  <li>
+  <p>Select the <strong>Repositories</strong> link to find your images in the registry.</p>
+  </li>
+  <li>
+  <p>Proceed through the <strong>Images</strong> and <strong>Tags</strong> blades to find the metadata associated with the <strong>ipcheck</strong> image with the <strong>latest</strong> tag.</p>
+  <blockquote>
+  <p><strong>Note</strong>: You can also select the <strong>Run ID</strong> link to find the build task metadata.</p>
+  </blockquote>
+  </li>
+  </ol>
+  <h4><a id="user-content-review-1" class="anchor" aria-hidden="true" href="#review-1"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+  <p>In this exercise, you created a .NET console application to display a machine’s current IP address. You then added the <strong>Dockerfile</strong> file to the application so that it could be converted into a Docker container image. Finally, you deployed the container image to Container Registry.</p>
+  <h3><a id="user-content-exercise-3-deploy-an-azure-container-instance" class="anchor" aria-hidden="true" href="#exercise-3-deploy-an-azure-container-instance"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 3: Deploy an Azure container instance</h3>
+  <h4><a id="user-content-task-1-enable-the-admin-user-in-container-registry" class="anchor" aria-hidden="true" href="#task-1-enable-the-admin-user-in-container-registry"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Enable the admin user in Container Registry</h4>
+  <ol>
+  <li>
+  <p>Access the container registry that you created earlier in this lab.</p>
+  </li>
+  <li>
+  <p>Select <strong>Update</strong> to find the settings for the container registry.</p>
+  </li>
+  <li>
+  <p><strong>Enable</strong> the <strong>Admin User</strong>, <strong>Save</strong> your changes, and then close the <strong>Update container registry</strong> blade.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-2-automatically-deploy-a-container-image-to-an-azure-container-instance" class="anchor" aria-hidden="true" href="#task-2-automatically-deploy-a-container-image-to-an-azure-container-instance"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Automatically deploy a container image to an Azure container instance</h4>
+  <ol>
+  <li>
+  <p>Select the <strong>Repositories</strong> link to find your images in the registry.</p>
+  </li>
+  <li>
+  <p>Select the <strong>ipcheck</strong> image, and then find the <strong>latest</strong> tag for that image.</p>
+  </li>
+  <li>
+  <p>Right-click the <strong>latest</strong> tag or activate the shortcut menu for the <strong>ipcheck</strong> container image to <strong>"run"</strong> a new Azure container instance with the following settings:</p>
+  <ul>
+  <li>
+  <p>Container name: <strong>managedcompute</strong></p>
+  </li>
+  <li>
+  <p>OS type: <strong>Linux</strong></p>
+  </li>
+  <li>
+  <p>Resource group: <strong>ContainerCompute</strong></p>
+  </li>
+  <li>
+  <p>Location: <strong>East US</strong></p>
+  </li>
+  <li>
+  <p>Number of cores: <strong>2</strong></p>
+  </li>
+  <li>
+  <p>Memory (GB): <strong>4</strong></p>
+  </li>
+  <li>
+  <p>Public IP address: <strong>No</strong></p>
+  </li>
+  </ul>
+  <blockquote>
+  <p><strong>Note</strong>: Wait for the creation task to complete before moving on with this lab.</p>
+  </blockquote>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-3-manually-deploy-a-container-image-to-container-instances" class="anchor" aria-hidden="true" href="#task-3-manually-deploy-a-container-image-to-container-instances"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Manually deploy a container image to Container Instances</h4>
+  <ol>
+  <li>
+  <p>Create a new container instance with the following information :</p>
+  <ul>
+  <li>
+  <p>Resource group: <strong>ContainerCompute</strong></p>
+  </li>
+  <li>
+  <p>Container name: <strong>manualcompute</strong></p>
+  </li>
+  <li>
+  <p>Region: <strong>East US</strong></p>
+  </li>
+  <li>
+  <p>Image source: <strong>Azure Container Registry</strong></p>
+  </li>
+  <li>
+  <p>Registry: *<strong>Azure Container Registery resource created earlier in the lab</strong></p>
+  </li>
+  <li>
+  <p>Image: <strong>ipcheck</strong></p>
+  </li>
+  <li>
+  <p>Image tag: <strong>latest</strong></p>
+  </li>
+  </ul>
+  <blockquote>
+  <p><strong>Note</strong>: Wait for the creation task to complete before moving forward with this lab.</p>
+  </blockquote>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-4-validate-that-the-container-instance-ran-successfully" class="anchor" aria-hidden="true" href="#task-4-validate-that-the-container-instance-ran-successfully"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 4: Validate that the container instance ran successfully</h4>
+  <ol>
+  <li>
+  <p>Access the <strong>manualcompute</strong> container instance that you created earlier in this lab.</p>
+  </li>
+  <li>
+  <p>Select the <strong>Containers</strong> link to get a list of the current containers that are running.</p>
+  </li>
+  <li>
+  <p>Find the contents of the <strong>Events</strong> list for the container instance that ran your <strong>ipcheck</strong> application.</p>
+  </li>
+  <li>
+  <p>Select the <strong>Logs</strong> tab, and then find the text logs from the container instance.</p>
+  <blockquote>
+  <p><strong>Note</strong>: You can also optionally find the <strong>Events</strong> and <strong>Logs</strong> from the <strong>managedcompute</strong> container instance.</p>
+  </blockquote>
+  </li>
+  </ol>
+  <h4><a id="user-content-review-2" class="anchor" aria-hidden="true" href="#review-2"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+  <p>In this exercise, you used multiple methods to deploy a container image to an Azure container instance. By using the manual method, you were also able to customize the deployment further and run task-based applications as part of a container run.</p>
+  <h3><a id="user-content-exercise-4-clean-up-your-subscription" class="anchor" aria-hidden="true" href="#exercise-4-clean-up-your-subscription"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 4: Clean up your subscription</h3>
+  <h4><a id="user-content-task-1-open-azure-cloud-shell-and-list-resource-groups" class="anchor" aria-hidden="true" href="#task-1-open-azure-cloud-shell-and-list-resource-groups"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Open Azure Cloud Shell and list resource groups</h4>
+  <ol>
+  <li>
+  <p>In the portal, select the <strong>Cloud Shell</strong> icon to open a new shell instance.</p>
+  </li>
+  <li>
+  <p>If <strong>Cloud Shell</strong> isn't already configured, configure the shell for Bash by using the default settings.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-2-delete-resource-groups" class="anchor" aria-hidden="true" href="#task-2-delete-resource-groups"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Delete resource groups</h4>
+  <ol>
+  <li>
+  <p>Enter the following command, and then select Enter to delete the <strong>ContainerCompute</strong> resource group:</p>
+  <pre><code>az group delete --name ContainerCompute --no-wait --yes
+  </code></pre>
+  </li>
+  <li>
+  <p>Close the Cloud Shell pane in the portal.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-3-close-the-active-applications" class="anchor" aria-hidden="true" href="#task-3-close-the-active-applications"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Close the active applications</h4>
+  <ul>
+  <li>Close the currently running Microsoft Edge application.</li>
+  </ul>
+  <h4><a id="user-content-review-3" class="anchor" aria-hidden="true" href="#review-3"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+  <p>In this exercise, you cleaned up your subscription by removing the resource groups that were used in this lab.</p>
+  </article>

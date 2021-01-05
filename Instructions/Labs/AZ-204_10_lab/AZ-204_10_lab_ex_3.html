@@ -1,0 +1,173 @@
+<article>
+  <h4><a id="user-content-task-1-create-net-project" class="anchor" aria-hidden="true" href="#task-1-create-net-project"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Create .NET project</h4>
+  <ol>
+  <li>
+  <p>Using Visual Studio Code, open the <strong>Allfiles (F):\Allfiles\Labs\10\Starter\EventPublisher</strong> folder.</p>
+  </li>
+  <li>
+  <p>Using a terminal, create a new .NET project named <strong>EventPublisher</strong> in the current folder:</p>
+  <pre><code>dotnet new console --name EventPublisher --output .
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: The <strong>dotnet new</strong> command will create a new <strong>console</strong> project in a folder with the same name as the project.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Using the same terminal, import version 3.2.0 of <strong>Microsoft.Azure.EventGrid</strong> from NuGet:</p>
+  <pre><code>dotnet add package Microsoft.Azure.EventGrid --version 3.2.0
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: The <strong>dotnet add package</strong> command will add the <strong>Microsoft.Azure.EventGrid</strong> package from NuGet. For more information, go to <a href="https://www.nuget.org/packages/Microsoft.Azure.EventGrid/3.2.0" rel="nofollow">Microsoft.Azure.EventGrid</a>.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Using the same terminal, build the .NET web application:</p>
+  <pre><code>dotnet build
+  </code></pre>
+  </li>
+  <li>
+  <p>Close the current terminal.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-2-modify-the-program-class-to-connect-to-event-grid" class="anchor" aria-hidden="true" href="#task-2-modify-the-program-class-to-connect-to-event-grid"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Modify the Program class to connect to Event Grid</h4>
+  <ol>
+  <li>
+  <p>Open the <strong>Program.cs</strong> file in Visual Studio Code.</p>
+  </li>
+  <li>
+  <p>Delete all existing code in the <strong>Program.cs</strong> file.</p>
+  </li>
+  <li>
+  <p>Add the following <strong>using</strong> directives for libraries that the application will reference:</p>
+  <pre><code>using Microsoft.Azure.EventGrid;
+  using Microsoft.Azure.EventGrid.Models;
+  using System;
+  using System.Collections.Generic;
+  using System.Threading.Tasks;
+  </code></pre>
+  </li>
+  <li>
+  <p>Create a new <strong>Program</strong> class with two constant string properties named <strong>topicEndpoint</strong> and <strong>topicKey</strong>, and then create an asynchronous <strong>Main</strong> entry point method:</p>
+  <pre><code>public class Program
+  {
+      private const string topicEndpoint = "";
+      private const string topicKey = "";
+      
+      public static async Task Main(string[] args)
+      {
+      }
+  }
+  </code></pre>
+  </li>
+  <li>
+  <p>Update the <strong>topicEndpoint</strong> string constant by setting its value to the&nbsp;<strong>Topic Endpoint</strong> of the Event Grid topic that you recorded earlier in this lab.</p>
+  </li>
+  <li>
+  <p>Update the <strong>topicKey</strong> string constant by setting its value to the&nbsp;<strong>Key</strong> of the Event Grid topic that you recorded earlier in this lab.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-3-publish-new-events" class="anchor" aria-hidden="true" href="#task-3-publish-new-events"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Publish new events</h4>
+  <ol>
+  <li>
+  <p>In the <strong>Main</strong> method, perform the following actions:</p>
+  <ol>
+  <li>
+  <p>Add the following block of code to connect to the Event Grid using the credentials you specified earlier in the lab:</p>
+  <pre><code>TopicCredentials credentials = new TopicCredentials(topicKey);
+  EventGridClient client = new EventGridClient(credentials);
+  </code></pre>
+  </li>
+  <li>
+  <p>Create a new variable named <strong>events</strong>, of type <strong>List</strong>:</p>
+  <pre><code>List&lt;EventGridEvent&gt; events = new List&lt;EventGridEvent&gt;();
+  </code></pre>
+  </li>
+  <li>
+  <p>Add the following block of code to: create two new variables named <strong>firstPerson</strong> of an anonymous type, and <strong>firstEvent</strong> of type <strong>EventGridEvent</strong>; populate the <strong>EventGridEvent</strong> variable with sample data; and add the <strong>firstEvent</strong> instance to your <strong>events</strong> list:</p>
+  <pre><code>var firstPerson = new
+  {
+      FullName = "Alba Sutton",
+      Address = "4567 Pine Avenue, Edison, WA 97202"
+  };    
+      
+  EventGridEvent firstEvent = new EventGridEvent
+  {
+      Id = Guid.NewGuid().ToString(),
+      EventType = "Employees.Registration.New",
+      EventTime = DateTime.Now,
+      Subject = $"New Employee: {firstPerson.FullName}",
+      Data = firstPerson.ToString(),
+      DataVersion = "1.0.0"
+  };
+  events.Add(firstEvent);
+  </code></pre>
+  </li>
+  <li>
+  <p>Add the following block of code to: create two new variables named <strong>secondPerson</strong> of an anonymous type, and <strong>secondEvent</strong> of type <strong>EventGridEvent</strong>; populate the <strong>EventGridEvent</strong> variable with sample data; and add the <strong>secondEvent</strong> instance to your <strong>events</strong> list:</p>
+  <pre><code>var secondPerson = new
+  {
+      FullName = "Alexandre Doyon",
+      Address = "456 College Street, Bow, WA 98107"
+  };
+  
+  EventGridEvent secondEvent = new EventGridEvent
+  {
+      Id = Guid.NewGuid().ToString(),
+      EventType = "Employees.Registration.New",
+      EventTime = DateTime.Now,
+      Subject = $"New Employee: {secondPerson.FullName}",
+      Data = secondPerson.ToString(),
+      DataVersion = "1.0.0"
+  };
+  events.Add(secondEvent);
+  </code></pre>
+  </li>
+  <li>
+  <p>Add the following block of code to obtain the <strong>Hostname</strong> from the <strong>topicEndpoint</strong> variable, and then use that hostname as a parameter to the <strong><a href="https://docs.microsoft.com/dotnet/api/microsoft.azure.eventgrid.eventgridclient.publisheventswithhttpmessagesasync" rel="nofollow">EventGridClient.PublishEventsAsync</a></strong> method invocation:</p>
+  <pre><code>string topicHostname = new Uri(topicEndpoint).Host;
+  await client.PublishEventsAsync(topicHostname, events);
+  </code></pre>
+  </li>
+  <li>
+  <p>Render the <strong>Events published</strong> message to the console:</p>
+  <pre><code>Console.WriteLine("Events published");
+  </code></pre>
+  </li>
+  </ol>
+  </li>
+  <li>
+  <p>Save the&nbsp;<strong>Program.cs</strong>&nbsp;file.</p>
+  </li>
+  <li>
+  <p>Using a terminal, run the .NET console application project:</p>
+  <pre><code>dotnet run
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: If there are any build errors, review the <strong>Program.cs</strong> file in the <strong>Allfiles (F):\Allfiles\Labs\10\Solution\EventPublisher</strong> folder.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Review the success message output from the currently running console application.</p>
+  </li>
+  <li>
+  <p>Close the current terminal.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-4-observe-published-events" class="anchor" aria-hidden="true" href="#task-4-observe-published-events"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 4: Observe published events</h4>
+  <ol>
+  <li>
+  <p>Return to the browser window with the <strong>Azure Event Grid viewer</strong> web application.</p>
+  </li>
+  <li>
+  <p>Review the <strong>Employees.Registration.New</strong> events that were created by your console application.</p>
+  </li>
+  <li>
+  <p>Select any of the events and review its JSON content.</p>
+  </li>
+  <li>
+  <p>Return to  Azure portal.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-review-2" class="anchor" aria-hidden="true" href="#review-2"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+  <p>In this exercise, you published new events to your Event Grid topic using a .NET console application.</p>
+  </article>

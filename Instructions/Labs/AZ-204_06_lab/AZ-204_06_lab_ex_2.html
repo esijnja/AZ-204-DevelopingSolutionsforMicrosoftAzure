@@ -1,0 +1,148 @@
+<article>
+  <h4><a id="user-content-task-1-create-a-net-project" class="anchor" aria-hidden="true" href="#task-1-create-a-net-project"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Create a .NET project</h4>
+  <ol>
+  <li>
+  <p>Using Visual Studio Code, open the <strong>Allfiles (F):\Allfiles\Labs\06\Starter\GraphClient</strong> folder.</p>
+  </li>
+  <li>
+  <p>Using a terminal, create a new .NET project named <strong>GraphClient</strong> in the current folder:</p>
+  <pre><code>dotnet new console --name GraphClient --output .
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: The <strong>dotnet new</strong> command will create a new <strong>console</strong> project in a folder with the same name as the project.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Using the same terminal, import version 4.7.1 of <strong>Microsoft.Identity.Client</strong> from NuGet:</p>
+  <pre><code>dotnet add package Microsoft.Identity.Client --version 4.7.1
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: The <strong>dotnet add package</strong> command will add the <strong>Microsoft.Identity.Client</strong> package from NuGet. For more information, go to <a href="https://www.nuget.org/packages/Microsoft.Identity.Client/4.7.1" rel="nofollow">Microsoft.Identity.Client</a>.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Using the same terminal, build the .NET web application:</p>
+  <pre><code>dotnet build
+  </code></pre>
+  </li>
+  <li>
+  <p>Close the current terminal.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-2-modify-the-program-class" class="anchor" aria-hidden="true" href="#task-2-modify-the-program-class"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Modify the Program class</h4>
+  <ol>
+  <li>
+  <p>Open the <strong>Program.cs</strong> file in Visual Studio Code.</p>
+  </li>
+  <li>
+  <p>Delete all existing code in the <strong>Program.cs</strong> file.</p>
+  </li>
+  <li>
+  <p>Add the following <strong>using</strong> directives for libraries that will be referenced by the application:</p>
+  <pre><code>using Microsoft.Identity.Client;
+  using System;
+  using System.Collections.Generic;
+  using System.Threading.Tasks;
+  </code></pre>
+  </li>
+  <li>
+  <p>Create a new <strong>Program</strong> class with two constant string properties named <strong>_clientId</strong> and <strong>_tenantId</strong>, and then create an asynchronous <strong>Main</strong> entry point method:</p>
+  <pre><code>public class Program
+  {
+      private const string _clientId = "&lt;app-reg-client-id&gt;";
+      private const string _tenantId = "&lt;aad-tenant-id&gt;";
+      
+      public static async Task Main(string[] args)
+      {
+      }
+  }
+  </code></pre>
+  </li>
+  <li>
+  <p>Update the <strong>_clientId</strong> string constant by setting its value to the&nbsp;<strong>Application (client) ID</strong> that you recorded earlier in this lab.</p>
+  </li>
+  <li>
+  <p>Update the <strong>_tenantId</strong> string constant by setting its value to the&nbsp;<strong>Directory (tenant) ID</strong> that you recorded earlier in this lab.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-3-obtain-an-msal-token" class="anchor" aria-hidden="true" href="#task-3-obtain-an-msal-token"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Obtain an MSAL token</h4>
+  <ol>
+  <li>
+  <p>In the <strong>Main</strong> method, perform the following actions:</p>
+  <ol>
+  <li>
+  <p>Create a new variable named <em>app</em> of type <strong><a href="https://docs.microsoft.com/dotnet/api/microsoft.identity.client.ipublicclientapplication" rel="nofollow">IPublicClientApplication</a></strong>.</p>
+  </li>
+  <li>
+  <p>Add the following block of code to build a public client application instance by using the static <strong><a href="https://docs.microsoft.com/dotnet/api/microsoft.identity.client.publicclientapplicationbuilder" rel="nofollow">PublicClientApplicationBuilder</a></strong> class, and then store it in the <em>app</em> variable:</p>
+  <pre><code>app = PublicClientApplicationBuilder
+      .Create(_clientId)
+      .WithAuthority(AzureCloudInstance.AzurePublic, _tenantId)
+      .WithRedirectUri("http://localhost")
+      .Build();
+  </code></pre>
+  </li>
+  <li>
+  <p>Add the following block of code to create a new generic string <strong><a href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1" rel="nofollow">List&lt;&gt;</a></strong> with a single value of <strong>user.read</strong>:</p>
+  <pre><code>List&lt;string&gt; scopes = new List&lt;string&gt; 
+  { 
+      "user.read" 
+  };
+  </code></pre>
+  </li>
+  <li>
+  <p>Create a new variable named <em>result</em> of type <strong><a href="https://docs.microsoft.com/dotnet/api/microsoft.identity.client.authenticationresult" rel="nofollow">AuthenticationResult</a></strong>.</p>
+  </li>
+  <li>
+  <p>Add the following block of code to acquire a token interactively and store the output in the <em>result</em> variable:</p>
+  <pre><code>result = await app
+      .AcquireTokenInteractive(scopes)
+      .ExecuteAsync();
+  </code></pre>
+  </li>
+  <li>
+  <p>Render the value of the <strong><a href="https://docs.microsoft.com/dotnet/api/microsoft.identity.client.authenticationresult.accesstoken" rel="nofollow">AuthenticationResult.AccessToken</a></strong> member to the console:</p>
+  <pre><code>Console.WriteLine($"Token:\t{result.AccessToken}");
+  </code></pre>
+  </li>
+  </ol>
+  </li>
+  <li>
+  <p>Save the&nbsp;<strong>Program.cs</strong>&nbsp;file.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-4-test-the-updated-application" class="anchor" aria-hidden="true" href="#task-4-test-the-updated-application"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 4: Test the updated application</h4>
+  <ol>
+  <li>
+  <p>Using a terminal, run the .NET console application project:</p>
+  <pre><code>dotnet run
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: If there are any build errors, review the <strong>Program.cs</strong> file in the <strong>Allfiles (F):\Allfiles\Labs\06\Solution\GraphClient</strong> folder.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>The running console application will automatically open an instance of the default browser.</p>
+  </li>
+  <li>
+  <p>In the open browser window, sign in by using your Microsoft account.</p>
+  <blockquote>
+  <p><strong>Note</strong>: You might have the option to select an existing Microsoft account as opposed to signing in again.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>The browser window will automatically go to the <strong>Permissions requested</strong> webpage. Accept the request for permissions.</p>
+  </li>
+  <li>
+  <p>Close the currently open browser window.</p>
+  </li>
+  <li>
+  <p>In the <strong>Visual Studio Code</strong> window, observe the token render in the output from the currently running console application.</p>
+  </li>
+  <li>
+  <p>Close the current terminal.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-review-1" class="anchor" aria-hidden="true" href="#review-1"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+  <p>In this exercise, you acquired a token from the Microsoft identity platform by using the MSAL.NET library.</p>
+  </article>

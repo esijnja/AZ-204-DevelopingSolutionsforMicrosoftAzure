@@ -1,0 +1,415 @@
+<article>
+    <tr>
+    <th>lab</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><div><table>
+    <thead>
+    <tr>
+    <th>title</th>
+    <th>az204Module</th>
+    <th>az020Module</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><div>Lab: Authenticating to and querying Microsoft Graph by using MSAL and .NET SDKs</div></td>
+    <td><div>Module 06: Implement user authentication and authorization</div></td>
+    <td><div>Module 06: Implement user authentication and authorization</div></td>
+    </tr>
+    </tbody>
+  </table>
+  </div></td>
+    </tr>
+    </tbody>
+  </table>
+  
+  <h1><a id="user-content-lab-authenticating-to-and-querying-microsoft-graph-by-using-msal-and-net-sdks" class="anchor" aria-hidden="true" href="#lab-authenticating-to-and-querying-microsoft-graph-by-using-msal-and-net-sdks"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Lab: Authenticating to and querying Microsoft Graph by using MSAL and .NET SDKs</h1>
+  <h1><a id="user-content-student-lab-manual" class="anchor" aria-hidden="true" href="#student-lab-manual"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Student lab manual</h1>
+  <h2><a id="user-content-lab-scenario" class="anchor" aria-hidden="true" href="#lab-scenario"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Lab scenario</h2>
+  <p>As a new employee at your company, you signed in to your Microsoft 365 applications for the first time and discovered that your profile information isn't accurate. You also noticed that the name and profile picture when you sign in aren't correct. Rather than change these values manually, you have decided that this is a good opportunity to learn the Microsoft identity platform and how you can use different libraries such as the Microsoft Authentication Library (MSAL) and the Microsoft Graph SDK to change these values in a programmatic manner.</p>
+  <h2><a id="user-content-objectives" class="anchor" aria-hidden="true" href="#objectives"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Objectives</h2>
+  <p>After you complete this lab, you will be able to:</p>
+  <ul>
+  <li>
+  <p>Create a new application registration in Azure Active Directory (Azure AD).</p>
+  </li>
+  <li>
+  <p>Use the MSAL.NET library to implement the interactive authentication flow.</p>
+  </li>
+  <li>
+  <p>Obtain a token from the Microsoft identity platform by using the MSAL.NET library.</p>
+  </li>
+  <li>
+  <p>Query Microsoft Graph by using the Microsoft Graph SDK and the device code flow.</p>
+  </li>
+  </ul>
+  <h2><a id="user-content-lab-setup" class="anchor" aria-hidden="true" href="#lab-setup"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Lab setup</h2>
+  <ul>
+  <li>Estimated time: <strong>45 minutes</strong></li>
+  </ul>
+  <h2><a id="user-content-instructions" class="anchor" aria-hidden="true" href="#instructions"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Instructions</h2>
+  <h3><a id="user-content-before-you-start" class="anchor" aria-hidden="true" href="#before-you-start"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Before you start</h3>
+  <h4><a id="user-content-sign-in-to-the-lab-virtual-machine" class="anchor" aria-hidden="true" href="#sign-in-to-the-lab-virtual-machine"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Sign in to the lab virtual machine</h4>
+  <p>Ensure that you're signed in to your Windows 10 virtual machine by using the following credentials:</p>
+  <ul>
+  <li>
+  <p>Username: <strong>Admin</strong></p>
+  </li>
+  <li>
+  <p>Password: <strong>Pa55w.rd</strong></p>
+  </li>
+  </ul>
+  <h4><a id="user-content-review-the-installed-applications" class="anchor" aria-hidden="true" href="#review-the-installed-applications"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review the installed applications</h4>
+  <p>Find the taskbar on your Windows 10 desktop. The taskbar contains the icons for the applications that you'll use in this lab:</p>
+  <ul>
+  <li>
+  <p>Microsoft Edge</p>
+  </li>
+  <li>
+  <p>Visual Studio Code</p>
+  </li>
+  </ul>
+  <h3><a id="user-content-exercise-1-create-an-azure-ad-application-registration" class="anchor" aria-hidden="true" href="#exercise-1-create-an-azure-ad-application-registration"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 1: Create an Azure AD application registration</h3>
+  <h4><a id="user-content-task-1-open-the-azure-portal" class="anchor" aria-hidden="true" href="#task-1-open-the-azure-portal"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Open the Azure portal</h4>
+  <ol>
+  <li>
+  <p>Sign in to the Azure portal (<a href="https://portal.azure.com" rel="nofollow">https://portal.azure.com</a>).</p>
+  </li>
+  <li>
+  <p>If this is your first time signing in to the Azure portal, you'll notice a dialog box offering a tour of the portal. Select <strong>Get Started</strong> to skip the tour.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-2-create-an-application-registration" class="anchor" aria-hidden="true" href="#task-2-create-an-application-registration"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Create an application registration</h4>
+  <ol>
+  <li>
+  <p>Create a new Azure AD application registration with the following details:</p>
+  <ul>
+  <li>
+  <p>Name: <strong>graphapp</strong></p>
+  </li>
+  <li>
+  <p>Supported account types: <strong>Accounts in this organizational directory only (Default Directory only - Single tenant)</strong></p>
+  </li>
+  <li>
+  <p>Redirect URI: <strong>Public client/native (mobile &amp; desktop) http://localhost</strong></p>
+  </li>
+  </ul>
+  <blockquote>
+  <p><strong>Note</strong>: Wait for Azure to finish creating the registration before you move forward with the lab. You'll receive a notification when the&nbsp;vault&nbsp;is created.</p>
+  </blockquote>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-3-enable-the-default-client-type" class="anchor" aria-hidden="true" href="#task-3-enable-the-default-client-type"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Enable the default client type</h4>
+  <ol>
+  <li>
+  <p>Find the <strong>Authentication</strong> section of the <strong>graphapp</strong> application registration blade, and then enable the <strong>Default client type</strong> option.</p>
+  </li>
+  <li>
+  <p>Save your changes.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-4-record-unique-identifiers" class="anchor" aria-hidden="true" href="#task-4-record-unique-identifiers"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 4: Record unique identifiers</h4>
+  <ol>
+  <li>
+  <p>Browse to <strong>Overview</strong> of the <strong>graphapp</strong> application registration blade.</p>
+  </li>
+  <li>
+  <p>Find and record the value of the <strong>Application (client) ID</strong> text box. You'll use this value later in the lab.</p>
+  </li>
+  <li>
+  <p>Find and record the value of the <strong>Directory (tenant) ID</strong> text box. You'll use this value later in the lab.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-review" class="anchor" aria-hidden="true" href="#review"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+  <p>In this exercise, you created a new application registration and recorded important values that you'll need later in the lab.</p>
+  <h3><a id="user-content-exercise-2-obtain-a-token-by-using-the-msalnet-library" class="anchor" aria-hidden="true" href="#exercise-2-obtain-a-token-by-using-the-msalnet-library"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 2: Obtain a token by using the MSAL.NET library</h3>
+  <h4><a id="user-content-task-1-create-a-net-project" class="anchor" aria-hidden="true" href="#task-1-create-a-net-project"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Create a .NET project</h4>
+  <ol>
+  <li>
+  <p>Using Visual Studio Code, open the <strong>Allfiles (F):\Allfiles\Labs\06\Starter\GraphClient</strong> folder.</p>
+  </li>
+  <li>
+  <p>Using a terminal, create a new .NET project named <strong>GraphClient</strong> in the current folder:</p>
+  <pre><code>dotnet new console --name GraphClient --output .
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: The <strong>dotnet new</strong> command will create a new <strong>console</strong> project in a folder with the same name as the project.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Using the same terminal, import version 4.7.1 of <strong>Microsoft.Identity.Client</strong> from NuGet:</p>
+  <pre><code>dotnet add package Microsoft.Identity.Client --version 4.7.1
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: The <strong>dotnet add package</strong> command will add the <strong>Microsoft.Identity.Client</strong> package from NuGet. For more information, go to <a href="https://www.nuget.org/packages/Microsoft.Identity.Client/4.7.1" rel="nofollow">Microsoft.Identity.Client</a>.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Using the same terminal, build the .NET web application:</p>
+  <pre><code>dotnet build
+  </code></pre>
+  </li>
+  <li>
+  <p>Close the current terminal.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-2-modify-the-program-class" class="anchor" aria-hidden="true" href="#task-2-modify-the-program-class"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Modify the Program class</h4>
+  <ol>
+  <li>
+  <p>Open the <strong>Program.cs</strong> file in Visual Studio Code.</p>
+  </li>
+  <li>
+  <p>Delete all existing code in the <strong>Program.cs</strong> file.</p>
+  </li>
+  <li>
+  <p>Add the following <strong>using</strong> directives for libraries that will be referenced by the application:</p>
+  <pre><code>using Microsoft.Identity.Client;
+  using System;
+  using System.Collections.Generic;
+  using System.Threading.Tasks;
+  </code></pre>
+  </li>
+  <li>
+  <p>Create a new <strong>Program</strong> class with two constant string properties named <strong>_clientId</strong> and <strong>_tenantId</strong>, and then create an asynchronous <strong>Main</strong> entry point method:</p>
+  <pre><code>public class Program
+  {
+      private const string _clientId = "&lt;app-reg-client-id&gt;";
+      private const string _tenantId = "&lt;aad-tenant-id&gt;";
+      
+      public static async Task Main(string[] args)
+      {
+      }
+  }
+  </code></pre>
+  </li>
+  <li>
+  <p>Update the <strong>_clientId</strong> string constant by setting its value to the&nbsp;<strong>Application (client) ID</strong> that you recorded earlier in this lab.</p>
+  </li>
+  <li>
+  <p>Update the <strong>_tenantId</strong> string constant by setting its value to the&nbsp;<strong>Directory (tenant) ID</strong> that you recorded earlier in this lab.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-3-obtain-an-msal-token" class="anchor" aria-hidden="true" href="#task-3-obtain-an-msal-token"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Obtain an MSAL token</h4>
+  <ol>
+  <li>
+  <p>In the <strong>Main</strong> method, perform the following actions:</p>
+  <ol>
+  <li>
+  <p>Create a new variable named <em>app</em> of type <strong><a href="https://docs.microsoft.com/dotnet/api/microsoft.identity.client.ipublicclientapplication" rel="nofollow">IPublicClientApplication</a></strong>.</p>
+  </li>
+  <li>
+  <p>Add the following block of code to build a public client application instance by using the static <strong><a href="https://docs.microsoft.com/dotnet/api/microsoft.identity.client.publicclientapplicationbuilder" rel="nofollow">PublicClientApplicationBuilder</a></strong> class, and then store it in the <em>app</em> variable:</p>
+  <pre><code>app = PublicClientApplicationBuilder
+      .Create(_clientId)
+      .WithAuthority(AzureCloudInstance.AzurePublic, _tenantId)
+      .WithRedirectUri("http://localhost")
+      .Build();
+  </code></pre>
+  </li>
+  <li>
+  <p>Add the following block of code to create a new generic string <strong><a href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1" rel="nofollow">List&lt;&gt;</a></strong> with a single value of <strong>user.read</strong>:</p>
+  <pre><code>List&lt;string&gt; scopes = new List&lt;string&gt; 
+  { 
+      "user.read" 
+  };
+  </code></pre>
+  </li>
+  <li>
+  <p>Create a new variable named <em>result</em> of type <strong><a href="https://docs.microsoft.com/dotnet/api/microsoft.identity.client.authenticationresult" rel="nofollow">AuthenticationResult</a></strong>.</p>
+  </li>
+  <li>
+  <p>Add the following block of code to acquire a token interactively and store the output in the <em>result</em> variable:</p>
+  <pre><code>result = await app
+      .AcquireTokenInteractive(scopes)
+      .ExecuteAsync();
+  </code></pre>
+  </li>
+  <li>
+  <p>Render the value of the <strong><a href="https://docs.microsoft.com/dotnet/api/microsoft.identity.client.authenticationresult.accesstoken" rel="nofollow">AuthenticationResult.AccessToken</a></strong> member to the console:</p>
+  <pre><code>Console.WriteLine($"Token:\t{result.AccessToken}");
+  </code></pre>
+  </li>
+  </ol>
+  </li>
+  <li>
+  <p>Save the&nbsp;<strong>Program.cs</strong>&nbsp;file.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-4-test-the-updated-application" class="anchor" aria-hidden="true" href="#task-4-test-the-updated-application"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 4: Test the updated application</h4>
+  <ol>
+  <li>
+  <p>Using a terminal, run the .NET console application project:</p>
+  <pre><code>dotnet run
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: If there are any build errors, review the <strong>Program.cs</strong> file in the <strong>Allfiles (F):\Allfiles\Labs\06\Solution\GraphClient</strong> folder.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>The running console application will automatically open an instance of the default browser.</p>
+  </li>
+  <li>
+  <p>In the open browser window, sign in by using your Microsoft account.</p>
+  <blockquote>
+  <p><strong>Note</strong>: You might have the option to select an existing Microsoft account as opposed to signing in again.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>The browser window will automatically go to the <strong>Permissions requested</strong> webpage. Accept the request for permissions.</p>
+  </li>
+  <li>
+  <p>Close the currently open browser window.</p>
+  </li>
+  <li>
+  <p>In the <strong>Visual Studio Code</strong> window, observe the token render in the output from the currently running console application.</p>
+  </li>
+  <li>
+  <p>Close the current terminal.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-review-1" class="anchor" aria-hidden="true" href="#review-1"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+  <p>In this exercise, you acquired a token from the Microsoft identity platform by using the MSAL.NET library.</p>
+  <h3><a id="user-content-exercise-3-query-microsoft-graph-by-using-the-net-sdk" class="anchor" aria-hidden="true" href="#exercise-3-query-microsoft-graph-by-using-the-net-sdk"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 3: Query Microsoft Graph by using the .NET SDK</h3>
+  <h4><a id="user-content-task-1-import-the-microsoft-graph-sdk-from-nuget" class="anchor" aria-hidden="true" href="#task-1-import-the-microsoft-graph-sdk-from-nuget"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Import the Microsoft Graph SDK from NuGet</h4>
+  <ol>
+  <li>
+  <p>Using a terminal, import version 1.21.0 of <strong>Microsoft.Graph</strong> from NuGet:</p>
+  <pre><code>dotnet add package Microsoft.Graph --version 1.21.0
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: The <strong>dotnet add package</strong> command will add the <strong>Microsoft.Graph</strong> package from NuGet. For more information, go to <a href="https://www.nuget.org/packages/Microsoft.Graph/1.21.0" rel="nofollow">Microsoft.Graph</a>.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Using the same terminal, import version 1.0.0-preview.2 of <strong>Microsoft.Graph.Auth</strong> from NuGet:</p>
+  <pre><code>dotnet add package Microsoft.Graph.Auth --version 1.0.0-preview.2
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: The <strong>dotnet add package</strong> command will add the <strong>Microsoft.Graph.Auth</strong> package from NuGet. For more information, go to <a href="https://www.nuget.org/packages/Microsoft.Graph.Auth/1.0.0-preview.2" rel="nofollow">Microsoft.Graph.Auth</a>.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Using the same terminal, build the .NET web application:</p>
+  <pre><code>dotnet build
+  </code></pre>
+  </li>
+  <li>
+  <p>Close the current terminal.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-2-modify-the-program-class-1" class="anchor" aria-hidden="true" href="#task-2-modify-the-program-class-1"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Modify the Program class</h4>
+  <ol>
+  <li>
+  <p>Open the <strong>Program.cs</strong> file in Visual Studio Code.</p>
+  </li>
+  <li>
+  <p>Add the following <strong>using</strong> directives for libraries that will be referenced by the application:</p>
+  <pre><code>using Microsoft.Graph;    
+  using Microsoft.Graph.Auth;
+  </code></pre>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-3-use-the-microsoft-graph-sdk-to-query-user-profile-information" class="anchor" aria-hidden="true" href="#task-3-use-the-microsoft-graph-sdk-to-query-user-profile-information"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Use the Microsoft Graph SDK to query user profile information</h4>
+  <ol>
+  <li>
+  <p>Within the <strong>Main</strong> method, remove the following block of unnecessary code:</p>
+  <pre><code>AuthenticationResult result;
+      
+  result = await app
+      .AcquireTokenInteractive(scopes)
+      .ExecuteAsync();
+  
+  Console.WriteLine($"Token:\t{result.AccessToken}");
+  </code></pre>
+  </li>
+  <li>
+  <p>In the <strong>Main</strong> method, perform the following actions:</p>
+  <ol>
+  <li>
+  <p>Create a new variable named <em>provider</em> of type <strong>DeviceCodeProvider</strong> that passes in the variables <em>app</em>, and <em>scopes</em> as constructor parameters:</p>
+  <pre><code>DeviceCodeProvider provider = new DeviceCodeProvider(app, scopes);
+  </code></pre>
+  </li>
+  <li>
+  <p>Create a new variable named <em>client</em> of type <strong>GraphServiceClient</strong> that passes in the variable <em>provider</em> as a constructor parameter:</p>
+  <pre><code>GraphServiceClient client = new GraphServiceClient(provider);
+  </code></pre>
+  </li>
+  <li>
+  <p>Add the following block of code to use the <strong>GraphServiceClient</strong> instance to asynchronously get the response of issuing an HTTP request to the relative <strong>/Me</strong> directory of the REST API, and then store the result in a new variable named <em>myProfile</em> of type <strong>User</strong>:</p>
+  <pre><code>User myProfile = await client.Me
+      .Request()
+      .GetAsync();
+  </code></pre>
+  </li>
+  <li>
+  <p>Render the value of the <strong>User.DisplayName</strong> and <strong>User.Id</strong> members to the console:</p>
+  <pre><code>Console.WriteLine($"Name:\t{myProfile.DisplayName}");
+  Console.WriteLine($"AAD Id:\t{myProfile.Id}");
+  </code></pre>
+  </li>
+  </ol>
+  </li>
+  <li>
+  <p>Save the&nbsp;<strong>Program.cs</strong>&nbsp;file.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-4-test-the-updated-application-1" class="anchor" aria-hidden="true" href="#task-4-test-the-updated-application-1"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 4: Test the updated application</h4>
+  <ol>
+  <li>
+  <p>Using a terminal, run the .NET console application project:</p>
+  <pre><code>dotnet run
+  </code></pre>
+  <blockquote>
+  <p><strong>Note</strong>: If there are any build errors, review the <strong>Program.cs</strong> file in the <strong>Allfiles (F):\Allfiles\Labs\06\Solution\GraphClient</strong> folder.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Observe the message in the output from the currently running console application. Record the value of the code in the message. You'll use this value later in the lab.</p>
+  </li>
+  <li>
+  <p>Go to <a href="https://microsoft.com/devicelogin" rel="nofollow">https://microsoft.com/devicelogin</a>, and then enter the code value that you copied earlier in the lab.</p>
+  </li>
+  <li>
+  <p>Sign in by using your Microsoft account.</p>
+  <blockquote>
+  <p><strong>Note</strong>: You might have the option to select an existing Microsoft account as opposed to signing in again.</p>
+  </blockquote>
+  </li>
+  <li>
+  <p>Close the currently open browser window.</p>
+  </li>
+  <li>
+  <p>In the <strong>Visual Studio Code</strong> window, observe the output from the Microsoft Graph request in the currently running console application.</p>
+  </li>
+  <li>
+  <p>Close the current terminal.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-review-2" class="anchor" aria-hidden="true" href="#review-2"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+  <p>In this exercise, you queried Microsoft Graph by using the SDK and MSAL-based authentication.</p>
+  <h3><a id="user-content-exercise-4-clean-up-your-subscription" class="anchor" aria-hidden="true" href="#exercise-4-clean-up-your-subscription"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 4: Clean up your subscription</h3>
+  <h4><a id="user-content-task-1-delete-the-application-registration-in-azure-ad" class="anchor" aria-hidden="true" href="#task-1-delete-the-application-registration-in-azure-ad"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Delete the application registration in Azure AD</h4>
+  <ol>
+  <li>
+  <p>Access the <strong>graphapp</strong> Azure AD application registration that you created earlier in this lab.</p>
+  </li>
+  <li>
+  <p>Delete the application registration.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-task-2-close-the-active-applications" class="anchor" aria-hidden="true" href="#task-2-close-the-active-applications"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Close the active applications</h4>
+  <ol>
+  <li>
+  <p>Close the currently running Microsoft Edge application.</p>
+  </li>
+  <li>
+  <p>Close the currently running Visual Studio Code application.</p>
+  </li>
+  </ol>
+  <h4><a id="user-content-review-3" class="anchor" aria-hidden="true" href="#review-3"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+  <p>In this exercise, you cleaned up your subscription by removing the application registration used in this lab.</p>
+  </article>
