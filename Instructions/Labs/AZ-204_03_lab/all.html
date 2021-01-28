@@ -1,32 +1,5 @@
-<article class="markdown-body entry-content container-lg" itemprop="text"><table data-table-type="yaml-metadata">
-    <thead>
-    <tr>
-    <th>lab</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td><div><table>
-    <thead>
-    <tr>
-    <th>title</th>
-    <th>az204Module</th>
-    <th>az020Module</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td><div>Lab: Retrieving Azure Storage resources and metadata by using the Azure Storage SDK for .NET</div></td>
-    <td><div>Module 03: Develop solutions that use blob storage</div></td>
-    <td><div>Module 03: Develop solutions that use blob storage</div></td>
-    </tr>
-    </tbody>
-  </table>
-  </div></td>
-    </tr>
-    </tbody>
-  </table>
-  
+<article>
+    
   <h1><a id="user-content-lab-retrieving-azure-storage-resources-and-metadata-by-using-the-azure-storage-sdk-for-net" class="anchor" aria-hidden="true" href="#lab-retrieving-azure-storage-resources-and-metadata-by-using-the-azure-storage-sdk-for-net"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Lab: Retrieving Azure Storage resources and metadata by using the Azure Storage SDK for .NET</h1>
   <h1><a id="user-content-student-lab-manual" class="anchor" aria-hidden="true" href="#student-lab-manual"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Student lab manual</h1>
   <h2><a id="user-content-lab-scenario" class="anchor" aria-hidden="true" href="#lab-scenario"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Lab scenario</h2>
@@ -50,26 +23,78 @@
   </ul>
   <h2><a id="user-content-instructions" class="anchor" aria-hidden="true" href="#instructions"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Instructions</h2>
   <h3><a id="user-content-before-you-start" class="anchor" aria-hidden="true" href="#before-you-start"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Before you start</h3>
-  <h4><a id="user-content-sign-in-to-the-lab-virtual-machine" class="anchor" aria-hidden="true" href="#sign-in-to-the-lab-virtual-machine"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Sign in to the lab virtual machine</h4>
-  <p>Ensure that you're signed in to your Windows 10 virtual machine (VM) by using the following credentials:</p>
+  <p>Make sure the following tools are installed on your machine</p>
   <ul>
-  <li>
-  <p>Username: <strong>Admin</strong></p>
-  </li>
-  <li>
-  <p>Password: <strong>Pa55w.rd</strong></p>
-  </li>
+  <li>Microsoft Edge</li>
+  <li>Windows PowerShell</li>
+  <li>Visual Studio Code</li>
   </ul>
-  <h4><a id="user-content-review-the-installed-applications" class="anchor" aria-hidden="true" href="#review-the-installed-applications"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review the installed applications</h4>
-  <p>Find the taskbar on your Windows 10 desktop. The taskbar contains the icons for the applications that you'll use in this lab:</p>
+  <h3><a id="user-content-make-an-f-drive" class="anchor" aria-hidden="true" href="#make-an-f-drive"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Make an F:\ drive:</h3>
+  <p>There are two ways to create an F:\ with the content</p>
+  <ol>
+  <li>using VHD (virtual hard disk)</li>
+  <li>using subst (map drive to a directory)</li>
+  </ol>
+  <h4><a id="user-content-make-an-f-drive-using-vhd" class="anchor" aria-hidden="true" href="#make-an-f-drive-using-vhd"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Make an F:\ drive using VHD</h4>
+  <p>In order to create a VHD on Windows 10, do the following:</p>
+  <ol>
+  <li>Open Start.</li>
+  <li>Search for Disk Management and click the top result to launch the experience.</li>
+  <li>Click the Action button.</li>
+  <li>Click the Create VHD option.</li>
+  <li>Click the Browse button and locate the folder you want to store the virtual disk.</li>
+  <li>In the "File name" field enter a name for the drive.</li>
+  <li>Use the "Save as type file" drop-down menu and select Virtual Disk files (.vhdx) . Or select Virtual Disk files (.vhd) if you're planning to create a VHD file.</li>
+  <li>Click the Save button.</li>
+  <li>Under "Virtual hard disk size," specify the size of the drive in megabytes (MB), gigabytes (GB), or terabytes (TB).</li>
+  <li>Under "Virtual hard disk format," select the VHDX option. (While using a VHDX format is recommended, you can also select the VHD format, but use it only if required.)</li>
+  <li>Under "Virtual hard disk type," select the Dynamic expanding option. (If you have selected the VHD format in the previous step, it's recommended to select the Fixed size option when selecting a type.)</li>
+  <li>Click OK.</li>
+  </ol>
+  <p>Once you complete these steps, you'll have created a VHD that you can then set up and use with any compatible version of Windows.</p>
+  <h5><a id="user-content-how-to-set-up-a-vhdx-or-vhd-on-windows-10" class="anchor" aria-hidden="true" href="#how-to-set-up-a-vhdx-or-vhd-on-windows-10"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>How to set up a VHDX or VHD on Windows 10</h5>
+  <ol>
+  <li>Using the above steps, you created a VHD, but it's empty without any data or file system. To make it useful, you need to initialize the disk, create a partition, and format the drive using these steps:</li>
+  <li>Right-click the newly created drive button on the far-left side, and click the Initialize Disk option.</li>
+  <li>Select the disk from the list.</li>
+  <li>Check the MBR (Master Boot Record) option. (You could also select the "GPT (GUID Partition Table)" option, but this option isn't supported by all versions of Windows.)</li>
+  <li>Click OK.</li>
+  <li>Right-click the Unallocated space, and select the New Simple Volume option.</li>
+  <li>Click Next.</li>
+  <li>Specify the size of the partition. (Leave this option unchanged if you're planning to use all the available space for the partition.)</li>
+  <li>Click Next.</li>
+  <li>Using the drop-down menu, select the drive letter you want to assign to the drive.</li>
+  <li>Click Next.</li>
+  <li>Under the Format this volume with the following settings section, make sure to use the following options:
   <ul>
-  <li>
-  <p>Microsoft Edge</p>
-  </li>
-  <li>
-  <p>File Explorer</p>
-  </li>
+  <li>File System - NTFS.</li>
+  <li>Allocation unit size - Default.</li>
+  <li>Volume label - Use the name of the drive file, but you can enter any name.</li>
+  <li>Perform a quick format - Formats the drive faster.</li>
+  <li>Enable file and folder compression - If it's not required, don't select it (optional).</li>
   </ul>
+  </li>
+  <li>Click Next.</li>
+  <li>Click Finish.</li>
+  </ol>
+  <p>After completing these steps, the VHDX or VHD will be initialized, partitioned, and formatted.
+  The VHD will mount automatically, and you can now access and save files using File Explorer.</p>
+  <h5><a id="user-content-make-sure-to-get-the-labs-source-and-instructions-from" class="anchor" aria-hidden="true" href="#make-sure-to-get-the-labs-source-and-instructions-from"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Make sure to get the labs source and instructions from</h5>
+  <p><a href="https://github.com/betabitnl/AZ-204-DevelopingSolutionsforMicrosoftAzure">https://github.com/betabitnl/AZ-204-DevelopingSolutionsforMicrosoftAzure</a></p>
+  <ol>
+  <li>Click Code</li>
+  <li>Click download zip</li>
+  <li>Open zip</li>
+  <li>Extra All file to F:\</li>
+  </ol>
+  <h4><a id="user-content-make-an-f-drive-using-subst" class="anchor" aria-hidden="true" href="#make-an-f-drive-using-subst"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Make an F:\ drive using subst</h4>
+  <p>By making an F:\ drive using subst it is easier to keep the labs up-to-date with the Github Repo.</p>
+  <h5><a id="user-content-clone-the-github-repo" class="anchor" aria-hidden="true" href="#clone-the-github-repo"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Clone the github repo:</h5>
+  <p>In a command prompt goto the direcory where you what to clone the the Github repo into. And type the following command:</p>
+  <p><code>git clone https://github.com/betabitnl/AZ-204-DevelopingSolutionsforMicrosoftAzure</code></p>
+  <h5><a id="user-content-create-the-f-drive" class="anchor" aria-hidden="true" href="#create-the-f-drive"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Create the F:\ drive</h5>
+  <p>For this example the Github is cloned in <code>c:\repos\</code>. To create the F:\ drive with correct content in it, type:</p>
+  <p><code>subst f: c:\repos\AZ-204-DevelopingSolutionsforMicrosoftAzure</code></p>
   <h3><a id="user-content-exercise-1-create-azure-resources" class="anchor" aria-hidden="true" href="#exercise-1-create-azure-resources"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 1: Create Azure resources</h3>
   <h4><a id="user-content-task-1-open-the-azure-portal" class="anchor" aria-hidden="true" href="#task-1-open-the-azure-portal"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Open the Azure portal</h4>
   <ol>
@@ -92,7 +117,7 @@
   <p>Name: <em><em>mediastor</em>[yourname]</em>**</p>
   </li>
   <li>
-  <p>Location: <strong>East US</strong></p>
+  <p>Location: <strong>West Europe</strong></p>
   </li>
   <li>
   <p>Performance: <strong>Standard</strong></p>

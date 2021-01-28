@@ -1,604 +1,661 @@
 <article class="markdown-body entry-content container-lg" itemprop="text"><table data-table-type="yaml-metadata">
-    <thead>
-    <tr>
-    <th>lab</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td><div><table>
-    <thead>
-    <tr>
-    <th>title</th>
-    <th>az204Module</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td><div>Lab: Enhancing a web application by using the Azure Content Delivery Network</div></td>
-    <td><div>Module 13: Integrate caching and content delivery within solutions</div></td>
-    </tr>
-    </tbody>
-  </table>
-  </div></td>
-    </tr>
-    </tbody>
-  </table>
-  
-  <h1><a id="user-content-lab-enhancing-a-web-application-by-using-the-azure-content-delivery-network" class="anchor" aria-hidden="true" href="#lab-enhancing-a-web-application-by-using-the-azure-content-delivery-network"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Lab: Enhancing a web application by using the Azure Content Delivery Network</h1>
-  <h1><a id="user-content-student-lab-manual" class="anchor" aria-hidden="true" href="#student-lab-manual"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Student lab manual</h1>
-  <h2><a id="user-content-lab-scenario" class="anchor" aria-hidden="true" href="#lab-scenario"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Lab scenario</h2>
-  <p>Your marketing organization has been tasked with building a website landing page to host content about an upcoming edX course. While designing the website, your team decided that multimedia videos and image content would be the ideal way to convey your marketing message. The website is already completed and available using a Docker container, and your team also decided that it would like to use a content delivery network (CDN) to improve the performance of the images, the videos, and the website itself. You have been tasked with using Microsoft Azure Content Delivery Network to improve the performance of both standard and streamed content on the website.</p>
-  <h2><a id="user-content-objectives" class="anchor" aria-hidden="true" href="#objectives"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Objectives</h2>
-  <p>After you complete this lab, you will be able to:</p>
-  <ul>
-  <li>
-  <p>Register a Microsoft.CDN resource provider.</p>
-  </li>
-  <li>
-  <p>Create Content Delivery Network resources.</p>
-  </li>
-  <li>
-  <p>Create and configure Content Delivery Network endpoints that are bound to various Azure services.</p>
-  </li>
-  </ul>
-  <h2><a id="user-content-lab-setup" class="anchor" aria-hidden="true" href="#lab-setup"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Lab setup</h2>
-  <ul>
-  <li>Estimated time: <strong>45 minutes</strong></li>
-  </ul>
-  <h2><a id="user-content-instructions" class="anchor" aria-hidden="true" href="#instructions"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Instructions</h2>
-  <h3><a id="user-content-before-you-start" class="anchor" aria-hidden="true" href="#before-you-start"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Before you start</h3>
-  <h4><a id="user-content-sign-in-to-the-lab-virtual-machine" class="anchor" aria-hidden="true" href="#sign-in-to-the-lab-virtual-machine"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Sign in to the lab virtual machine</h4>
-  <p>Ensure that you're signed in to your Windows 10 virtual machine (VM) by using the following credentials:</p>
-  <ul>
-  <li>
-  <p>Username: <strong>Admin</strong></p>
-  </li>
-  <li>
-  <p>Password: <strong>Pa55w.rd</strong></p>
-  </li>
-  </ul>
-  <h4><a id="user-content-review-the-installed-applications" class="anchor" aria-hidden="true" href="#review-the-installed-applications"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review the installed applications</h4>
-  <p>Find the taskbar on your Windows 10 desktop. The taskbar contains the icon for the application that you'll use in this lab:</p>
-  <ul>
-  <li>Microsoft Edge</li>
-  </ul>
-  <h3><a id="user-content-exercise-1-create-azure-resources" class="anchor" aria-hidden="true" href="#exercise-1-create-azure-resources"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 1: Create Azure resources</h3>
-  <h4><a id="user-content-task-1-open-the-azure-portal" class="anchor" aria-hidden="true" href="#task-1-open-the-azure-portal"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Open the Azure portal</h4>
-  <ol>
-  <li>
-  <p>Sign in to the Azure portal (<a href="https://portal.azure.com" rel="nofollow">https://portal.azure.com</a>).</p>
-  </li>
-  <li>
-  <p>If this is your first time signing in to the Azure portal, you'll notice a dialog box offering a tour of the portal. Select <strong>Get Started</strong> to skip the tour.</p>
-  </li>
-  </ol>
-  <h4><a id="user-content-task-2-create-a-storage-account" class="anchor" aria-hidden="true" href="#task-2-create-a-storage-account"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Create a Storage account</h4>
-  <ol>
-  <li>
-  <p>Create a new&nbsp;storage account&nbsp;with the following details:</p>
-  <ul>
-  <li>
-  <p>New resource group: <strong>MarketingContent</strong></p>
-  </li>
-  <li>
-  <p>Name: <em><em>contenthost</em>[yourname]</em>**</p>
-  </li>
-  <li>
-  <p>Location: <strong>East US</strong></p>
-  </li>
-  <li>
-  <p>Performance: <strong>Standard</strong></p>
-  </li>
-  <li>
-  <p>Account kind: <strong>StorageV2 (general purpose v2)</strong></p>
-  </li>
-  <li>
-  <p>Replication: <strong>Read-access geo-redundant storage (RA-GRS)</strong></p>
-  </li>
-  <li>
-  <p>Access tier: <strong>Hot</strong></p>
-  </li>
-  </ul>
-  <blockquote>
-  <p><strong>Note</strong>: Wait for Azure to finish creating the storage account before you move forward with the lab. You'll receive a notification when the&nbsp;account&nbsp;is created.</p>
-  </blockquote>
-  </li>
-  </ol>
-  <h4><a id="user-content-task-3-create-a-web-app-by-using-azure-app-service" class="anchor" aria-hidden="true" href="#task-3-create-a-web-app-by-using-azure-app-service"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Create a web app by using Azure App Service</h4>
-  <ol>
-  <li>
-  <p>Create a new web app with the following details:</p>
-  <ul>
-  <li>
-  <p>Existing resource group: <strong>MarketingContent</strong></p>
-  </li>
-  <li>
-  <p>Name: <em><em>landingpage</em>[yourname]</em>**</p>
-  </li>
-  <li>
-  <p>Publish: <strong>Docker Container</strong></p>
-  </li>
-  <li>
-  <p>Operating system: <strong>Linux</strong></p>
-  </li>
-  <li>
-  <p>Region: <strong>East US</strong></p>
-  </li>
-  <li>
-  <p>New App Service plan: <strong>MarketingPlan</strong></p>
-  </li>
-  <li>
-  <p>SKU and size: <strong>Premium V2 P1v2</strong></p>
-  </li>
-  <li>
-  <p>Docker options: <strong>Single Container</strong></p>
-  </li>
-  <li>
-  <p>Image source: <strong>Docker Hub</strong></p>
-  </li>
-  <li>
-  <p>Access type: <strong>Public</strong></p>
-  </li>
-  <li>
-  <p>Image and tag: <strong>microsoftlearning/edx-html-landing-page:latest</strong></p>
-  </li>
-  </ul>
-  <blockquote>
-  <p><strong>Note</strong>: Wait for Azure to finish creating the web app before you move forward with the lab. You'll receive a notification when the&nbsp;app&nbsp;is created.</p>
-  </blockquote>
-  </li>
-  <li>
-  <p>Access the <em><em>landingpage</em>[yourname]</em>** web app that you created earlier in this lab.</p>
-  </li>
-  <li>
-  <p>In the <strong>Settings</strong> section, go to the <strong>Properties</strong> section, and then record the value of the <strong>URL</strong> text box. You'll use this value later in the lab.</p>
-  </li>
-  </ol>
-  <h4><a id="user-content-review" class="anchor" aria-hidden="true" href="#review"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
-  <p>In this exercise, you created an Azure Storage account and an Azure Web App that you'll use later in this lab.</p>
-  <h3><a id="user-content-exercise-2-configure-content-delivery-network-and-endpoints" class="anchor" aria-hidden="true" href="#exercise-2-configure-content-delivery-network-and-endpoints"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 2: Configure Content Delivery Network and endpoints</h3>
-  <h4><a id="user-content-task-1-open-azure-cloud-shell" class="anchor" aria-hidden="true" href="#task-1-open-azure-cloud-shell"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Open Azure Cloud Shell</h4>
-  <ol>
-  <li>
-  <p>Open a new Cloud Shell instance in the Azure portal.</p>
-  </li>
-  <li>
-  <p>If Cloud Shell isn't already configured, configure the shell for Bash by using the default settings.</p>
-  </li>
-  <li>
-  <p>At the <strong>Cloud Shell</strong> command prompt in the portal, use the <strong>az</strong> command with the <strong>--version</strong> flag to get the version of the Azure Command-Line Interface (Azure CLI) tool.</p>
-  </li>
-  </ol>
-  <h4><a id="user-content-task-2-register-the-microsoftcdn-provider" class="anchor" aria-hidden="true" href="#task-2-register-the-microsoftcdn-provider"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Register the Microsoft.CDN provider</h4>
-  <ol>
-  <li>
-  <p>Use the <strong>az</strong> command with the <strong>--help</strong> flag to find a list of subgroups and commands at the root level of the Azure CLI.</p>
-  </li>
-  <li>
-  <p>Use the <strong>az provider</strong> command with the <strong>--help</strong> flag to get a list of commands available for resource providers.</p>
-  </li>
-  <li>
-  <p>Use the <strong>az provider list</strong> command to list all currently registered providers.</p>
-  </li>
-  <li>
-  <p>Use the <strong>az provider list</strong> command again with the <strong>--query "[].namespace"</strong> flag to list just the namespaces of the currently registered providers.</p>
-  </li>
-  <li>
-  <p>Observe the list of currently registered providers. The <strong>Microsoft.CDN</strong> provider isn't currently in the list of providers.</p>
-  </li>
-  <li>
-  <p>Use the <strong>az provider register</strong> command with the <strong>--help</strong> flag to get the required flags to register a new provider.</p>
-  </li>
-  <li>
-  <p>Use the <strong>az provider register</strong> command to register a namespace with your current subscription by using the following setting:</p>
-  <ul>
-  <li>Namespace: <strong>Microsoft.CDN</strong></li>
-  </ul>
-  </li>
-  <li>
-  <p>Close the Cloud Shell pane.</p>
-  </li>
-  </ol>
-  <h4><a id="user-content-task-3-create-a-content-delivery-network-profile" class="anchor" aria-hidden="true" href="#task-3-create-a-content-delivery-network-profile"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Create a Content Delivery Network profile</h4>
-  <ol>
-  <li>
-  <p>Create a new Content Delivery Network profile with the following details:</p>
-  <ul>
-  <li>
-  <p>Name: <strong>contentdeliverynetwork</strong></p>
-  </li>
-  <li>
-  <p>Existing resource group: <strong>MarketingContent</strong></p>
-  </li>
-  <li>
-  <p>Resource group location: <strong>East US</strong></p>
-  </li>
-  <li>
-  <p>Pricing tier: <strong>Standard Akamai</strong></p>
-  </li>
-  <li>
-  <p>Create a new CDN endpoint now: <strong>No</strong></p>
-  </li>
-  </ul>
-  <blockquote>
-  <p><strong>Note</strong>: Wait for Azure to finish creating the CDN profile before you move forward with the lab. You'll receive a notification when the&nbsp;app&nbsp;is created.</p>
-  </blockquote>
-  </li>
-  </ol>
-  <h4><a id="user-content-task-4-configure-storage-containers" class="anchor" aria-hidden="true" href="#task-4-configure-storage-containers"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 4: Configure Storage containers</h4>
-  <ol>
-  <li>
-  <p>Access the <em><em>contenthost</em>[yourname]</em>** storage account that you created earlier in this lab.</p>
-  </li>
-  <li>
-  <p>Select the <strong>Containers</strong> link in the <strong>Blob service</strong> section, and then create a new container with the following settings:</p>
-  <ul>
-  <li>
-  <p>Name: <strong>media</strong></p>
-  </li>
-  <li>
-  <p>Public access level: <strong>Blob (anonymous read access for blobs only)</strong></p>
-  </li>
-  </ul>
-  </li>
-  <li>
-  <p>Create a new container with the following settings:</p>
-  <ul>
-  <li>
-  <p>Name: <strong>video</strong></p>
-  </li>
-  <li>
-  <p>Public access level: <strong>Blob (anonymous read access for blobs only)</strong></p>
-  </li>
-  </ul>
-  </li>
-  <li>
-  <p>Observe the updated list of containers.</p>
-  </li>
-  </ol>
-  <h4><a id="user-content-task-5-create-content-delivery-network-endpoints" class="anchor" aria-hidden="true" href="#task-5-create-content-delivery-network-endpoints"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 5: Create Content Delivery Network endpoints</h4>
-  <ol>
-  <li>
-  <p>Access the <strong>contentdeliverynetwork</strong> CDN profile that you created earlier in this lab, and then select <strong>+ Endpoint</strong>.</p>
-  </li>
-  <li>
-  <p>Add a new endpoint with the following properties:</p>
-  <ul>
-  <li>
-  <p>Name: <em><em>cdnmedia</em>[yourname]</em>**</p>
-  </li>
-  <li>
-  <p>Origin type: <strong>Storage</strong></p>
-  </li>
-  <li>
-  <p>Origin hostname: <em><em>contenthost</em>[yourname]*.blob.core.windows.net</em>* (the Storage account that you created earlier in this lab)</p>
-  </li>
-  <li>
-  <p>Origin path: <strong>/media</strong></p>
-  </li>
-  <li>
-  <p>Optimized for: <strong>General web delivery</strong></p>
-  </li>
-  </ul>
-  <blockquote>
-  <p><strong>Note</strong>: Wait for Azure to finish creating the CDN endpoint before you move forward with the lab. You'll receive a notification when the&nbsp;account&nbsp;is created.</p>
-  </blockquote>
-  </li>
-  <li>
-  <p>Add a new endpoint with the following properties:</p>
-  <ul>
-  <li>
-  <p>Name: <em><em>cdnvideo</em>[yourname]</em>**</p>
-  </li>
-  <li>
-  <p>Origin type: <strong>Storage</strong></p>
-  </li>
-  <li>
-  <p>Origin hostname: <em><em>contenthost</em>[yourname]*.blob.core.windows.net</em>* (the Storage account that you created earlier in this lab)</p>
-  </li>
-  <li>
-  <p>Origin path: <strong>/video</strong></p>
-  </li>
-  <li>
-  <p>Optimized for: <strong>Video on demand media streaming</strong></p>
-  </li>
-  </ul>
-  <blockquote>
-  <p><strong>Note</strong>: Wait for Azure to finish creating the CDN endpoint before you move forward with the lab. You'll receive a notification when the&nbsp;account&nbsp;is created.</p>
-  </blockquote>
-  </li>
-  <li>
-  <p>Add a new endpoint with the following properties:</p>
-  <ul>
-  <li>
-  <p>Name: <em><em>cdnweb</em>[yourname]</em>**</p>
-  </li>
-  <li>
-  <p>Origin type: <strong>Web App</strong></p>
-  </li>
-  <li>
-  <p>Origin hostname: <em><em>landingpage</em>[yourname]*.azurewebsites.net</em>* (the Web App that you created earlier in this lab)</p>
-  </li>
-  <li>
-  <p>Optimized for: <strong>General web delivery</strong></p>
-  </li>
-  </ul>
-  <blockquote>
-  <p><strong>Note</strong>: Wait for Azure to finish creating the CDN endpoint before you move forward with the lab. You'll receive a notification when the&nbsp;account&nbsp;is created.</p>
-  </blockquote>
-  </li>
-  </ol>
-  <h4><a id="user-content-review-1" class="anchor" aria-hidden="true" href="#review-1"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
-  <p>In this exercise, you registered the resource provider for Content Delivery Network and then used the provider to create both CDN profile and endpoint resources.</p>
-  <h3><a id="user-content-exercise-3-upload-and-configure-static-web-content" class="anchor" aria-hidden="true" href="#exercise-3-upload-and-configure-static-web-content"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 3: Upload and configure static web content</h3>
-  <h4><a id="user-content-task-1-observe-the-landing-page" class="anchor" aria-hidden="true" href="#task-1-observe-the-landing-page"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Observe the landing page</h4>
-  <ol>
-  <li>
-  <p>Access the <em><em>landingpage</em>[yourname]</em>** web app that you created earlier in this lab.</p>
-  </li>
-  <li>
-  <p>Go to the URL for the <em><em>landingpage</em>[yourname]</em>** web app.</p>
-  </li>
-  <li>
-  <p>Observe the error message displayed on the screen. The website won't work until you configure the specified settings to reference multimedia content.</p>
-  </li>
-  <li>
-  <p>Return to the Azure portal.</p>
-  </li>
-  </ol>
-  <h4><a id="user-content-task-2-upload-storage-blobs" class="anchor" aria-hidden="true" href="#task-2-upload-storage-blobs"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Upload Storage blobs</h4>
-  <ol>
-  <li>
-  <p>Access the <em><em>contenthost</em>[yourname]</em>** storage account that you created earlier in this lab.</p>
-  </li>
-  <li>
-  <p>Select the <strong>Containers</strong> link in the <strong>Blob service</strong> section, and then select the <strong>media</strong> container.</p>
-  </li>
-  <li>
-  <p>Upload the following files from the <strong>Allfiles (F): \Allfiles\Labs\13\Starter</strong> folder on your lab VM:</p>
-  <ul>
-  <li>
-  <p><strong>campus.jpg</strong></p>
-  </li>
-  <li>
-  <p><strong>conference.jpg</strong></p>
-  </li>
-  <li>
-  <p><strong>poster.jpg</strong></p>
-  </li>
-  </ul>
-  <blockquote>
-  <p><strong>Note</strong>: We recommend that you enable the <strong>Overwrite if files already exist</strong> option.</p>
-  </blockquote>
-  </li>
-  <li>
-  <p>Record the value in the <strong>URL</strong> text box. You will use this value later in the lab.</p>
-  </li>
-  <li>
-  <p>Back in the <strong>Containers</strong> section, select the <strong>video</strong> container.</p>
-  </li>
-  <li>
-  <p>Upload the <strong>welcome.mp4</strong> file from the <strong>Allfiles (F): \Allfiles\Labs\13\Starter</strong> folder on your lab VM.</p>
-  <blockquote>
-  <p><strong>Note</strong>: We recommend that you enable the <strong>Overwrite if files already exist</strong> option.</p>
-  </blockquote>
-  </li>
-  <li>
-  <p>Record the value in the <strong>URL</strong> text box. You will use this value later in the lab.</p>
-  </li>
-  </ol>
-  <h4><a id="user-content-task-3-configure-web-app-settings" class="anchor" aria-hidden="true" href="#task-3-configure-web-app-settings"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Configure Web App settings</h4>
-  <ol>
-  <li>
-  <p>Access the <em><em>landingpage</em>[yourname]</em>** web app that you created earlier in this lab.</p>
-  </li>
-  <li>
-  <p>In the <strong>Settings</strong> section, go to the <strong>Configuration</strong> section.</p>
-  </li>
-  <li>
-  <p>Find and access the <strong>Application Settings</strong> tab in the <strong>Configuration</strong> section.</p>
-  </li>
-  <li>
-  <p>Create a new application setting by using the following details:</p>
-  <ul>
-  <li>
-  <p>Name: <strong>CDNMediaEndpoint</strong></p>
-  </li>
-  <li>
-  <p>Value: The <strong>URI</strong> value of the <strong>media</strong> container in the <em><em>contenthost</em>[yourname]</em>** storage account that you recorded earlier in this lab.</p>
-  </li>
-  <li>
-  <p>Deployment slot setting: <strong>Not selected</strong></p>
-  </li>
-  </ul>
-  </li>
-  <li>
-  <p>Create a new application setting by using the following details:</p>
-  <ul>
-  <li>
-  <p>Name: <strong>CDNVideoEndpoint</strong></p>
-  </li>
-  <li>
-  <p>Value: The <strong>URI</strong> value of the <strong>video</strong> container in the <em><em>contenthost</em>[yourname]</em>** storage account that you recorded earlier in this lab.</p>
-  </li>
-  <li>
-  <p>Deployment slot setting: <strong>Not selected</strong></p>
-  </li>
-  </ul>
-  </li>
-  <li>
-  <p>Save your changes to the application settings.</p>
-  </li>
-  </ol>
-  <h4><a id="user-content-task-4-validate-the-corrected-landing-page" class="anchor" aria-hidden="true" href="#task-4-validate-the-corrected-landing-page"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 4: Validate the corrected landing page</h4>
-  <ol>
-  <li>
-  <p>Access the <em><em>landingpage</em>[yourname]</em>** web app that you created earlier in this lab.</p>
-  </li>
-  <li>
-  <p><strong>Restart</strong> the currently running Web App.</p>
-  <blockquote>
-  <p><strong>Note</strong>: Wait for the restart operation to complete before you move forward with the lab. You'll receive a notification when the&nbsp;operation is done.</p>
-  </blockquote>
-  </li>
-  <li>
-  <p>Go to the URL for the <em><em>landingpage</em>[yourname]</em>** web app.</p>
-  </li>
-  <li>
-  <p>Observe the updated website rendering multimedia content of various types.</p>
-  </li>
-  <li>
-  <p>Return to the Azure portal.</p>
-  </li>
-  </ol>
-  <h4><a id="user-content-review-2" class="anchor" aria-hidden="true" href="#review-2"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
-  <p>In this exercise, you uploaded multimedia content as blobs to Storage containers and then updated your Web App to point directly to the storage blobs.</p>
-  <h3><a id="user-content-exercise-4-use-content-delivery-network-endpoints" class="anchor" aria-hidden="true" href="#exercise-4-use-content-delivery-network-endpoints"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 4: Use Content Delivery Network endpoints</h3>
-  <h4><a id="user-content-task-1-retrieve-endpoint-uniform-resource-identifiers-uris" class="anchor" aria-hidden="true" href="#task-1-retrieve-endpoint-uniform-resource-identifiers-uris"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Retrieve endpoint Uniform Resource Identifiers (URIs)</h4>
-  <ol>
-  <li>
-  <p>Access the <strong>contentdeliverynetwork</strong> CDN profile that you created earlier in this lab.</p>
-  </li>
-  <li>
-  <p>Select the <em><em>cdnmedia</em>[yourname]</em>** endpoint.</p>
-  </li>
-  <li>
-  <p>Copy the value of the <strong>Endpoint hostname</strong> text box. You will use this value later in the lab.</p>
-  </li>
-  <li>
-  <p>Select the <em><em>cdnvideo</em>[yourname]</em>** endpoint.</p>
-  </li>
-  <li>
-  <p>Copy the value of the <strong>Endpoint hostname</strong> text box. You will use this value later in the lab.</p>
-  </li>
-  </ol>
-  <h4><a id="user-content-task-2-test-multimedia-content-by-using-the-cdn" class="anchor" aria-hidden="true" href="#task-2-test-multimedia-content-by-using-the-cdn"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Test multimedia content by using the CDN</h4>
-  <ol>
-  <li>
-  <p>Construct a URL for the <strong>campus.jpg</strong> resource by combining the <strong>Endpoint hostname</strong> URL from the <em><em>cdnmedia</em>[yourname]</em>** endpoint that you copied earlier in the lab with a relative path of <strong>/campus.jpg</strong>.</p>
-  <blockquote>
-  <p><strong>Note</strong>: For example, if your <strong>Endpoint hostname</strong> URL is <strong><a href="https://cdnmediastudent.azureedge.net/" rel="nofollow">https://cdnmediastudent.azureedge.net/</a></strong>, your newly constructed URL would be <strong><a href="https://cdnmediastudent.azureedge.net/campus.jpg" rel="nofollow">https://cdnmediastudent.azureedge.net/campus.jpg</a></strong>.</p>
-  </blockquote>
-  </li>
-  <li>
-  <p>Construct a URL for the <strong>conference.jpg</strong> resource by combining the <strong>Endpoint hostname</strong> URL from the <em><em>cdnmedia</em>[yourname]</em>** endpoint that you copied earlier in the lab with a relative path of <strong>/conference.jpg</strong>.</p>
-  <blockquote>
-  <p><strong>Note</strong>: For example, if your <strong>Endpoint hostname</strong> URL is <strong><a href="https://cdnmediastudent.azureedge.net/" rel="nofollow">https://cdnmediastudent.azureedge.net/</a></strong>, your newly constructed URL would be <strong><a href="https://cdnmediastudent.azureedge.net/conference.jpg" rel="nofollow">https://cdnmediastudent.azureedge.net/conference.jpg</a></strong>.</p>
-  </blockquote>
-  </li>
-  <li>
-  <p>Construct a URL for the <strong>poster.jpg</strong> resource by combining the <strong>Endpoint hostname</strong> URL from the <em><em>cdnmedia</em>[yourname]</em>** endpoint that you copied earlier in the lab with a relative path of <strong>/poster.jpg</strong>.</p>
-  <blockquote>
-  <p><strong>Note</strong>: For example, if your <strong>Endpoint hostname</strong> URL is <strong><a href="https://cdnmediastudent.azureedge.net/" rel="nofollow">https://cdnmediastudent.azureedge.net/</a></strong>, your newly constructed URL would be <strong><a href="https://cdnmediastudent.azureedge.net/poster.jpg" rel="nofollow">https://cdnmediastudent.azureedge.net/poster.jpg</a></strong>.</p>
-  </blockquote>
-  </li>
-  <li>
-  <p>Construct a URL for the <strong>welcome.mp4</strong> resource by combining the <strong>Endpoint hostname</strong> URL from the <em><em>cdnvideo</em>[yourname]</em>** endpoint that you copied earlier in the lab with a relative path of <strong>/welcome.mp4</strong>.</p>
-  <blockquote>
-  <p><strong>Note</strong>: For example, if your <strong>Endpoint hostname</strong> URL is <strong><a href="https://cdnvideostudent.azureedge.net/" rel="nofollow">https://cdnvideostudent.azureedge.net/</a></strong>, your newly constructed URL would be <strong><a href="https://cdnvideostudent.azureedge.net/welcome.mp4" rel="nofollow">https://cdnvideostudent.azureedge.net/welcome.mp4</a></strong>.</p>
-  </blockquote>
-  </li>
-  <li>
-  <p>Open a new <strong>Microsoft Edge</strong> browser window.</p>
-  </li>
-  <li>
-  <p>In the new browser window, go to the URL that you constructed for the <strong>campus.jpg</strong> media resource, and then verify that the resource was successfully found.</p>
-  <blockquote>
-  <p><strong>Note</strong>: If the content isn't available yet, the CDN endpoint is still initializing. This initialization process can take anywhere from 5 to 15 minutes.</p>
-  </blockquote>
-  </li>
-  <li>
-  <p>Go to the URL that you constructed for the <strong>conference.jpg</strong> media resource, and then verify that the resource was successfully found.</p>
-  </li>
-  <li>
-  <p>Go to the URL that you constructed for the <strong>poster.jpg</strong> media resource, and then verify that the resource was successfully found.</p>
-  </li>
-  <li>
-  <p>Go to the URL that you constructed for the <strong>welcome.mp4</strong> video resource, and then verify that the resource was successfully found.</p>
-  </li>
-  <li>
-  <p>Close the browser window that you created in this task.</p>
-  </li>
-  </ol>
-  <h4><a id="user-content-task-3-update-the-web-app-settings" class="anchor" aria-hidden="true" href="#task-3-update-the-web-app-settings"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Update the Web App settings</h4>
-  <ol>
-  <li>
-  <p>Access the <em><em>landingpage</em>[yourname]</em>** web app that you created earlier in this lab.</p>
-  </li>
-  <li>
-  <p>In the <strong>Settings</strong> section, go to the <strong>Configuration</strong> section.</p>
-  </li>
-  <li>
-  <p>Find and access the <strong>Application Settings</strong> tab in the <strong>Configuration</strong> section.</p>
-  </li>
-  <li>
-  <p>Update the <strong>CDNMediaEndpoint</strong> application setting by changing its value to the <strong>Endpoint hostname</strong> URL from the <em><em>cdnmedia</em>[yourname]</em>** endpoint that you copied earlier in the lab.</p>
-  </li>
-  <li>
-  <p>Update the <strong>CDNVideoEndpoint</strong> application setting by changing its value to the <strong>Endpoint hostname</strong> URL from the <em><em>cdnvideo</em>[yourname]</em>** endpoint that you copied earlier in the lab.</p>
-  </li>
-  <li>
-  <p>Save your changes to the application settings.</p>
-  </li>
-  <li>
-  <p>Restart the currently running Web App.</p>
-  <blockquote>
-  <p><strong>Note</strong>: Wait for the restart operation to complete before you move forward with the lab. You'll receive a notification when the&nbsp;operation is done.</p>
-  </blockquote>
-  </li>
-  </ol>
-  <h4><a id="user-content-task-4-test-the-web-content" class="anchor" aria-hidden="true" href="#task-4-test-the-web-content"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 4: Test the web content</h4>
-  <ol>
-  <li>
-  <p>Access the <strong>contentdeliverynetwork</strong> CDN profile that you created earlier in this lab.</p>
-  </li>
-  <li>
-  <p>Select the <em><em>cdnweb</em>[yourname]</em>** endpoint.</p>
-  </li>
-  <li>
-  <p>Copy the value of the <strong>Endpoint hostname</strong> text box. You will use this value later in the lab.</p>
-  </li>
-  <li>
-  <p>Open a new <strong>Microsoft Edge</strong> browser window.</p>
-  </li>
-  <li>
-  <p>In the new browser window, go to the <strong>Endpoint hostname</strong> URL for the <em><em>cdnweb</em>[yourname]</em>** endpoint.</p>
-  </li>
-  <li>
-  <p>Observe the website and multimedia content that are all served by using Content Delivery Network.</p>
-  </li>
-  </ol>
-  <h4><a id="user-content-review-3" class="anchor" aria-hidden="true" href="#review-3"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
-  <p>In this exercise, you updated your Web App to use Content Delivery Network to serve multimedia content and to serve the web application itself.</p>
-  <h3><a id="user-content-exercise-5-clean-up-your-subscription" class="anchor" aria-hidden="true" href="#exercise-5-clean-up-your-subscription"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 5: Clean up your subscription</h3>
-  <h4><a id="user-content-task-1-open-azure-cloud-shell-and-list-resource-groups" class="anchor" aria-hidden="true" href="#task-1-open-azure-cloud-shell-and-list-resource-groups"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Open Azure Cloud Shell and list resource groups</h4>
-  <ol>
-  <li>
-  <p>In the portal, select the <strong>Cloud Shell</strong> icon to open a new shell instance.</p>
-  </li>
-  <li>
-  <p>If Cloud Shell isn't already configured, configure the shell for Bash by using the default settings.</p>
-  </li>
-  </ol>
-  <h4><a id="user-content-task-2-delete-a-resource-group" class="anchor" aria-hidden="true" href="#task-2-delete-a-resource-group"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Delete a resource group</h4>
-  <ol>
-  <li>
-  <p>At the command prompt, enter the following command, and then select Enter to delete the <strong>MarketingContent</strong> resource group:</p>
-  <pre><code>az group delete --name MarketingContent --no-wait --yes
-  </code></pre>
-  </li>
-  <li>
-  <p>Close the Cloud Shell pane in the portal.</p>
-  </li>
-  </ol>
-  <h4><a id="user-content-task-3-close-the-active-application" class="anchor" aria-hidden="true" href="#task-3-close-the-active-application"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Close the active application</h4>
-  <ol>
-  <li>
-  <pre><code>the currently running Microsoft Edge application.
-  </code></pre>
-  </li>
-  </ol>
-  <h4><a id="user-content-review-4" class="anchor" aria-hidden="true" href="#review-4"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
-  <p>In this exercise, you cleaned up your subscription by removing the resource group used in this lab.</p>
-  </article>
+  <thead>
+  <tr>
+  <th>lab</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td><div><table>
+  <thead>
+  <tr>
+  <th>title</th>
+  <th>az204Module</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td><div>Lab: Enhancing a web application by using the Azure Content Delivery Network</div></td>
+  <td><div>Module 13: Integrate caching and content delivery within solutions</div></td>
+  </tr>
+  </tbody>
+</table>
+</div></td>
+  </tr>
+  </tbody>
+</table>
+
+<h1><a id="user-content-lab-enhancing-a-web-application-by-using-the-azure-content-delivery-network" class="anchor" aria-hidden="true" href="#lab-enhancing-a-web-application-by-using-the-azure-content-delivery-network"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Lab: Enhancing a web application by using the Azure Content Delivery Network</h1>
+<h1><a id="user-content-student-lab-manual" class="anchor" aria-hidden="true" href="#student-lab-manual"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Student lab manual</h1>
+<h2><a id="user-content-lab-scenario" class="anchor" aria-hidden="true" href="#lab-scenario"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Lab scenario</h2>
+<p>Your marketing organization has been tasked with building a website landing page to host content about an upcoming edX course. While designing the website, your team decided that multimedia videos and image content would be the ideal way to convey your marketing message. The website is already completed and available using a Docker container, and your team also decided that it would like to use a content delivery network (CDN) to improve the performance of the images, the videos, and the website itself. You have been tasked with using Microsoft Azure Content Delivery Network to improve the performance of both standard and streamed content on the website.</p>
+<h2><a id="user-content-objectives" class="anchor" aria-hidden="true" href="#objectives"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Objectives</h2>
+<p>After you complete this lab, you will be able to:</p>
+<ul>
+<li>
+<p>Register a Microsoft.CDN resource provider.</p>
+</li>
+<li>
+<p>Create Content Delivery Network resources.</p>
+</li>
+<li>
+<p>Create and configure Content Delivery Network endpoints that are bound to various Azure services.</p>
+</li>
+</ul>
+<h2><a id="user-content-lab-setup" class="anchor" aria-hidden="true" href="#lab-setup"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Lab setup</h2>
+<ul>
+<li>Estimated time: <strong>45 minutes</strong></li>
+</ul>
+<h2><a id="user-content-instructions" class="anchor" aria-hidden="true" href="#instructions"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Instructions</h2>
+<h3><a id="user-content-before-you-start" class="anchor" aria-hidden="true" href="#before-you-start"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Before you start</h3>
+<p>Make sure the following tools are installed on your machine</p>
+<ul>
+<li>Microsoft Edge</li>
+<li>Windows PowerShell</li>
+<li>Visual Studio Code</li>
+</ul>
+<h3><a id="user-content-make-an-f-drive" class="anchor" aria-hidden="true" href="#make-an-f-drive"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Make an F:\ drive:</h3>
+<p>There are two ways to create an F:\ with the content</p>
+<ol>
+<li>using VHD (virtual hard disk)</li>
+<li>using subst (map drive to a directory)</li>
+</ol>
+<h4><a id="user-content-make-an-f-drive-using-vhd" class="anchor" aria-hidden="true" href="#make-an-f-drive-using-vhd"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Make an F:\ drive using VHD</h4>
+<p>In order to create a VHD on Windows 10, do the following:</p>
+<ol>
+<li>Open Start.</li>
+<li>Search for Disk Management and click the top result to launch the experience.</li>
+<li>Click the Action button.</li>
+<li>Click the Create VHD option.</li>
+<li>Click the Browse button and locate the folder you want to store the virtual disk.</li>
+<li>In the "File name" field enter a name for the drive.</li>
+<li>Use the "Save as type file" drop-down menu and select Virtual Disk files (.vhdx) . Or select Virtual Disk files (.vhd) if you're planning to create a VHD file.</li>
+<li>Click the Save button.</li>
+<li>Under "Virtual hard disk size," specify the size of the drive in megabytes (MB), gigabytes (GB), or terabytes (TB).</li>
+<li>Under "Virtual hard disk format," select the VHDX option. (While using a VHDX format is recommended, you can also select the VHD format, but use it only if required.)</li>
+<li>Under "Virtual hard disk type," select the Dynamic expanding option. (If you have selected the VHD format in the previous step, it's recommended to select the Fixed size option when selecting a type.)</li>
+<li>Click OK.</li>
+</ol>
+<p>Once you complete these steps, you'll have created a VHD that you can then set up and use with any compatible version of Windows.</p>
+<h5><a id="user-content-how-to-set-up-a-vhdx-or-vhd-on-windows-10" class="anchor" aria-hidden="true" href="#how-to-set-up-a-vhdx-or-vhd-on-windows-10"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>How to set up a VHDX or VHD on Windows 10</h5>
+<ol>
+<li>Using the above steps, you created a VHD, but it's empty without any data or file system. To make it useful, you need to initialize the disk, create a partition, and format the drive using these steps:</li>
+<li>Right-click the newly created drive button on the far-left side, and click the Initialize Disk option.</li>
+<li>Select the disk from the list.</li>
+<li>Check the MBR (Master Boot Record) option. (You could also select the "GPT (GUID Partition Table)" option, but this option isn't supported by all versions of Windows.)</li>
+<li>Click OK.</li>
+<li>Right-click the Unallocated space, and select the New Simple Volume option.</li>
+<li>Click Next.</li>
+<li>Specify the size of the partition. (Leave this option unchanged if you're planning to use all the available space for the partition.)</li>
+<li>Click Next.</li>
+<li>Using the drop-down menu, select the drive letter you want to assign to the drive.</li>
+<li>Click Next.</li>
+<li>Under the Format this volume with the following settings section, make sure to use the following options:
+<ul>
+<li>File System - NTFS.</li>
+<li>Allocation unit size - Default.</li>
+<li>Volume label - Use the name of the drive file, but you can enter any name.</li>
+<li>Perform a quick format - Formats the drive faster.</li>
+<li>Enable file and folder compression - If it's not required, don't select it (optional).</li>
+</ul>
+</li>
+<li>Click Next.</li>
+<li>Click Finish.</li>
+</ol>
+<p>After completing these steps, the VHDX or VHD will be initialized, partitioned, and formatted.
+The VHD will mount automatically, and you can now access and save files using File Explorer.</p>
+<h5><a id="user-content-make-sure-to-get-the-labs-source-and-instructions-from" class="anchor" aria-hidden="true" href="#make-sure-to-get-the-labs-source-and-instructions-from"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Make sure to get the labs source and instructions from</h5>
+<p><a href="https://github.com/betabitnl/AZ-204-DevelopingSolutionsforMicrosoftAzure">https://github.com/betabitnl/AZ-204-DevelopingSolutionsforMicrosoftAzure</a></p>
+<ol>
+<li>Click Code</li>
+<li>Click download zip</li>
+<li>Open zip</li>
+<li>Extra All file to F:\</li>
+</ol>
+<h4><a id="user-content-make-an-f-drive-using-subst" class="anchor" aria-hidden="true" href="#make-an-f-drive-using-subst"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Make an F:\ drive using subst</h4>
+<p>By making an F:\ drive using subst it is easier to keep the labs up-to-date with the Github Repo.</p>
+<h5><a id="user-content-clone-the-github-repo" class="anchor" aria-hidden="true" href="#clone-the-github-repo"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Clone the github repo:</h5>
+<p>In a command prompt goto the direcory where you what to clone the the Github repo into. And type the following command:</p>
+<p><code>git clone https://github.com/betabitnl/AZ-204-DevelopingSolutionsforMicrosoftAzure</code></p>
+<h5><a id="user-content-create-the-f-drive" class="anchor" aria-hidden="true" href="#create-the-f-drive"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Create the F:\ drive</h5>
+<p>For this example the Github is cloned in <code>c:\repos\</code>. To create the F:\ drive with correct content in it, type:</p>
+<p><code>subst f: c:\repos\AZ-204-DevelopingSolutionsforMicrosoftAzure</code></p>
+<h3><a id="user-content-exercise-1-create-azure-resources" class="anchor" aria-hidden="true" href="#exercise-1-create-azure-resources"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 1: Create Azure resources</h3>
+<h4><a id="user-content-task-1-open-the-azure-portal" class="anchor" aria-hidden="true" href="#task-1-open-the-azure-portal"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Open the Azure portal</h4>
+<ol>
+<li>
+<p>Sign in to the Azure portal (<a href="https://portal.azure.com" rel="nofollow">https://portal.azure.com</a>).</p>
+</li>
+<li>
+<p>If this is your first time signing in to the Azure portal, you'll notice a dialog box offering a tour of the portal. Select <strong>Get Started</strong> to skip the tour.</p>
+</li>
+</ol>
+<h4><a id="user-content-task-2-create-a-storage-account" class="anchor" aria-hidden="true" href="#task-2-create-a-storage-account"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Create a Storage account</h4>
+<ol>
+<li>
+<p>Create a new&nbsp;storage account&nbsp;with the following details:</p>
+<ul>
+<li>
+<p>New resource group: <strong>MarketingContent</strong></p>
+</li>
+<li>
+<p>Name: <em><em>contenthost</em>[yourname]</em>**</p>
+</li>
+<li>
+<p>Location: <strong>West Europe</strong></p>
+</li>
+<li>
+<p>Performance: <strong>Standard</strong></p>
+</li>
+<li>
+<p>Account kind: <strong>StorageV2 (general purpose v2)</strong></p>
+</li>
+<li>
+<p>Replication: <strong>Read-access geo-redundant storage (RA-GRS)</strong></p>
+</li>
+<li>
+<p>Access tier: <strong>Hot</strong></p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Note</strong>: Wait for Azure to finish creating the storage account before you move forward with the lab. You'll receive a notification when the&nbsp;account&nbsp;is created.</p>
+</blockquote>
+</li>
+</ol>
+<h4><a id="user-content-task-3-create-a-web-app-by-using-azure-app-service" class="anchor" aria-hidden="true" href="#task-3-create-a-web-app-by-using-azure-app-service"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Create a web app by using Azure App Service</h4>
+<ol>
+<li>
+<p>Create a new web app with the following details:</p>
+<ul>
+<li>
+<p>Existing resource group: <strong>MarketingContent</strong></p>
+</li>
+<li>
+<p>Name: <em><em>landingpage</em>[yourname]</em>**</p>
+</li>
+<li>
+<p>Publish: <strong>Docker Container</strong></p>
+</li>
+<li>
+<p>Operating system: <strong>Linux</strong></p>
+</li>
+<li>
+<p>Region: <strong>West Europe</strong></p>
+</li>
+<li>
+<p>New App Service plan: <strong>MarketingPlan</strong></p>
+</li>
+<li>
+<p>SKU and size: <strong>Premium V2 P1v2</strong></p>
+</li>
+<li>
+<p>Docker options: <strong>Single Container</strong></p>
+</li>
+<li>
+<p>Image source: <strong>Docker Hub</strong></p>
+</li>
+<li>
+<p>Access type: <strong>Public</strong></p>
+</li>
+<li>
+<p>Image and tag: <strong>microsoftlearning/edx-html-landing-page:latest</strong></p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Note</strong>: Wait for Azure to finish creating the web app before you move forward with the lab. You'll receive a notification when the&nbsp;app&nbsp;is created.</p>
+</blockquote>
+</li>
+<li>
+<p>Access the <em><em>landingpage</em>[yourname]</em>** web app that you created earlier in this lab.</p>
+</li>
+<li>
+<p>In the <strong>Settings</strong> section, go to the <strong>Properties</strong> section, and then record the value of the <strong>URL</strong> text box. You'll use this value later in the lab.</p>
+</li>
+</ol>
+<h4><a id="user-content-review" class="anchor" aria-hidden="true" href="#review"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+<p>In this exercise, you created an Azure Storage account and an Azure Web App that you'll use later in this lab.</p>
+<h3><a id="user-content-exercise-2-configure-content-delivery-network-and-endpoints" class="anchor" aria-hidden="true" href="#exercise-2-configure-content-delivery-network-and-endpoints"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 2: Configure Content Delivery Network and endpoints</h3>
+<h4><a id="user-content-task-1-open-azure-cloud-shell" class="anchor" aria-hidden="true" href="#task-1-open-azure-cloud-shell"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Open Azure Cloud Shell</h4>
+<ol>
+<li>
+<p>Open a new Cloud Shell instance in the Azure portal.</p>
+</li>
+<li>
+<p>If Cloud Shell isn't already configured, configure the shell for Bash by using the default settings.</p>
+</li>
+<li>
+<p>At the <strong>Cloud Shell</strong> command prompt in the portal, use the <strong>az</strong> command with the <strong>--version</strong> flag to get the version of the Azure Command-Line Interface (Azure CLI) tool.</p>
+</li>
+</ol>
+<h4><a id="user-content-task-2-register-the-microsoftcdn-provider" class="anchor" aria-hidden="true" href="#task-2-register-the-microsoftcdn-provider"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Register the Microsoft.CDN provider</h4>
+<ol>
+<li>
+<p>Use the <strong>az</strong> command with the <strong>--help</strong> flag to find a list of subgroups and commands at the root level of the Azure CLI.</p>
+</li>
+<li>
+<p>Use the <strong>az provider</strong> command with the <strong>--help</strong> flag to get a list of commands available for resource providers.</p>
+</li>
+<li>
+<p>Use the <strong>az provider list</strong> command to list all currently registered providers.</p>
+</li>
+<li>
+<p>Use the <strong>az provider list</strong> command again with the <strong>--query "[].namespace"</strong> flag to list just the namespaces of the currently registered providers.</p>
+</li>
+<li>
+<p>Observe the list of currently registered providers. The <strong>Microsoft.CDN</strong> provider isn't currently in the list of providers.</p>
+</li>
+<li>
+<p>Use the <strong>az provider register</strong> command with the <strong>--help</strong> flag to get the required flags to register a new provider.</p>
+</li>
+<li>
+<p>Use the <strong>az provider register</strong> command to register a namespace with your current subscription by using the following setting:</p>
+<ul>
+<li>Namespace: <strong>Microsoft.CDN</strong></li>
+</ul>
+</li>
+<li>
+<p>Close the Cloud Shell pane.</p>
+</li>
+</ol>
+<h4><a id="user-content-task-3-create-a-content-delivery-network-profile" class="anchor" aria-hidden="true" href="#task-3-create-a-content-delivery-network-profile"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Create a Content Delivery Network profile</h4>
+<ol>
+<li>
+<p>Create a new Content Delivery Network profile with the following details:</p>
+<ul>
+<li>
+<p>Name: <strong>contentdeliverynetwork</strong></p>
+</li>
+<li>
+<p>Existing resource group: <strong>MarketingContent</strong></p>
+</li>
+<li>
+<p>Resource group location: <strong>West Europe</strong></p>
+</li>
+<li>
+<p>Pricing tier: <strong>Standard Akamai</strong></p>
+</li>
+<li>
+<p>Create a new CDN endpoint now: <strong>No</strong></p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Note</strong>: Wait for Azure to finish creating the CDN profile before you move forward with the lab. You'll receive a notification when the&nbsp;app&nbsp;is created.</p>
+</blockquote>
+</li>
+</ol>
+<h4><a id="user-content-task-4-configure-storage-containers" class="anchor" aria-hidden="true" href="#task-4-configure-storage-containers"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 4: Configure Storage containers</h4>
+<ol>
+<li>
+<p>Access the <em><em>contenthost</em>[yourname]</em>** storage account that you created earlier in this lab.</p>
+</li>
+<li>
+<p>Select the <strong>Containers</strong> link in the <strong>Blob service</strong> section, and then create a new container with the following settings:</p>
+<ul>
+<li>
+<p>Name: <strong>media</strong></p>
+</li>
+<li>
+<p>Public access level: <strong>Blob (anonymous read access for blobs only)</strong></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Create a new container with the following settings:</p>
+<ul>
+<li>
+<p>Name: <strong>video</strong></p>
+</li>
+<li>
+<p>Public access level: <strong>Blob (anonymous read access for blobs only)</strong></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Observe the updated list of containers.</p>
+</li>
+</ol>
+<h4><a id="user-content-task-5-create-content-delivery-network-endpoints" class="anchor" aria-hidden="true" href="#task-5-create-content-delivery-network-endpoints"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 5: Create Content Delivery Network endpoints</h4>
+<ol>
+<li>
+<p>Access the <strong>contentdeliverynetwork</strong> CDN profile that you created earlier in this lab, and then select <strong>+ Endpoint</strong>.</p>
+</li>
+<li>
+<p>Add a new endpoint with the following properties:</p>
+<ul>
+<li>
+<p>Name: <em><em>cdnmedia</em>[yourname]</em>**</p>
+</li>
+<li>
+<p>Origin type: <strong>Storage</strong></p>
+</li>
+<li>
+<p>Origin hostname: <em><em>contenthost</em>[yourname]*.blob.core.windows.net</em>* (the Storage account that you created earlier in this lab)</p>
+</li>
+<li>
+<p>Origin path: <strong>/media</strong></p>
+</li>
+<li>
+<p>Optimized for: <strong>General web delivery</strong></p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Note</strong>: Wait for Azure to finish creating the CDN endpoint before you move forward with the lab. You'll receive a notification when the&nbsp;account&nbsp;is created.</p>
+</blockquote>
+</li>
+<li>
+<p>Add a new endpoint with the following properties:</p>
+<ul>
+<li>
+<p>Name: <em><em>cdnvideo</em>[yourname]</em>**</p>
+</li>
+<li>
+<p>Origin type: <strong>Storage</strong></p>
+</li>
+<li>
+<p>Origin hostname: <em><em>contenthost</em>[yourname]*.blob.core.windows.net</em>* (the Storage account that you created earlier in this lab)</p>
+</li>
+<li>
+<p>Origin path: <strong>/video</strong></p>
+</li>
+<li>
+<p>Optimized for: <strong>Video on demand media streaming</strong></p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Note</strong>: Wait for Azure to finish creating the CDN endpoint before you move forward with the lab. You'll receive a notification when the&nbsp;account&nbsp;is created.</p>
+</blockquote>
+</li>
+<li>
+<p>Add a new endpoint with the following properties:</p>
+<ul>
+<li>
+<p>Name: <em><em>cdnweb</em>[yourname]</em>**</p>
+</li>
+<li>
+<p>Origin type: <strong>Web App</strong></p>
+</li>
+<li>
+<p>Origin hostname: <em><em>landingpage</em>[yourname]*.azurewebsites.net</em>* (the Web App that you created earlier in this lab)</p>
+</li>
+<li>
+<p>Optimized for: <strong>General web delivery</strong></p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Note</strong>: Wait for Azure to finish creating the CDN endpoint before you move forward with the lab. You'll receive a notification when the&nbsp;account&nbsp;is created.</p>
+</blockquote>
+</li>
+</ol>
+<h4><a id="user-content-review-1" class="anchor" aria-hidden="true" href="#review-1"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+<p>In this exercise, you registered the resource provider for Content Delivery Network and then used the provider to create both CDN profile and endpoint resources.</p>
+<h3><a id="user-content-exercise-3-upload-and-configure-static-web-content" class="anchor" aria-hidden="true" href="#exercise-3-upload-and-configure-static-web-content"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 3: Upload and configure static web content</h3>
+<h4><a id="user-content-task-1-observe-the-landing-page" class="anchor" aria-hidden="true" href="#task-1-observe-the-landing-page"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Observe the landing page</h4>
+<ol>
+<li>
+<p>Access the <em><em>landingpage</em>[yourname]</em>** web app that you created earlier in this lab.</p>
+</li>
+<li>
+<p>Go to the URL for the <em><em>landingpage</em>[yourname]</em>** web app.</p>
+</li>
+<li>
+<p>Observe the error message displayed on the screen. The website won't work until you configure the specified settings to reference multimedia content.</p>
+</li>
+<li>
+<p>Return to the Azure portal.</p>
+</li>
+</ol>
+<h4><a id="user-content-task-2-upload-storage-blobs" class="anchor" aria-hidden="true" href="#task-2-upload-storage-blobs"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Upload Storage blobs</h4>
+<ol>
+<li>
+<p>Access the <em><em>contenthost</em>[yourname]</em>** storage account that you created earlier in this lab.</p>
+</li>
+<li>
+<p>Select the <strong>Containers</strong> link in the <strong>Blob service</strong> section, and then select the <strong>media</strong> container.</p>
+</li>
+<li>
+<p>Upload the following files from the <strong>Allfiles (F): \Allfiles\Labs\13\Starter</strong> folder on your lab VM:</p>
+<ul>
+<li>
+<p><strong>campus.jpg</strong></p>
+</li>
+<li>
+<p><strong>conference.jpg</strong></p>
+</li>
+<li>
+<p><strong>poster.jpg</strong></p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Note</strong>: We recommend that you enable the <strong>Overwrite if files already exist</strong> option.</p>
+</blockquote>
+</li>
+<li>
+<p>Record the value in the <strong>URL</strong> text box. You will use this value later in the lab.</p>
+</li>
+<li>
+<p>Back in the <strong>Containers</strong> section, select the <strong>video</strong> container.</p>
+</li>
+<li>
+<p>Upload the <strong>welcome.mp4</strong> file from the <strong>Allfiles (F): \Allfiles\Labs\13\Starter</strong> folder on your lab VM.</p>
+<blockquote>
+<p><strong>Note</strong>: We recommend that you enable the <strong>Overwrite if files already exist</strong> option.</p>
+</blockquote>
+</li>
+<li>
+<p>Record the value in the <strong>URL</strong> text box. You will use this value later in the lab.</p>
+</li>
+</ol>
+<h4><a id="user-content-task-3-configure-web-app-settings" class="anchor" aria-hidden="true" href="#task-3-configure-web-app-settings"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Configure Web App settings</h4>
+<ol>
+<li>
+<p>Access the <em><em>landingpage</em>[yourname]</em>** web app that you created earlier in this lab.</p>
+</li>
+<li>
+<p>In the <strong>Settings</strong> section, go to the <strong>Configuration</strong> section.</p>
+</li>
+<li>
+<p>Find and access the <strong>Application Settings</strong> tab in the <strong>Configuration</strong> section.</p>
+</li>
+<li>
+<p>Create a new application setting by using the following details:</p>
+<ul>
+<li>
+<p>Name: <strong>CDNMediaEndpoint</strong></p>
+</li>
+<li>
+<p>Value: The <strong>URI</strong> value of the <strong>media</strong> container in the <em><em>contenthost</em>[yourname]</em>** storage account that you recorded earlier in this lab.</p>
+</li>
+<li>
+<p>Deployment slot setting: <strong>Not selected</strong></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Create a new application setting by using the following details:</p>
+<ul>
+<li>
+<p>Name: <strong>CDNVideoEndpoint</strong></p>
+</li>
+<li>
+<p>Value: The <strong>URI</strong> value of the <strong>video</strong> container in the <em><em>contenthost</em>[yourname]</em>** storage account that you recorded earlier in this lab.</p>
+</li>
+<li>
+<p>Deployment slot setting: <strong>Not selected</strong></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Save your changes to the application settings.</p>
+</li>
+</ol>
+<h4><a id="user-content-task-4-validate-the-corrected-landing-page" class="anchor" aria-hidden="true" href="#task-4-validate-the-corrected-landing-page"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 4: Validate the corrected landing page</h4>
+<ol>
+<li>
+<p>Access the <em><em>landingpage</em>[yourname]</em>** web app that you created earlier in this lab.</p>
+</li>
+<li>
+<p><strong>Restart</strong> the currently running Web App.</p>
+<blockquote>
+<p><strong>Note</strong>: Wait for the restart operation to complete before you move forward with the lab. You'll receive a notification when the&nbsp;operation is done.</p>
+</blockquote>
+</li>
+<li>
+<p>Go to the URL for the <em><em>landingpage</em>[yourname]</em>** web app.</p>
+</li>
+<li>
+<p>Observe the updated website rendering multimedia content of various types.</p>
+</li>
+<li>
+<p>Return to the Azure portal.</p>
+</li>
+</ol>
+<h4><a id="user-content-review-2" class="anchor" aria-hidden="true" href="#review-2"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+<p>In this exercise, you uploaded multimedia content as blobs to Storage containers and then updated your Web App to point directly to the storage blobs.</p>
+<h3><a id="user-content-exercise-4-use-content-delivery-network-endpoints" class="anchor" aria-hidden="true" href="#exercise-4-use-content-delivery-network-endpoints"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 4: Use Content Delivery Network endpoints</h3>
+<h4><a id="user-content-task-1-retrieve-endpoint-uniform-resource-identifiers-uris" class="anchor" aria-hidden="true" href="#task-1-retrieve-endpoint-uniform-resource-identifiers-uris"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Retrieve endpoint Uniform Resource Identifiers (URIs)</h4>
+<ol>
+<li>
+<p>Access the <strong>contentdeliverynetwork</strong> CDN profile that you created earlier in this lab.</p>
+</li>
+<li>
+<p>Select the <em><em>cdnmedia</em>[yourname]</em>** endpoint.</p>
+</li>
+<li>
+<p>Copy the value of the <strong>Endpoint hostname</strong> text box. You will use this value later in the lab.</p>
+</li>
+<li>
+<p>Select the <em><em>cdnvideo</em>[yourname]</em>** endpoint.</p>
+</li>
+<li>
+<p>Copy the value of the <strong>Endpoint hostname</strong> text box. You will use this value later in the lab.</p>
+</li>
+</ol>
+<h4><a id="user-content-task-2-test-multimedia-content-by-using-the-cdn" class="anchor" aria-hidden="true" href="#task-2-test-multimedia-content-by-using-the-cdn"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Test multimedia content by using the CDN</h4>
+<ol>
+<li>
+<p>Construct a URL for the <strong>campus.jpg</strong> resource by combining the <strong>Endpoint hostname</strong> URL from the <em><em>cdnmedia</em>[yourname]</em>** endpoint that you copied earlier in the lab with a relative path of <strong>/campus.jpg</strong>.</p>
+<blockquote>
+<p><strong>Note</strong>: For example, if your <strong>Endpoint hostname</strong> URL is <strong><a href="https://cdnmediastudent.azureedge.net/" rel="nofollow">https://cdnmediastudent.azureedge.net/</a></strong>, your newly constructed URL would be <strong><a href="https://cdnmediastudent.azureedge.net/campus.jpg" rel="nofollow">https://cdnmediastudent.azureedge.net/campus.jpg</a></strong>.</p>
+</blockquote>
+</li>
+<li>
+<p>Construct a URL for the <strong>conference.jpg</strong> resource by combining the <strong>Endpoint hostname</strong> URL from the <em><em>cdnmedia</em>[yourname]</em>** endpoint that you copied earlier in the lab with a relative path of <strong>/conference.jpg</strong>.</p>
+<blockquote>
+<p><strong>Note</strong>: For example, if your <strong>Endpoint hostname</strong> URL is <strong><a href="https://cdnmediastudent.azureedge.net/" rel="nofollow">https://cdnmediastudent.azureedge.net/</a></strong>, your newly constructed URL would be <strong><a href="https://cdnmediastudent.azureedge.net/conference.jpg" rel="nofollow">https://cdnmediastudent.azureedge.net/conference.jpg</a></strong>.</p>
+</blockquote>
+</li>
+<li>
+<p>Construct a URL for the <strong>poster.jpg</strong> resource by combining the <strong>Endpoint hostname</strong> URL from the <em><em>cdnmedia</em>[yourname]</em>** endpoint that you copied earlier in the lab with a relative path of <strong>/poster.jpg</strong>.</p>
+<blockquote>
+<p><strong>Note</strong>: For example, if your <strong>Endpoint hostname</strong> URL is <strong><a href="https://cdnmediastudent.azureedge.net/" rel="nofollow">https://cdnmediastudent.azureedge.net/</a></strong>, your newly constructed URL would be <strong><a href="https://cdnmediastudent.azureedge.net/poster.jpg" rel="nofollow">https://cdnmediastudent.azureedge.net/poster.jpg</a></strong>.</p>
+</blockquote>
+</li>
+<li>
+<p>Construct a URL for the <strong>welcome.mp4</strong> resource by combining the <strong>Endpoint hostname</strong> URL from the <em><em>cdnvideo</em>[yourname]</em>** endpoint that you copied earlier in the lab with a relative path of <strong>/welcome.mp4</strong>.</p>
+<blockquote>
+<p><strong>Note</strong>: For example, if your <strong>Endpoint hostname</strong> URL is <strong><a href="https://cdnvideostudent.azureedge.net/" rel="nofollow">https://cdnvideostudent.azureedge.net/</a></strong>, your newly constructed URL would be <strong><a href="https://cdnvideostudent.azureedge.net/welcome.mp4" rel="nofollow">https://cdnvideostudent.azureedge.net/welcome.mp4</a></strong>.</p>
+</blockquote>
+</li>
+<li>
+<p>Open a new <strong>Microsoft Edge</strong> browser window.</p>
+</li>
+<li>
+<p>In the new browser window, go to the URL that you constructed for the <strong>campus.jpg</strong> media resource, and then verify that the resource was successfully found.</p>
+<blockquote>
+<p><strong>Note</strong>: If the content isn't available yet, the CDN endpoint is still initializing. This initialization process can take anywhere from 5 to 15 minutes.</p>
+</blockquote>
+</li>
+<li>
+<p>Go to the URL that you constructed for the <strong>conference.jpg</strong> media resource, and then verify that the resource was successfully found.</p>
+</li>
+<li>
+<p>Go to the URL that you constructed for the <strong>poster.jpg</strong> media resource, and then verify that the resource was successfully found.</p>
+</li>
+<li>
+<p>Go to the URL that you constructed for the <strong>welcome.mp4</strong> video resource, and then verify that the resource was successfully found.</p>
+</li>
+<li>
+<p>Close the browser window that you created in this task.</p>
+</li>
+</ol>
+<h4><a id="user-content-task-3-update-the-web-app-settings" class="anchor" aria-hidden="true" href="#task-3-update-the-web-app-settings"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Update the Web App settings</h4>
+<ol>
+<li>
+<p>Access the <em><em>landingpage</em>[yourname]</em>** web app that you created earlier in this lab.</p>
+</li>
+<li>
+<p>In the <strong>Settings</strong> section, go to the <strong>Configuration</strong> section.</p>
+</li>
+<li>
+<p>Find and access the <strong>Application Settings</strong> tab in the <strong>Configuration</strong> section.</p>
+</li>
+<li>
+<p>Update the <strong>CDNMediaEndpoint</strong> application setting by changing its value to the <strong>Endpoint hostname</strong> URL from the <em><em>cdnmedia</em>[yourname]</em>** endpoint that you copied earlier in the lab.</p>
+</li>
+<li>
+<p>Update the <strong>CDNVideoEndpoint</strong> application setting by changing its value to the <strong>Endpoint hostname</strong> URL from the <em><em>cdnvideo</em>[yourname]</em>** endpoint that you copied earlier in the lab.</p>
+</li>
+<li>
+<p>Save your changes to the application settings.</p>
+</li>
+<li>
+<p>Restart the currently running Web App.</p>
+<blockquote>
+<p><strong>Note</strong>: Wait for the restart operation to complete before you move forward with the lab. You'll receive a notification when the&nbsp;operation is done.</p>
+</blockquote>
+</li>
+</ol>
+<h4><a id="user-content-task-4-test-the-web-content" class="anchor" aria-hidden="true" href="#task-4-test-the-web-content"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 4: Test the web content</h4>
+<ol>
+<li>
+<p>Access the <strong>contentdeliverynetwork</strong> CDN profile that you created earlier in this lab.</p>
+</li>
+<li>
+<p>Select the <em><em>cdnweb</em>[yourname]</em>** endpoint.</p>
+</li>
+<li>
+<p>Copy the value of the <strong>Endpoint hostname</strong> text box. You will use this value later in the lab.</p>
+</li>
+<li>
+<p>Open a new <strong>Microsoft Edge</strong> browser window.</p>
+</li>
+<li>
+<p>In the new browser window, go to the <strong>Endpoint hostname</strong> URL for the <em><em>cdnweb</em>[yourname]</em>** endpoint.</p>
+</li>
+<li>
+<p>Observe the website and multimedia content that are all served by using Content Delivery Network.</p>
+</li>
+</ol>
+<h4><a id="user-content-review-3" class="anchor" aria-hidden="true" href="#review-3"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+<p>In this exercise, you updated your Web App to use Content Delivery Network to serve multimedia content and to serve the web application itself.</p>
+<h3><a id="user-content-exercise-5-clean-up-your-subscription" class="anchor" aria-hidden="true" href="#exercise-5-clean-up-your-subscription"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Exercise 5: Clean up your subscription</h3>
+<h4><a id="user-content-task-1-open-azure-cloud-shell-and-list-resource-groups" class="anchor" aria-hidden="true" href="#task-1-open-azure-cloud-shell-and-list-resource-groups"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 1: Open Azure Cloud Shell and list resource groups</h4>
+<ol>
+<li>
+<p>In the portal, select the <strong>Cloud Shell</strong> icon to open a new shell instance.</p>
+</li>
+<li>
+<p>If Cloud Shell isn't already configured, configure the shell for Bash by using the default settings.</p>
+</li>
+</ol>
+<h4><a id="user-content-task-2-delete-a-resource-group" class="anchor" aria-hidden="true" href="#task-2-delete-a-resource-group"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 2: Delete a resource group</h4>
+<ol>
+<li>
+<p>At the command prompt, enter the following command, and then select Enter to delete the <strong>MarketingContent</strong> resource group:</p>
+<pre><code>az group delete --name MarketingContent --no-wait --yes
+</code></pre>
+</li>
+<li>
+<p>Close the Cloud Shell pane in the portal.</p>
+</li>
+</ol>
+<h4><a id="user-content-task-3-close-the-active-application" class="anchor" aria-hidden="true" href="#task-3-close-the-active-application"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Task 3: Close the active application</h4>
+<ol>
+<li>
+<pre><code>the currently running Microsoft Edge application.
+</code></pre>
+</li>
+</ol>
+<h4><a id="user-content-review-4" class="anchor" aria-hidden="true" href="#review-4"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Review</h4>
+<p>In this exercise, you cleaned up your subscription by removing the resource group used in this lab.</p>
+</article>
